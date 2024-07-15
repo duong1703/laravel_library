@@ -65,6 +65,12 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin\admin::class,  // Đảm bảo model Admin được sử dụng
+        ],
+
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
