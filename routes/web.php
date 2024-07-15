@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\BookController;
+use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\MemberController;
@@ -43,6 +44,19 @@ Route::controller(AdminController::class)->group(function (){
     Route::post('/admin/add', 'adminpost')->name('adminpost');
     Route::delete('/admin/delete/{id}', 'admindelete')->name('admindelete');
 });
+
+
+
+//Admin_category
+Route::controller(CategoriesController::class)->group(function (){
+    Route::get('views/admin/pages/categories/list', 'categories_admin')->name('categorieslist');
+    Route::get('views/admin/pages/categories/add', 'addCategories')->name('categoriesadd');
+    Route::get('views/admin/pages/categories/edit/{id}', 'editCategories')->name('categoriesedit');
+    Route::put('/categories/edit/{id}', 'categorieseditpost')->name('categorieseditpost');
+    Route::post('/categories/add', 'categoriespost')->name('categoriespost');
+    Route::delete('/admin/categories/{id}', 'categoriesdelete')->name('categoriesdelete');
+});
+
 
 //Admin_book
 Route::controller(BookController::class)->group(function (){

@@ -49,13 +49,22 @@
         </div>
         <div class="dash-nav-dropdown">
             <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
-                <i class="fas fa-list"></i> Danh mục sách</a>
+                <i class="fas fa-book"></i> Mượn/Trả sách </a>
             <div class="dash-nav-dropdown-menu">
                 <a href="" class="dash-nav-dropdown-item">Danh sách</a>
-                <a href="" class="dash-nav-dropdown-item">Danh mục</a>
+                <a href="" class="dash-nav-dropdown-item">TT mượn sách</a>
+                <a href="" class="dash-nav-dropdown-item">Hạn trả sách</a>
             </div>
         </div>
-        <a href="" class="dash-nav-item">
+        <div class="dash-nav-dropdown">
+            <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
+                <i class="fas fa-list"></i> Danh mục sách</a>
+            <div class="dash-nav-dropdown-menu">
+                <a href="{{ route('categorieslist') }}" class="dash-nav-dropdown-item">Danh sách</a>
+                <a href="{{ route('categoriesadd') }}" class="dash-nav-dropdown-item">Thêm mới</a>
+            </div>
+        </div>
+        <a href="contacts.html" class="dash-nav-item">
             <i class="fas fa-info"></i>Liên hệ
         </a>
     </nav>
