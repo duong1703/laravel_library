@@ -48,33 +48,33 @@ class CategoriesController extends Controller
 
     public function editCategories($id)
     {
-        $editCategories = categories::findOrFail($id);
-        return view('/admin/pages/categories/edit', compact('editCategories'));
+        $categories = categories::with('subcategories')->findOrFail($id);
+        // dd( $categories);
+        return view('/admin/pages/categories/edit', compact('categories'));
     }
 
     public function categorieseditpost(Request $request, $id)
     {
         $request->validate([
-            'categories_name' => 'required|string|max:255',
-            'subcategories_name' => 'required|string|max:255'
+            'name' => 'required|string|max:255',
+            'subcategories.*.name' => 'required|string|max:255',
         ]);
 
-        $categoryName = $request->input('categories_name');
-        $categories = categories::where('name', $categoryName)->first();
+        $category = categories::findOrFail($id);
+        $category->name = $request->input('name');
+        $category->save();
 
-        if (!$categories) {
-            $categories = new categories();
-            $categories->name = $categoryName;
-            $categories->save();
+        if ($request->has('subcategories')) {
+            foreach ($request->input('subcategories') as $subId => $subData) {
+                $subcategories = subcategories::findOrFail($subId);
+                $subcategories->name = $subData['name'];
+                $subcategories->save();
+            }
         }
 
-        $subcategories = new subcategories();
-        $subcategories->name = $request->input('subcategories_name');
-        $subcategories->category_id = $categories->id;
-        $subcategories->save();
+        $request->session()->flash('success', 'Cập nhật danh mục và danh mục con thành công!');
 
-        $request->session()->flash('success', 'Chỉnh sửa danh mục cha và danh mục con thành công!');
-        return redirect()->route('categorieslist');
+        return redirect()->route('categoriesedit', ['id' => $id]);
     }
 
     public function categoriesdelete(Request $request, $id)

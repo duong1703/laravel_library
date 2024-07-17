@@ -31,13 +31,26 @@
         </div>
         <div class="col-xl-3">
             <div class="stats stats-warning  rounded-4">
-                <h3 class="stats-title"> Tổng danh mục </h3>
+                <h3 class="stats-title"> Tổng danh mục cha </h3>
                 <div class="stats-content">
                     <div class="stats-icon">
                         <i class="fa fa-list"></i>
                     </div>
                     <div class="stats-data">
-                        <div class="stats-number"></div>
+                        <div class="stats-number">{{ $categoriescount }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="stats stats-info  rounded-4">
+                <h3 class="stats-title"> Tổng danh mục con </h3>
+                <div class="stats-content">
+                    <div class="stats-icon">
+                        <i class="fa fa-list"></i>
+                    </div>
+                    <div class="stats-data">
+                        <div class="stats-number">{{ $subcategoriescount }}</div>
                     </div>
                 </div>
             </div>

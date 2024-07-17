@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\admin\admin;
 use Auth;
+use Log;
 use Hash;
 use Illuminate\Http\Request;
 
@@ -17,23 +18,19 @@ class LoginController extends Controller
 
     public function login_process(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string',
-        ]);
+        $credentials = $request->only('email', 'password');
 
-        $admin = Admin::where('email', $credentials['email'])->first();
+        Log::info('Thông tin đăng nhập:', $credentials);
 
-        if ($admin && Hash::check($credentials['password'], $admin->password) && $admin->role === 'admin') {
-            Auth::login($admin);
-            $request->session()->regenerate();
-
-            return redirect()->route('homeadmin');
+        if (Auth::attempt($credentials)) {
+            Log::info('Đăng nhập thành công');
+            return redirect()->intended('views/admin/pages/home');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records or you do not have admin access.',
-        ])->onlyInput('email');
+        Log::info('Đăng nhập thất bại');
+        return redirect('views/admin/pages/login')->withErrors([
+            'email' => 'Thông tin đăng nhập không chính xác.',
+        ]);
     }
 
     public function logout_process(Request $request)

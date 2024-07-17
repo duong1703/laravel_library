@@ -9,10 +9,10 @@ class AuthAdmin
 {
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role === 'admin') {
-            return $next($request);
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            return redirect('/views/admin/pages/login')->with('error', 'Bạn cần đăng nhập với tư cách quản trị viên để truy cập.');
         }
 
-        return redirect()->route('loginadmin');
+        return $next($request);
     }
 }
