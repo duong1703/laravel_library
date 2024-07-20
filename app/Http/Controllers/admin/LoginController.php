@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\admin\admin;
 use Auth;
+use Illuminate\Support\Facades\Session;
 use Log;
 use Hash;
 use Illuminate\Http\Request;
@@ -24,6 +25,8 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             Log::info('Đăng nhập thành công');
+            $user = Auth::user();
+            Session::put('user_name', $user->name);
             return redirect()->intended('views/admin/pages/home');
         }
 

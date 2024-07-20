@@ -1,5 +1,9 @@
 @extends('admin.main')
 
+@section('title')
+Danh sách danh mục
+@endsection
+
 @section('content')
 <style>
     .action-buttons {

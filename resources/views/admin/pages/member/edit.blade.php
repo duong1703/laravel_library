@@ -1,5 +1,9 @@
 @extends('admin.main')
 
+@section('title')
+Chỉnh sửa thành viên
+@endsection
+
 @section('content')
 <main class="dash-content">
     <div class="container-fluid">

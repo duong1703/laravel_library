@@ -1,5 +1,9 @@
 @extends('admin.main')
 
+@section('title')
+    Trang chủ
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row dash-row">
@@ -24,7 +28,7 @@
                         <i class="fa fa-book"></i>
                     </div>
                     <div class="stats-data">
-                        <div class="stats-number"></div>
+                        <div class="stats-number"> {{ $bookcount }}</div>
                     </div>
                 </div>
             </div>

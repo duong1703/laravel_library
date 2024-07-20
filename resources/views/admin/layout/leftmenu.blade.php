@@ -49,15 +49,6 @@
         </div>
         <div class="dash-nav-dropdown">
             <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
-                <i class="fas fa-book"></i> Mượn/Trả sách </a>
-            <div class="dash-nav-dropdown-menu">
-                <a href="" class="dash-nav-dropdown-item">Danh sách</a>
-                <a href="" class="dash-nav-dropdown-item">TT mượn sách</a>
-                <a href="" class="dash-nav-dropdown-item">Hạn trả sách</a>
-            </div>
-        </div>
-        <div class="dash-nav-dropdown">
-            <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
                 <i class="fas fa-list"></i> Danh mục sách</a>
             <div class="dash-nav-dropdown-menu">
                 <a href="{{ route('categorieslist') }}" class="dash-nav-dropdown-item">Danh sách</a>

@@ -14,11 +14,14 @@ class HomeController extends Controller
         $admincount = DB::table('admin')->count();
         $categoriescount = DB::table('categories')->count();
         $subcategoriescount = DB::table('subcategories')->count();
+        $bookcount = DB::table('book')->count();
         return view('/admin/pages/home', [
             'membercount' => $membercount,
             'admincount' => $admincount,
             'categoriescount' => $categoriescount,
             'subcategoriescount' => $subcategoriescount,
+            'bookcount' => $bookcount,
+            
         ]);
     }
 }

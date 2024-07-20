@@ -10,7 +10,7 @@
     <link rel="stylesheet" href=" {{ asset('css/easion.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
     <script src=" {{ asset('js/chart-js-config.js') }}"></script>
-    <title>Easion - Bootstrap Dashboard Template</title>
+    <title>Trang đăng nhập</title>
 </head>
 
 <body>
@@ -39,7 +39,7 @@
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
                 </form>
 
             </div>
@@ -54,6 +54,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    
     <script src=" {{ asset('js/easion.js') }}"></script>
 </body>
 
