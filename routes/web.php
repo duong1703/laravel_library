@@ -63,6 +63,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/views/admin/pages/book/list', 'book_admin')->name('booklist');
         Route::get('/views/admin/pages/book/add', 'addBook')->name('bookadd');
         Route::get('views/admin/pages/book/edit/{id}', 'editBook')->name('bookedit');
+        Route::get('book/{book_file_name}')->name('showbook');
         Route::put('/book/edit/{id}', 'bookeditpost')->name('bookeditpost');
         Route::post('/book/add', 'bookpost')->name('bookpost');
         Route::delete('/book/delete/{id}', 'bookdelete')->name('bookdelete');

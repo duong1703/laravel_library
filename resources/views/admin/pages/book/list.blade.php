@@ -10,7 +10,8 @@ Danh sách sách
     width: 100%;
 }
 
-.auto-height-table th, .auto-height-table td {
+.auto-height-table th,
+.auto-height-table td {
     vertical-align: middle;
 }
 
@@ -65,25 +66,57 @@ Danh sách sách
                                 @php
                                 $count = 1;
                                 @endphp
-                                @foreach ( $data as $book )
+                                @foreach ($data as $book)
                                 <tr>
                                     <td class="text-center">{{ $count++ }}</td>
                                     <td>
-                                        <img src="{{ asset($book -> book_images) }}" alt="" height="120" >
+                                        <img src="{{ asset($book->book_images) }}" alt="" height="120">
                                     </td>
-                                    <td class="text-center">{{ $book -> book_name }}</td>
-                                    <td class="text-center">{{ $book -> book_author }}</td>
-                                    <td class="text-center">{{ $book -> book_file }}</td>
-                                    <td class="text-center">{{ $book -> book_year_of_manufacture }}</td>
-                                    <td class="text-center">{{ $book -> book_publisher }}</td>
-                                    <td class="text-center">{{ $book -> book_amount }}</td>
-                                    <td class="text-center">{{ $book -> book_category }}</td>
-                                    <td class="text-center">{{ $book -> book_status }}</td>
-                                    
+                                    <td class="text-center">{{ $book->book_name }}</td>
+                                    <td class="text-center">{{ $book->book_author }}</td>
+                                    <td class="text-center">{{ $book->book_file }}</td>
+                                    <td class="text-center">{{ $book->book_year_of_manufacture }}</td>
+                                    <td class="text-center">{{ $book->book_publisher }}</td>
+                                    <td class="text-center">{{ $book->book_amount }}</td>
+                                    <td class="text-center">{{ $book->book_category }}</td>
+                                    <td class="text-center">{{ $book->book_status }}</td>
+
                                     <td class="text-center action-buttons mt-5">
-                                        <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                        <a href="" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                                        <form action="{{ route('bookdelete', ['id' => $book->id]) }}" method="POST" style="display:inline;">
+                                        <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary"
+                                            target="_blank"><i class="fas fa-edit"></i></a>
+                                        <!-- <a href="{{ route('showbook', ['book_file_name' => basename($book->book_file)]) }}"
+                                                    class="btn btn-info"><i class="fa fa-eye"></i></a> -->
+
+
+
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                            data-bs-target="#previewModal"
+                                            data-file-url="{{ route('showbook', ['book_file_name' => basename($book->book_file)]) }}">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+
+
+                                        <div class="modal fade" id="previewModal" tabindex="-1"
+                                            aria-labelledby="previewModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="previewModalLabel">Xem trước tài
+                                                            liệu</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <iframe id="documentViewer" src=""
+                                                            style="width: 100%; height: 600px;"
+                                                            frameborder="0"></iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <form action="{{ route('bookdelete', ['id' => $book->id]) }}" method="POST"
+                                            style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger"
@@ -103,4 +136,19 @@ Danh sách sách
         </div>
     </div>
 </main>
+<script>
+var previewModal = document.getElementById('previewModal');
+previewModal.addEventListener('show.bs.modal', function(event) {
+    var button = event.relatedTarget;
+    var fileUrl = button.getAttribute('data-file-url');
+
+    var documentViewer = previewModal.querySelector('#documentViewer');
+    documentViewer.src = fileUrl;
+});
+
+previewModal.addEventListener('hidden.bs.modal', function(event) {
+    var documentViewer = previewModal.querySelector('#documentViewer');
+    documentViewer.src = '';
+});
+</script>
 @endsection

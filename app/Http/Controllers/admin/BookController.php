@@ -123,6 +123,20 @@ class BookController extends Controller
         return redirect()->route('bookadd');
     }
 
+    public function showbook($book_file_name)
+    {
+        $path = public_path('book/' . $book_file_name);
+
+        if (!file_exists($path)) {
+            abort(404);
+        }
+
+        $file = file_get_contents($path);
+        $type = mime_content_type($path);
+
+        return response($file, 200)->header("Content-Type", $type);
+    }
+
     public function bookdelete(Request $request, $id)
     {
         $book = book::findOrFail($id);
