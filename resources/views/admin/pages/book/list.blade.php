@@ -26,16 +26,33 @@ Danh sách sách
     align-items: center;
     gap: 10px;
 }
+
+.action-buttons .btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-buttons form {
+    margin: 0;
+}
+
+.table th,
+.table td {
+    border: 1px solid #dee2e6;
+}
 </style>
 <main class="dash-content">
     <div class="container-fluid">
         <h1 class="dash-title">Trang chủ / Sách / Danh sách</h1>
-        <!-- @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif -->
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <div class="row">
             <div class="col-xl-12">
                 <div class="card easion-card">
@@ -43,14 +60,14 @@ Danh sách sách
                         <div class="easion-card-icon">
                             <i class="fas fa-chart-bar"></i>
                         </div>
-                        <div class="easion-card-title"> Danh sách về sách </div>
+                        <div class="easion-card-title">Danh sách về sách</div>
                     </div>
-                    <div class="card-body ">
-                        <table id="datatable" class="cell-border table table-striped auto-height-table">
+                    <div class="card-body">
+                        <table id="datatable" class="cell-border " style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="text-center" scope="col">id</th>
-                                    <th class="text-center" scope="col">Ảnh sách</th>
+                                    <th class="text-center" scope="col">Bìa sách</th>
                                     <th class="text-center" scope="col">Tên sách</th>
                                     <th class="text-center" scope="col">Tác giả</th>
                                     <th class="text-center" scope="col">File sách</th>
@@ -59,6 +76,7 @@ Danh sách sách
                                     <th class="text-center" scope="col">Số lượng</th>
                                     <th class="text-center" scope="col">Danh mục</th>
                                     <th class="text-center" scope="col">Trạng thái</th>
+                                    <th class="text-center" scope="col">Ngày tạo</th>
                                     <th class="text-center" scope="col">Chức năng</th>
                                 </tr>
                             </thead>
@@ -70,7 +88,8 @@ Danh sách sách
                                 <tr>
                                     <td class="text-center">{{ $count++ }}</td>
                                     <td>
-                                        <img src="{{ asset($book->book_images) }}" alt="" height="120">
+                                        <img src="{{ asset($book->book_images) }}" alt="" class="img-fluid"
+                                            height="120">
                                     </td>
                                     <td class="text-center">{{ $book->book_name }}</td>
                                     <td class="text-center">{{ $book->book_author }}</td>
@@ -80,41 +99,16 @@ Danh sách sách
                                     <td class="text-center">{{ $book->book_amount }}</td>
                                     <td class="text-center">{{ $book->book_category }}</td>
                                     <td class="text-center">{{ $book->book_status }}</td>
-
-                                    <td class="text-center action-buttons mt-5">
-                                        <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary"
-                                            target="_blank"><i class="fas fa-edit"></i></a>
-                                        <!-- <a href="{{ route('showbook', ['book_file_name' => basename($book->book_file)]) }}"
-                                                    class="btn btn-info"><i class="fa fa-eye"></i></a> -->
-
-
-
+                                    <td class="text-center">{{ $book->created_at }}</td>
+                                    <td class="text-center action-buttons mt-3">
+                                        <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
                                         <button type="button" class="btn btn-info" data-bs-toggle="modal"
                                             data-bs-target="#previewModal"
                                             data-file-url="{{ route('showbook', ['book_file_name' => basename($book->book_file)]) }}">
                                             <i class="fa fa-eye"></i>
                                         </button>
-
-
-                                        <div class="modal fade" id="previewModal" tabindex="-1"
-                                            aria-labelledby="previewModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-xl">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="previewModalLabel">Xem trước tài
-                                                            liệu</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <iframe id="documentViewer" src=""
-                                                            style="width: 100%; height: 600px;"
-                                                            frameborder="0"></iframe>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <form action="{{ route('bookdelete', ['id' => $book->id]) }}" method="POST"
                                             style="display:inline;">
                                             @csrf
@@ -126,29 +120,49 @@ Danh sách sách
                                         </form>
                                     </td>
                                 </tr>
-
+                                @endforeach
                             </tbody>
-                            @endforeach
                         </table>
+                        <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="previewModalLabel">Xem trước tài liệu</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <iframe id="documentViewer" src="" style="width: 100%; height: 600px;"
+                                            frameborder="0"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+@endsection
+
 <script>
-var previewModal = document.getElementById('previewModal');
-previewModal.addEventListener('show.bs.modal', function(event) {
-    var button = event.relatedTarget;
-    var fileUrl = button.getAttribute('data-file-url');
+document.addEventListener('DOMContentLoaded', function() {
+    $('#datatable').DataTable();
 
-    var documentViewer = previewModal.querySelector('#documentViewer');
-    documentViewer.src = fileUrl;
-});
+    var previewModal = document.getElementById('previewModal');
+    previewModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        var fileUrl = button.getAttribute('data-file-url');
 
-previewModal.addEventListener('hidden.bs.modal', function(event) {
-    var documentViewer = previewModal.querySelector('#documentViewer');
-    documentViewer.src = '';
+        var documentViewer = previewModal.querySelector('#documentViewer');
+        documentViewer.src = fileUrl;
+    });
+
+    previewModal.addEventListener('hidden.bs.modal', function(event) {
+        var documentViewer = previewModal.querySelector('#documentViewer');
+        documentViewer.src = '';
+    });
 });
 </script>
-@endsection

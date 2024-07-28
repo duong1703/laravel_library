@@ -117,7 +117,6 @@ Thêm mới sách
                                     value="{{ old('book_status') }}" required>
                                     <option selected>Lựa chọn trạng thái sách</option>
                                     <option value="available" class="text-success">Có sẵn</option>
-                                    <option value="borrowed" class="text-warning">Đang mượn</option>
                                     <option value="lost" class="text-danger">Mất</option>
                                 </select>
                                 @error('book_status')

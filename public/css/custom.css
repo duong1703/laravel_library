@@ -1,0 +1,65 @@
+/* Your custom css code goes here */
+.navbar-blue {
+    background-color: #2966d4;
+    border-color: #2966d4;
+}
+
+/* Thay đổi màu văn bản của các mục menu điều hướng thành màu trắng */
+.navbar-nav > li > a {
+    color: white !important;
+}
+
+/* Thay đổi màu nền và màu văn bản của menu thả xuống */
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus,
+.navbar-nav > li.dropdown-submenu > a:hover,
+.navbar-nav > li.dropdown-submenu > a:focus {
+    background-color: #2966d4 !important; /* Màu nền xanh nước biển */
+    color: white !important; /* Màu văn bản trắng */
+}
+
+/* Đảm bảo màu nền và màu văn bản của các mục trong menu thả xuống */
+.dropdown-menu {
+    background-color: #2966d4 !important; /* Màu nền xanh nước biển */
+    border: none; /* Loại bỏ viền mặc định */
+}
+
+.dropdown-menu > li > a {
+    color: white !important; /* Màu văn bản trắng */
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    background-color: #2966d4 !important; /* Giữ màu nền xanh nước biển khi hover */
+    color: white !important; /* Màu văn bản trắng khi hover */
+}
+
+.overlay-right {
+    background-position: right;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh; /* Adjust the height as needed */
+}
+
+.probootstrap-slider-text {
+    padding-right: 20px; /* Adjust the padding as needed */
+}
+
+.image-bg img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.probootstrap-service-2 {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.probootstrap-service-2 .text {
+    padding: 15px 0;
+}
+

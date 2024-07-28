@@ -6,12 +6,35 @@ use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\MemberController;
+use App\Http\Controllers\admin\VisitorsController;
+use App\Http\Controllers\client\ContactController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+/** USER_WEBSITE */
+//User_Website
+// Route::get('/', function () {
+//     return view('client/pages/home');
+// });
+
+
+Route::controller(\App\Http\Controllers\client\HomeController::class)->group(function (){
+    Route::get('/', 'user_home')->name('user_home');
 });
 
+Route::controller(\App\Http\Controllers\client\BookController::class)->group(function (){
+    Route::get('views/client/pages/book', 'user_book')->name('user_book');
+});
+
+
+Route::controller(ContactController::class)->group(function (){
+    Route::get('views/client/pages/contact', 'user_contact')->name('user_contact');
+});
+
+
+
+
+
+/**ADMIN_PANEL */
 // Admin Login Routes
 Route::controller(LoginController::class)->group(function () {
     Route::get('views/admin/pages/login', 'admin_login')->name('loginadmin');
@@ -19,6 +42,8 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/auth/logout', 'logout_process')->name('logout_process');
 });
 
+
+//Admin_Panel
 Route::middleware(['admin'])->group(function () {
     //Admin_home
     Route::controller(HomeController::class)->group(function () {
@@ -35,7 +60,6 @@ Route::middleware(['admin'])->group(function () {
         Route::delete('/member/delete/{id}', 'memberdelete')->name('memberdelete');
     });
 
-
     //Admin_admin
     Route::controller(AdminController::class)->group(function () {
         Route::get('views/admin/pages/admin/list', 'admin_admin')->name('adminlist');
@@ -45,7 +69,6 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/admin/add', 'adminpost')->name('adminpost');
         Route::delete('/admin/delete/{id}', 'admindelete')->name('admindelete');
     });
-
 
     //Admin_category
     Route::controller(CategoriesController::class)->group(function () {
@@ -57,7 +80,6 @@ Route::middleware(['admin'])->group(function () {
         Route::delete('/admin/categories/{id}', 'categoriesdelete')->name('categoriesdelete');
     });
 
-
     //Admin_book
     Route::controller(BookController::class)->group(function () {
         Route::get('/views/admin/pages/book/list', 'book_admin')->name('booklist');
@@ -67,6 +89,11 @@ Route::middleware(['admin'])->group(function () {
         Route::put('/book/edit/{id}', 'bookeditpost')->name('bookeditpost');
         Route::post('/book/add', 'bookpost')->name('bookpost');
         Route::delete('/book/delete/{id}', 'bookdelete')->name('bookdelete');
+    });
+
+    //Admin_visitors
+    Route::controller(VisitorsController::class)->group(function (){
+        Route::get('/views/admin/pages/visitors/list', 'visitors_admin')->name('visitorslist');
     });
 
 });

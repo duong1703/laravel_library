@@ -24,9 +24,8 @@ class BookController extends Controller
 
     public function bookpost(Request $request)
     {
-        // dd($request->all());
         $request->validate([
-            'book_images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'book_images' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'book_name' => 'required|string|max:255',
             'book_author' => 'required|string|max:255',
             'book_file' => 'required|file|mimes:doc,docx,pdf|max:512000',
@@ -39,7 +38,7 @@ class BookController extends Controller
 
         $book = new book();
 
-        // Lưu hình ảnh
+
         if ($request->hasFile('book_images')) {
             $book_images = $request->file('book_images');
             $book_images_name = time() . '.' . $book_images->getClientOriginalExtension();
@@ -47,7 +46,7 @@ class BookController extends Controller
             $book->book_images = 'images/' . $book_images_name;
         }
 
-        // Lưu tài liệu
+
         if ($request->hasFile('book_file')) {
             $book_file = $request->file('book_file');
             $book_file_name = time() . '.' . $book_file->getClientOriginalExtension();
@@ -78,36 +77,17 @@ class BookController extends Controller
 
     public function bookeditpost(Request $request, $id)
     {
+        $book = Book::findOrFail($id);
+
         $request->validate([
-            'book_images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'book_name' => 'required|string|max:255',
             'book_author' => 'required|string|max:255',
-            'book_file' => 'required|file|mimes:doc,docx,pdf|max:512000',
             'book_publisher' => 'required|string|max:255',
-            'book_year_of_manufacture' => 'required',
+            'book_year_of_manufacture' => 'required|date',
             'book_amount' => 'required|integer',
             'book_category' => 'required|string|max:255',
             'book_status' => 'required|string|max:255',
         ]);
-
-        $book = new book();
-
-        // Lưu hình ảnh
-        if ($request->hasFile('book_images')) {
-            $book_images = $request->file('book_images');
-            $book_images_name = time() . '.' . $book_images->getClientOriginalExtension();
-            $book_images->move(public_path('images'), $book_images_name);
-            $book->book_images = 'images/' . $book_images_name;
-        }
-
-        // Lưu tài liệu
-        if ($request->hasFile('book_file')) {
-            $book_file = $request->file('book_file');
-            $book_file_name = time() . '.' . $book_file->getClientOriginalExtension();
-            $book_file->move(public_path('book'), $book_file_name);
-            $book->book_file = 'book/' . $book_file_name;
-        }
-
 
         $book->book_name = $request->input('book_name');
         $book->book_author = $request->input('book_author');
@@ -117,10 +97,32 @@ class BookController extends Controller
         $book->book_category = $request->input('book_category');
         $book->book_status = $request->input('book_status');
 
+        
+        if ($request->hasFile('book_images')) {
+            $request->validate([
+                'book_images' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+            $book_images = $request->file('book_images');
+            $book_images_name = time() . '.' . $book_images->getClientOriginalExtension();
+            $book_images->move(public_path('images'), $book_images_name);
+            $book->book_images = 'images/' . $book_images_name;
+        }
+
+        
+        if ($request->hasFile('book_file')) {
+            $request->validate([
+                'book_file' => 'file|mimes:doc,docx,pdf|max:512000',
+            ]);
+            $book_file = $request->file('book_file');
+            $book_file_name = time() . '.' . $book_file->getClientOriginalExtension();
+            $book_file->move(public_path('book'), $book_file_name);
+            $book->book_file = 'book/' . $book_file_name;
+        }
+
         $book->save();
 
         $request->session()->flash('success', 'Chỉnh sửa thông tin sách thành công!');
-        return redirect()->route('bookadd');
+        return redirect()->route('booklist');
     }
 
     public function showbook($book_file_name)

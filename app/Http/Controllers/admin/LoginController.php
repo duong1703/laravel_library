@@ -21,18 +21,19 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        Log::info('Thông tin đăng nhập:', $credentials);
+
 
         if (Auth::attempt($credentials)) {
-            Log::info('Đăng nhập thành công');
+
             $user = Auth::user();
             Session::put('user_name', $user->name);
             return redirect()->intended('views/admin/pages/home');
         }
 
-        Log::info('Đăng nhập thất bại');
+
         return redirect('views/admin/pages/login')->withErrors([
-            'email' => 'Thông tin đăng nhập không chính xác.',
+            'email' => 'Email đăng nhập không chính xác.',
+            'password' => 'Password đăng nhập không chính xác.',
         ]);
     }
 
