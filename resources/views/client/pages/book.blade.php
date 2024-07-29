@@ -15,6 +15,8 @@ Kho sách
     </div>
 </section>
 
+
+
 <section class="probootstrap-section">
     <div class="container">
         <div class="row">
@@ -31,7 +33,7 @@ Kho sách
                             <h3 class="text-success">{{ $book->book_name }}</h3>
                             <p class="text-primary">{{ $book->book_author }}</p>
                             <p class="text-success">Trạng thái sách: {{ $book->book_status }}</p>
-                            <p><a href="#" class="btn btn-primary">Đọc tài liệu</a> <span class="enrolled-count">2,928
+                            <p><a href="{{ route('user_bookdetail', ['id' => $book->id]) }}" class="btn btn-primary">Đọc tài liệu chi tiết</a> <span class="enrolled-count">2,928
                                     students enrolled</span></p>
                         </div>
                     </div>

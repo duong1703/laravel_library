@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\MemberController;
 use App\Http\Controllers\admin\VisitorsController;
+use App\Http\Controllers\client\BookDetailController;
 use App\Http\Controllers\client\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,20 +17,27 @@ use Illuminate\Support\Facades\Route;
 //     return view('client/pages/home');
 // });
 
-
+//User_home
 Route::controller(\App\Http\Controllers\client\HomeController::class)->group(function (){
     Route::get('/', 'user_home')->name('user_home');
 });
 
+//User_book
 Route::controller(\App\Http\Controllers\client\BookController::class)->group(function (){
     Route::get('views/client/pages/book', 'user_book')->name('user_book');
 });
 
-
+//User_contact
 Route::controller(ContactController::class)->group(function (){
     Route::get('views/client/pages/contact', 'user_contact')->name('user_contact');
 });
 
+//User_book detail
+Route::controller(BookDetailController::class)->group(function (){
+    Route::get('book/{book_file_name}')->name('showbook');
+    Route::get('views/client/pages/bookdetail', 'user_bookdetail')->name('user_bookdetail');
+    Route::get('views/client/pages/bookdetail/{id}', 'user_bookdetail')->name('user_bookdetail');
+});
 
 
 

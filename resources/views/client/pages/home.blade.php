@@ -311,7 +311,8 @@ Trang chủ
                                         {{ $book->created_at }}</span>
                                     <h3>{{ $book->book_name }}</h3>
                                     <h3> Tác giả: {{ $book -> book_author }}</h3>
-                                    <p><a href="#" class="btn btn-primary">Đọc sách</a> <span class="enrolled-count"></span></p>
+                                    <p><a href="{{ route('user_bookdetail', ['id' => $book->id]) }}" class="btn btn-primary">Đọc tài liệu chi tiết</a> <span class="enrolled-count">2,928
+                                    students enrolled</span></p>
                                 </div>
                             </div>
                         </div>
