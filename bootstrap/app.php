@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
            'admin' => \App\Http\Middleware\AuthAdmin::class,
+           'nocache' => \App\Http\Middleware\nocache::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

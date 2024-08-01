@@ -22,10 +22,8 @@
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle">Giới thiệu</a>
             <ul class="dropdown-menu">
-                <li><a href="">Thông tin khái quát</a></li>
-                <li><a href="">Cơ cấu tổ chức</a></li>
-                <li><a href="">Hội đồng trường</a></li>
-                <li><a href="">Ban giám hiệu</a></li>
+                <li><a href="{{ route('info_user') }}">Thông tin khái quát</a></li>
+                <li><a href="{{ route('structure_user') }}">Cơ cấu tổ chức</a></li>
             </ul>
         </li>
         <li><a href="{{ route('user_contact') }}">Liên hệ</a></li>

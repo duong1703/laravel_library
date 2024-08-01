@@ -13,6 +13,12 @@ Liên hệ
             </div>
         </div>
     </div>
+    @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 </section>
 
 
@@ -34,32 +40,50 @@ Liên hệ
                             </ul>
                         </div>
                     </div>
+
+
                     <div class="col-md-7 col-md-push-1  probootstrap-animate" id="probootstrap-content">
                         <p>Liên hệ với chúng tôi qua biểu mẫu dưới đây</p>
-                        <form action="#" method="post" class="probootstrap-form">
+                        <form action="{{ route('postcontact') }}" method="post" class="probootstrap-form">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input type="text" class="form-control" id="name" name="name">
+                                <label for="fullname">Full Name</label>
+                                <input value="{{ old('fullname') }}" type="text" class="form-control" id="fullname"
+                                    name="fullname" required>
+                                @error('fullname')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email">
+                                <input value="{{ old('email') }}" type="email" class="form-control" id="email"
+                                    name="email" required>
+                                @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="id">Mã sinh viên</label>
-                                <input type="number" class="form-control" id="number" name="number">
+                                <label for="ID_student">Mã sinh viên</label>
+                                <input value="{{ old('ID_student') }}" type="text" class="form-control" id="ID_student"
+                                    name="ID_student" required>
+                                @error('ID_student')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea cols="30" rows="10" class="form-control" id="message"
-                                    name="message"></textarea>
+                                <textarea cols="30" rows="10" class="form-control" id="message" name="message"
+                                    required>{{ old('message') }}</textarea>
+                                @error('message')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit"
                                     value="Gửi tin nhắn">
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>

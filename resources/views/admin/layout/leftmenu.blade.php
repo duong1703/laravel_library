@@ -62,5 +62,12 @@
                 <a href="{{ route('visitorslist') }}" class="dash-nav-dropdown-item">Xem lượt</a>
             </div>
         </div>
+        <div class="dash-nav-dropdown">
+            <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
+                <i class="fa fa-mail-bulk"></i>Tin nhắn hỗ trợ</a>
+            <div class="dash-nav-dropdown-menu">
+                <a href="{{ route('message_admin') }}" class="dash-nav-dropdown-item">Danh sách</a>
+            </div>
+        </div>
     </nav>
 </div>

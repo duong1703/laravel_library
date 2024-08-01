@@ -25,7 +25,7 @@ Trang chủ
                         <h3>Thông tin về trường</h3>
                         <p>Tiền thân của Trường Đại học Điện lực là Trường Kỹ nghệ Thực hành được thành lập năm 1898.
                             Sau đó Trường được tách thành Trường Kỹ thuật I và trường Kỹ thuật II.</p>
-                        <p><a href="#" class="btn btn-primary">Learn More</a></p>
+                        <p><a href="{{ route('info_user') }}" class="btn btn-primary">Learn More</a></p>
                     </div>
                     <div class="probootstrap-image probootstrap-animate"
                         style="background-image: url(img/slider_3.jpg)">
