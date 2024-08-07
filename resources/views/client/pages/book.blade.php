@@ -33,7 +33,7 @@ Kho sách
                             <h3 class="text-success">{{ $book->book_name }}</h3>
                             <p class="text-primary">{{ $book->book_author }}</p>
                             <p class="text-success">Trạng thái sách: {{ $book->book_status }}</p>
-                            <p><a href="{{ route('user_bookdetail', ['id' => $book->id]) }}" class="btn btn-primary">Đọc tài liệu chi tiết</a> 
+                            <p><a href="{{ route('user_bookdetail_id', ['id' => $book->id]) }}" class="btn btn-primary">Đọc tài liệu chi tiết</a> 
                         </div>
                     </div>
                 </div>

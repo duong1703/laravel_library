@@ -40,11 +40,11 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 100vh; /* Adjust the height as needed */
+    height: 100vh; 
 }
 
 .probootstrap-slider-text {
-    padding-right: 20px; /* Adjust the padding as needed */
+    padding-right: 20px; 
 }
 
 .image-bg img {
@@ -61,5 +61,15 @@
 }
 .probootstrap-service-2 .text {
     padding: 15px 0;
+}
+
+.status-success {
+    background-color: green;
+    color: white;
+}
+
+.status-failed {
+    background-color: red;
+    color: white;
 }
 

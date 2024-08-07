@@ -9,8 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a style="margin-top:20px" href="/" ><img src="{{ asset('img/CNTTIT.png') }}" width="210"
-    height="75"></a>
+    <a style="margin-top:20px" href="/"><img src="{{ asset('img/CNTTIT.png') }}" width="210" height="75"></a>
 </div>
 
 <div id="navbar-collapse" class="navbar-collapse collapse">
@@ -27,6 +26,6 @@
             </ul>
         </li>
         <li><a href="{{ route('user_contact') }}">Liên hệ</a></li>
-        <li><a href="" class="fa fa-user">Đăng nhập</a></li>
+        <li><a href="{{ route('user_login') }}" class="fa fa-user">Đăng nhập</a></li>
     </ul>
 </div>

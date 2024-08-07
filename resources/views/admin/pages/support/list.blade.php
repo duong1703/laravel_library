@@ -57,7 +57,7 @@ Hỗ trợ từ xa
                                         <td class="text-center">{{ $message->ID_student }}</td>
                                         <td class="text-center">{{ $message->message }}</td>
                                         <td class="text-center">{{ $message->reply }}</td>
-                                        <td class="text-center">{{ $message->status }}</td>
+                                        <td class="text-center ">{{ $message->status }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('editMessage',['id' => $message->id] ) }}"
                                                 class="btn btn-primary"><i class="fas fa-edit"></i></a>
@@ -81,4 +81,6 @@ Hỗ trợ từ xa
         </div>
     </div>
 </main>
+
+
 @endsection

@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\MemberController;
 use App\Http\Controllers\admin\SupportController;
 use App\Http\Controllers\admin\VisitorsController;
+use App\Http\Controllers\client\AccountController;
 use App\Http\Controllers\client\BookDetailController;
 use App\Http\Controllers\client\ContactController;
 use App\Http\Controllers\client\IntroController;
@@ -24,6 +25,13 @@ Route::controller(\App\Http\Controllers\client\HomeController::class)->group(fun
     Route::get('/', 'user_home')->name('user_home');
 });
 
+
+//User_login
+Route::controller(\App\Http\Controllers\client\LoginController::class)->group(function (){
+    Route::get('views/client/pages/login', 'user_login')->name('user_login');
+});
+
+
 //User_book
 Route::controller(\App\Http\Controllers\client\BookController::class)->group(function () {
     Route::get('views/client/pages/book', 'user_book')->name('user_book');
@@ -39,13 +47,18 @@ Route::controller(ContactController::class)->group(function () {
 Route::controller(BookDetailController::class)->group(function () {
     Route::get('book/{book_file_name}')->name('showbook');
     Route::get('views/client/pages/bookdetail', 'user_bookdetail')->name('user_bookdetail');
-    Route::get('views/client/pages/bookdetail/{id}', 'user_bookdetail')->name('user_bookdetail');
+    Route::get('views/client/pages/bookdetail/{id}', 'user_bookdetail')->name('user_bookdetail_id');
 });
 
 //User_Intro
 Route::controller(IntroController::class)->group(function () {
     Route::get('views/client/pages/intro/info', 'info_user')->name('info_user');
     Route::get('views/client/pages/intro/structure', 'structure_user')->name('structure_user');
+});
+
+//user_account
+Route::controller(AccountController::class)->group(function (){
+    Route::get('views/client/pages/account', 'user_account')->name('user_account');
 });
 
 

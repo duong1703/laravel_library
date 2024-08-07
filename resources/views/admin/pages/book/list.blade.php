@@ -98,7 +98,7 @@ Danh sách sách
                                     <td class="text-center">{{ $book->book_publisher }}</td>
                                     <td class="text-center">{{ $book->book_amount }}</td>
                                     <td class="text-center">{{ $book->book_category }}</td>
-                                    <td class="text-center">{{ $book->book_status }}</td>
+                                    <td class="text-center status-cell">{{ $book->book_status }}</td>
                                     <td class="text-center">{{ $book->created_at }}</td>
                                     <td class="text-center action-buttons mt-3">
                                         <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary">
@@ -166,3 +166,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
