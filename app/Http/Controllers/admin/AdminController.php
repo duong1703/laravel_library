@@ -10,9 +10,11 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function admin_admin()
+    public function admin_admin(Request $request)
     {
+       
         $admin = DB::table('admin')->get();
+        
         return view('/admin/pages/admin/list', ['data' => $admin]);
     }
 
@@ -41,12 +43,14 @@ class AdminController extends Controller
         return redirect()->route('adminadd');
     }
 
-    public function editAdmin($id){
+    public function editAdmin($id)
+    {
         $editAdmin = admin::findOrFail($id);
         return view('/admin/pages/admin/edit', compact('editAdmin'));
     }
 
-    public function admineditpost(Request $request, $id){
+    public function admineditpost(Request $request, $id)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:admin,email',
