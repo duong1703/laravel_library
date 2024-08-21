@@ -28,23 +28,28 @@
                                     <h3 class="mb-4">Đăng nhập thành viên</h3>
                                     <p class="text-danger">Chỉ có thành viên mới có thể đăng nhập</p>
                                 </div>
-                               
+
                             </div>
-                            <form action="#" class="signin-form">
-                                <div class="form-group mb-3">
-                                    <label class="label" for="name">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" placeholder="Username" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="label" for="password">Mật khẩu</label>
-                                    <input type="password" class="form-control" placeholder="Password" required>
+                            <form action="{{ route('userLoginpost') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name_login">Tên đăng nhập</label>
+                                    <input type="text" name="name_login" id="name_login" class="form-control" required>
+                                    @error('name_login')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Đăng
-                                        nhập</button>
+                                    <label for="password">Mật khẩu</label>
+                                    <input type="password" name="password" id="password" class="form-control" required>
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-
+                                <button type="submit" class="btn btn-primary">Đăng nhập</button>
                             </form>
+
+
                             <a href="{{ route('user_home') }}">Quay lại trang chủ</a>
                         </div>
                     </div>

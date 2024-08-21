@@ -26,6 +26,35 @@
             </ul>
         </li>
         <li><a href="{{ route('user_contact') }}">Liên hệ</a></li>
-        <li><a href="{{ route('user_login') }}" class="fa fa-user">Đăng nhập</a></li>
+        <!-- <li><a href="{{ route('user_login') }}" class="fa fa-user">Đăng nhập</a></li> -->
+        @if(Session::has('member_name_login'))
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle fa fa-user">
+                Xin chào, {{ Session::get('member_name_login') }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="text-center" href="{{ route('user_account') }}">Trang cá nhân</a></li>
+                    <li>
+                        <form action="{{ route('userLogoutpost') }}" method="post" class="text-center">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Đăng xuất</button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        @else
+            <li><a href="{{ route('user_login') }}" class="fa fa-user">Đăng nhập</a></li>
+        @endif
+
+        <!-- @if(Session::has('member_name_login'))
+            <p>Xin chào, {{ Session::get('member_name_login') }}</p>
+        @else
+            <a href="{{ route('user_login') }}">Login</a>
+        @endif -->
+
+
+
+
+
     </ul>
 </div>

@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
            'admin' => \App\Http\Middleware\AuthAdmin::class,
            'nocache' => \App\Http\Middleware\nocache::class,
+           'blockip' => \App\Http\Middleware\blockip::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

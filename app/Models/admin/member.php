@@ -3,9 +3,10 @@
 namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class member extends Model
+class member extends Authenticatable
 {
     use HasFactory;
 
@@ -13,5 +14,13 @@ class member extends Model
 
     protected $primaryKey = "id";
 
+
     protected $fillable = ['name_member', 'name_login', 'password', 'Email', 'role', 'born', 'numberphone', 'ID_number_card', 'address'];
+
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
 }

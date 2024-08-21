@@ -10,4 +10,8 @@ class VisitorsController extends Controller
     public function visitors_admin(){
         return view('/admin/pages/visitors/list');
     }
+
+    public function monitor_admin(){
+        
+    }
 }

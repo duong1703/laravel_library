@@ -33,7 +33,8 @@ Theo dõi truy cập
                         <div class="easion-card-title"> Theo dõi lượt truy cập </div>
                     </div>
                     <div class="card-body ">
-                       
+                        <canvas id="bookReadsChart" width="400" height="200"></canvas>
+
                     </div>
                 </div>
             </div>
