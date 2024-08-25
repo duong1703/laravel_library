@@ -23,4 +23,9 @@ class member extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
+    public function readbooks()
+    {
+        return $this->hasMany(readbook::class);
+    }
+
 }

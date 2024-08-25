@@ -35,16 +35,20 @@
                                 <div class="form-group">
                                     <label for="name_login">Tên đăng nhập</label>
                                     <input type="text" name="name_login" id="name_login" class="form-control" required>
-                                    @error('name_login')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Mật khẩu</label>
                                     <input type="password" name="password" id="password" class="form-control" required>
-                                    @error('password')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
                                 </div>
                                 <button type="submit" class="btn btn-primary">Đăng nhập</button>
                             </form>

@@ -20,6 +20,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
         </script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css" />
 </head>
 
 <body>
@@ -48,6 +49,7 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
         </script>
     <script src="https://cdn.datatables.net/2.1.2/js/dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
     <script src=" {{ asset('js/easion.js') }}"></script>
 </body>
 <script>
@@ -55,5 +57,19 @@
         $('#datatable').DataTable();
     });
 </script>
+
+<!-- <script>
+    const driver = window.driver.js.driver;
+
+    const driverObj = driver();
+
+    driverObj.highlight({
+        element: "#Thongke",
+        popover: {
+            title: "Thống kê",
+            description: "Hiển thị số liệu của các chức năng!"
+        }
+    });
+</script> -->
 
 </html>

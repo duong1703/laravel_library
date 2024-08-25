@@ -6,52 +6,52 @@ Danh sách sách
 
 @section('content')
 <style>
-.auto-height-table {
-    width: 100%;
-}
+    .auto-height-table {
+        width: 100%;
+    }
 
-.auto-height-table th,
-.auto-height-table td {
-    vertical-align: middle;
-}
+    .auto-height-table th,
+    .auto-height-table td {
+        vertical-align: middle;
+    }
 
-.img-fluid {
-    max-width: 100%;
-    height: auto;
-}
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
 
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
 
-.action-buttons .btn {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .action-buttons .btn {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.action-buttons form {
-    margin: 0;
-}
+    .action-buttons form {
+        margin: 0;
+    }
 
-.table th,
-.table td {
-    border: 1px solid #dee2e6;
-}
+    .table th,
+    .table td {
+        border: 1px solid #dee2e6;
+    }
 </style>
 <main class="dash-content">
     <div class="container-fluid">
         <h1 class="dash-title">Trang chủ / Sách / Danh sách</h1>
         @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+            <div class="alert alert-success alert-dismissible fade show">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endif
         <div class="row">
             <div class="col-xl-12">
@@ -63,7 +63,7 @@ Danh sách sách
                         <div class="easion-card-title">Danh sách về sách</div>
                     </div>
                     <div class="card-body">
-                        <table id="datatable" class="cell-border " style="width:100%">
+                        <table id="datatable" class="cell-border table " style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="text-center" scope="col">id</th>
@@ -82,44 +82,48 @@ Danh sách sách
                             </thead>
                             <tbody>
                                 @php
-                                $count = 1;
+                                    $count = 1;
                                 @endphp
                                 @foreach ($data as $book)
-                                <tr>
-                                    <td class="text-center">{{ $count++ }}</td>
-                                    <td>
-                                        <img src="{{ asset($book->book_images) }}" alt="" class="img-fluid"
-                                            height="120">
-                                    </td>
-                                    <td class="text-center">{{ $book->book_name }}</td>
-                                    <td class="text-center">{{ $book->book_author }}</td>
-                                    <td class="text-center">{{ $book->book_file }}</td>
-                                    <td class="text-center">{{ $book->book_year_of_manufacture }}</td>
-                                    <td class="text-center">{{ $book->book_publisher }}</td>
-                                    <td class="text-center">{{ $book->book_amount }}</td>
-                                    <td class="text-center">{{ $book->book_category }}</td>
-                                    <td class="text-center status-cell">{{ $book->book_status }}</td>
-                                    <td class="text-center">{{ $book->created_at }}</td>
-                                    <td class="text-center action-buttons mt-3">
-                                        <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                            data-bs-target="#previewModal"
-                                            data-file-url="{{ route('showbook', ['book_file_name' => basename($book->book_file)]) }}">
-                                            <i class="fa fa-eye"></i>
-                                        </button>
-                                        <form action="{{ route('bookdelete', ['id' => $book->id]) }}" method="POST"
-                                            style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
-                                                <i class="far fa-trash-alt"></i>
+                                    <tr>
+                                        <td class="text-center">{{ $count++ }}</td>
+                                        <td>
+                                            <img src="{{ asset($book->book_images) }}" alt="" class="img-fluid"
+                                                height="120">
+                                        </td>
+                                        <td class="text-center">{{ $book->book_name }}</td>
+                                        <td class="text-center">{{ $book->book_author }}</td>
+                                        <td class="text-center">{{ $book->book_file }}</td>
+                                        <td class="text-center">{{ $book->book_year_of_manufacture }}</td>
+                                        <td class="text-center">{{ $book->book_publisher }}</td>
+                                        <td class="text-center">{{ $book->book_amount }}</td>
+                                        <td class="text-center">{{ $book->book_category }}</td>
+                                        <td
+                                            class="text-center {{ $book->book_status === 'inactive' ? ' bg-danger text-white' : ' bg-success text-white' }}">
+                                            {{ $book->book_status }}
+                                        </td>
+
+                                        <td class="text-center">{{ $book->created_at }}</td>
+                                        <td class="text-center action-buttons mt-3">
+                                            <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#previewModal"
+                                                data-file-url="{{ route('showbook', ['book_file_name' => basename($book->book_file)]) }}">
+                                                <i class="fa fa-eye"></i>
                                             </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                            <form action="{{ route('bookdelete', ['id' => $book->id]) }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger"
+                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -148,22 +152,21 @@ Danh sách sách
 @endsection
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    $('#datatable').DataTable();
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#datatable').DataTable();
 
-    var previewModal = document.getElementById('previewModal');
-    previewModal.addEventListener('show.bs.modal', function(event) {
-        var button = event.relatedTarget;
-        var fileUrl = button.getAttribute('data-file-url');
+        var previewModal = document.getElementById('previewModal');
+        previewModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var fileUrl = button.getAttribute('data-file-url');
 
-        var documentViewer = previewModal.querySelector('#documentViewer');
-        documentViewer.src = fileUrl;
+            var documentViewer = previewModal.querySelector('#documentViewer');
+            documentViewer.src = fileUrl;
+        });
+
+        previewModal.addEventListener('hidden.bs.modal', function (event) {
+            var documentViewer = previewModal.querySelector('#documentViewer');
+            documentViewer.src = '';
+        });
     });
-
-    previewModal.addEventListener('hidden.bs.modal', function(event) {
-        var documentViewer = previewModal.querySelector('#documentViewer');
-        documentViewer.src = '';
-    });
-});
 </script>
-

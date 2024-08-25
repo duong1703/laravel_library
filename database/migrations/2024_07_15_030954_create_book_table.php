@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('book_category');
             $table->string('book_status');
             $table->timestamps();
+
+            $table->foreignId('subcategory_id')->constrained('subcategories')->onDelete('cascade'); 
         });
     }
 

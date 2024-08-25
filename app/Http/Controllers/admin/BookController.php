@@ -95,7 +95,7 @@ class BookController extends Controller
         $book->book_year_of_manufacture = $request->input('book_year_of_manufacture');
         $book->book_amount = $request->input('book_amount');
         $book->book_category = $request->input('book_category');
-        $book->book_status = $request->input('book_status');
+        // $book->book_status = $request->input('book_status');
 
         
         if ($request->hasFile('book_images')) {
@@ -118,6 +118,10 @@ class BookController extends Controller
             $book_file->move(public_path('book'), $book_file_name);
             $book->book_file = 'book/' . $book_file_name;
         }
+
+        if ($book) { 
+            $book->book_status = $request->input('book_status');
+        } 
 
         $book->save();
 

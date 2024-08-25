@@ -73,3 +73,44 @@
     color: white;
 }
 
+
+.text-bg-success {
+    background-color: #25f0d8; 
+    color: #ffffff; 
+}
+
+.text-bg-danger {
+    background-color: #dc3545; 
+    color: #ffffff; 
+}
+
+.table .status-column {
+    max-width: 150px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+.table td.status-column {
+    border: 1px solid #dee2e6; 
+    padding: 8px; 
+    text-align: center; 
+}
+
+.badge {
+    border-radius: 0.25rem; 
+    padding: 0.5rem 0.75rem; 
+    font-size: 0.875rem; 
+}
+
+#book_status option[value="available"] {
+    color: #28a745; 
+}
+
+#book_status option[value="lost"] {
+    color: #dc3545; 
+}
+
+
+
+

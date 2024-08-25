@@ -21,7 +21,7 @@
                 height="75"></a>
     </header>
     <nav class="dash-nav-list">
-        <a href="{{ route('homeadmin') }}" class="dash-nav-item">
+        <a href="{{ route('homeadmin') }}" class="dash-nav-item" id="Thongke">
             <i class="fas fa-home"></i> Thống kê </a>
         <div class="dash-nav-dropdown">
             <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
