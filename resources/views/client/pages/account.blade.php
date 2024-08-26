@@ -30,14 +30,7 @@ Tài khoản của bạn
 
     <h2>Lịch sử đọc sách</h2>
 
-    @foreach($reads as $read)
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ $read->book->book_name }}</h5>
-                <p class="card-text">Read on: {{ $read->created_at->format('d-m-Y H:i') }}</p>
-            </div>
-        </div>
-    @endforeach
+   
 </div>
 
 

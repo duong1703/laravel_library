@@ -12,6 +12,7 @@ use App\Http\Controllers\client\AccountController;
 use App\Http\Controllers\client\BookDetailController;
 use App\Http\Controllers\client\ContactController;
 use App\Http\Controllers\client\IntroController;
+use App\Mail\AuthenMemberMail;
 use Illuminate\Support\Facades\Route;
 
 /** USER_WEBSITE */
@@ -38,8 +39,6 @@ Route::controller(\App\Http\Controllers\client\LoginController::class)->group(fu
 Route::controller(\App\Http\Controllers\client\BookController::class)->group(function () {
     Route::get('views/client/pages/book', 'user_book')->name('user_book');
     Route::post('/book/read-count/{id}', 'readBook')->name('user_book_id');
-    Route::get('/get-child-categories/{category_id}', 'getChildCategories')->name('getChildCategories');
-    Route::get('/filter-books', 'filterBooks')->name('filterBooks');
 });
 
 //User_contact
@@ -62,7 +61,6 @@ Route::controller(IntroController::class)->group(function () {
 });
 
 //user_account
-
 Route::controller(AccountController::class)->group(function () {
     Route::get('views/client/pages/account', 'user_account')->name('user_account');
     Route::get('/account', 'show_user_account')->name('show_user_account');

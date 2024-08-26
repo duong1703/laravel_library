@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\member;
 use DB;
 use Hash;
+use Mail;
+use App\Mail\AuthenMemberMail;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -46,6 +48,8 @@ class MemberController extends Controller
         $member->ID_number_card = $request->input('ID_number_card');
         $member->address = $request->input('address');
         $member->save();
+
+        Mail::to($member->email)->send(new AuthenMemberMail($request->input('email'), $request->input('password')));
 
         $request->session()->flash('success', 'Thêm thành viên thành công!');
         return redirect()->route('memberadd');

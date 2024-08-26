@@ -99,7 +99,7 @@ Danh sách sách
                                         <td class="text-center">{{ $book->book_amount }}</td>
                                         <td class="text-center">{{ $book->book_category }}</td>
                                         <td
-                                            class="text-center {{ $book->book_status === 'inactive' ? ' bg-danger text-white' : ' bg-success text-white' }}">
+                                            class="text-center {{ $book->book_status === 'Unavailable' ? ' bg-danger text-white' : ' bg-success text-white' }}">
                                             {{ $book->book_status }}
                                         </td>
 
@@ -110,7 +110,8 @@ Danh sách sách
                                             </a>
                                             <button type="button" class="btn btn-info" data-bs-toggle="modal"
                                                 data-bs-target="#previewModal"
-                                                data-file-url="{{ route('showbook', ['book_file_name' => basename($book->book_file)]) }}">
+                                                data-file-url="{{ route('showbook', ['book_file_name' => basename($book->book_file)]) }}"
+                                                data-file-type="{{ pathinfo($book->book_file, PATHINFO_EXTENSION) }}">
                                                 <i class="fa fa-eye"></i>
                                             </button>
                                             <form action="{{ route('bookdelete', ['id' => $book->id]) }}" method="POST"
@@ -127,7 +128,7 @@ Danh sách sách
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel"
+                        <!-- <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
@@ -142,7 +143,31 @@ Danh sách sách
                                     </div>
                                 </div>
                             </div>
+                        </div> -->
+                        <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="previewModalLabel">Xem Trước Tài Liệu</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <iframe id="previewFrame"
+                                            style="width: 100%; height: 600px; border: none;"></iframe>
+                                        <div id="noPreview" class="text-center d-none">
+                                            <p>Không thể xem trước tài liệu này.</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Đóng</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -152,21 +177,49 @@ Danh sách sách
 @endsection
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        $('#datatable').DataTable();
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     $('#datatable').DataTable();
 
-        var previewModal = document.getElementById('previewModal');
-        previewModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-            var fileUrl = button.getAttribute('data-file-url');
+    //     var previewModal = document.getElementById('previewModal');
+    //     previewModal.addEventListener('show.bs.modal', function (event) {
+    //         var button = event.relatedTarget;
+    //         var fileUrl = button.getAttribute('data-file-url');
 
-            var documentViewer = previewModal.querySelector('#documentViewer');
-            documentViewer.src = fileUrl;
-        });
+    //         var documentViewer = previewModal.querySelector('#documentViewer');
+    //         documentViewer.src = fileUrl;
+    //     });
 
-        previewModal.addEventListener('hidden.bs.modal', function (event) {
-            var documentViewer = previewModal.querySelector('#documentViewer');
-            documentViewer.src = '';
+    //     previewModal.addEventListener('hidden.bs.modal', function (event) {
+    //         var documentViewer = previewModal.querySelector('#documentViewer');
+    //         documentViewer.src = '';
+    //     });
+    // });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const previewModal = document.getElementById('previewModal');
+
+        previewModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget;
+            const fileUrl = button.getAttribute('data-file-url');
+            const fileType = button.getAttribute('data-file-type');
+            const previewFrame = document.getElementById('previewFrame');
+            const noPreview = document.getElementById('noPreview');
+
+            if (fileType === 'pdf') {
+                previewFrame.src = fileUrl;
+                previewFrame.classList.remove('d-none');
+                noPreview.classList.add('d-none');
+            } else if (fileType === 'docx') {
+                const viewerUrl = `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(fileUrl)}`;
+                previewFrame.src = viewerUrl;
+                previewFrame.classList.remove('d-none');
+                noPreview.classList.add('d-none');
+            } else {
+                previewFrame.src = '';
+                previewFrame.classList.add('d-none');
+                noPreview.classList.remove('d-none');
+            }
         });
     });
+
 </script>

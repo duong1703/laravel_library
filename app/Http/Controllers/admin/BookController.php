@@ -131,7 +131,7 @@ class BookController extends Controller
 
     public function showbook($book_file_name)
     {
-        $path = public_path('book/' . $book_file_name);
+        $path = storage_path('app/public/' . $book_file_name);
 
         if (!file_exists($path)) {
             abort(404);

@@ -140,10 +140,10 @@ Chỉnh sửa thông tin sách
                             <div class="mb-3">
                                 <label for="book_status">Trạng thái sách</label>
                                 <select name="book_status" id="book_status" class="form-control" required>
-                                    <option value="active" {{ $editBook->book_status == 'active' ? 'selected' : '' }}>Active
+                                    <option value="Available" {{ $editBook->book_status == 'Available' ? 'selected' : '' }}>Available
                                     </option>
-                                    <option value="inactive" {{ $editBook->book_status == 'inactive' ? 'selected' : '' }}>
-                                        Inactive</option>
+                                    <option value="Unavailable" {{ $editBook->book_status == 'Unavailable' ? 'selected' : '' }}>
+                                        Unavailable</option>
                                 </select>
                                 @error('book_status')
                                     <div class="text-danger">{{ $message }}</div>

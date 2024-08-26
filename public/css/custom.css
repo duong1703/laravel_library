@@ -75,12 +75,12 @@
 
 
 .text-bg-success {
-    background-color: #25f0d8; 
+    background-color: #76ff7a; 
     color: #ffffff; 
 }
 
 .text-bg-danger {
-    background-color: #dc3545; 
+    background-color: #ff9999 ; 
     color: #ffffff; 
 }
 
@@ -104,11 +104,11 @@
 }
 
 #book_status option[value="available"] {
-    color: #28a745; 
+    color: #76ff7a; 
 }
 
 #book_status option[value="lost"] {
-    color: #dc3545; 
+    color: #ff9999; 
 }
 
 

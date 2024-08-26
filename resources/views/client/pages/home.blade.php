@@ -310,9 +310,15 @@ Trang chủ
                                     <span class="probootstrap-meta"><i class="icon-calendar2"></i>
                                         {{ $book->created_at }}</span>
                                     <h3>{{ $book->book_name }}</h3>
-                                    <h3> Tác giả: {{ $book -> book_author }}</h3>
-                                    <p><a href="{{ route('user_bookdetail_id', ['id' => $book->id]) }}" class="btn btn-primary">Đọc tài liệu chi tiết</a> <span class="enrolled-count">
-                                    </span></p>
+                                    <h3> Tác giả: {{ $book->book_author }}</h3>
+                                    @if(Session::has('member_name_login'))
+                                        <p><a href="{{ route('user_bookdetail_id', ['id' => $book->id]) }}"
+                                                class="btn btn-primary">Đọc tài liệu chi tiết</a> <span class="enrolled-count">
+                                    @else
+                                        <a href="{{ route('user_login') }}" class="btn btn-primary">Đăng nhập để đọc tài liệu</a>
+                                    @endif
+
+                                        </span></p>
                                 </div>
                             </div>
                         </div>
@@ -498,7 +504,8 @@ Trang chủ
                     <div class="icon"><i class="icon-checkmark"></i></div>
                     <div class="text">
                         <h3>2. TẦM NHÌN</h3>
-                        <p>Là trường đại học đa ngành theo định hướng ứng dụng có uy tín trong và ngoài nước, từng bước khẳng định vị thế hàng đầu Việt Nam trong lĩnh vực năng lượng.</p>
+                        <p>Là trường đại học đa ngành theo định hướng ứng dụng có uy tín trong và ngoài nước, từng bước
+                            khẳng định vị thế hàng đầu Việt Nam trong lĩnh vực năng lượng.</p>
                     </div>
                 </div>
                 <div class="service left-icon probootstrap-animate">
@@ -514,7 +521,11 @@ Trang chủ
                     <div class="icon"><i class="icon-checkmark"></i></div>
                     <div class="text">
                         <h3>4. MỤC TIÊU</h3>
-                        <p>Trở thành trường đại học theo ứng dụng hàng đầu Việt Nam, theo mô hình tự chủ toàn diện, hội nhập với nền giáo dục tiên tiến khu vực và quốc tế. Người học được đào tạo toàn diện, đáp ứng tốt yêu cầu của thị trường lao động, có khả năng học tập suốt đời, có năng lực sáng tạo và khởi nghiệp. Kết quả nghiên cứu khoa học đáp ứng tốt yêu cầu thực tiễn, góp phần vào sự nghiệp công nghiệp hóa, hiện đại hóa đất nước.</p>
+                        <p>Trở thành trường đại học theo ứng dụng hàng đầu Việt Nam, theo mô hình tự chủ toàn diện, hội
+                            nhập với nền giáo dục tiên tiến khu vực và quốc tế. Người học được đào tạo toàn diện, đáp
+                            ứng tốt yêu cầu của thị trường lao động, có khả năng học tập suốt đời, có năng lực sáng tạo
+                            và khởi nghiệp. Kết quả nghiên cứu khoa học đáp ứng tốt yêu cầu thực tiễn, góp phần vào sự
+                            nghiệp công nghiệp hóa, hiện đại hóa đất nước.</p>
                     </div>
                 </div>
 
