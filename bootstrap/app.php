@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
            'admin' => \App\Http\Middleware\AuthAdmin::class,
            'nocache' => \App\Http\Middleware\nocache::class,
            'blockip' => \App\Http\Middleware\blockip::class,
+           'CheckUserIsLoggedIn' => \App\Http\Middleware\CheckUserIsLoggedIn::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -12,46 +12,33 @@ use Illuminate\Queue\SerializesModels;
 class AuthenMemberMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $email;
+    /**
+     * Create a new message instance.
+     */
+    public $name_login;
     public $password;
     /**
      * Create a new message instance.
      */
-    public function __construct($email, $password)
+    public function __construct($name_login, $password)
     {
-        $this->mail = $email;
+        $this->name_login = $name_login;  
         $this->password = $password;
     }
 
     /**
-     * Get the message envelope.
+     * Build the message.
      */
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            subject: 'Authen Member Mail',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: '/admin/pages/emails/login-details',
-        );
-    }
-
     public function build()
     {
         return $this->subject('Thông tin đăng nhập của bạn')
-            ->view('/admin/pages/emails/login-details')
-            ->with([
-                'email' => $this->email,
-                'password' => $this->password,
-            ]);
+                    ->view('admin.pages.emails.login-details')
+                    ->with([
+                        'name_login' => $this->name_login,
+                        'password' => $this->password,
+                    ]);
     }
+
 
     /**
      * Get the attachments for the message.

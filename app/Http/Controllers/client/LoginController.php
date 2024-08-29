@@ -22,12 +22,12 @@ class LoginController extends Controller
 
        
         $request->validate([
-            'name_login' => 'required|string',
-            'password' => 'required|string',
+           'name_login' => 'required|string|max:255',
+           'password' => 'required|string|min:8',
         ]);
 
       
-        $member = Member::where('name_login', $request->input('name_login'))->first();
+        $member = member::where('name_login', $request->input('name_login'))->first();
 
         if ($member && Hash::check($request->input('password'), $member->password)) {
 

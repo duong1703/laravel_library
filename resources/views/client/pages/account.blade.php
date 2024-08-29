@@ -29,8 +29,19 @@ Tài khoản của bạn
     <h4 class="mt-2">Xin chào, {{ Session::get('member_name_login') }}</h4>
 
     <h2>Lịch sử đọc sách</h2>
+    <div class="body">
+        <table id="datatable" class="cell-border table " style="width:100%">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">STT</th>
+                    <th class="text-center" scope="col">Tên sách</th>
+                    <th class="text-center" scope="col">Ngày đọc</th>
+                    <th class="text-center" scope="col">Ngày cập nhật cuối</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 
-   
 </div>
 
 

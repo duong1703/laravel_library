@@ -39,6 +39,7 @@ Route::controller(\App\Http\Controllers\client\LoginController::class)->group(fu
 Route::controller(\App\Http\Controllers\client\BookController::class)->group(function () {
     Route::get('views/client/pages/book', 'user_book')->name('user_book');
     Route::post('/book/read-count/{id}', 'readBook')->name('user_book_id');
+    Route::get('search', 'searchBook')->name('search');
 });
 
 //User_contact
@@ -52,6 +53,7 @@ Route::controller(BookDetailController::class)->group(function () {
     Route::get('book/{book_file_name}')->name('showbook');
     Route::get('views/client/pages/bookdetail', 'user_bookdetail')->name('user_bookdetail');
     Route::get('views/client/pages/bookdetail/{id}', 'user_bookdetail')->name('user_bookdetail_id');
+   
 });
 
 //User_Intro
@@ -61,10 +63,12 @@ Route::controller(IntroController::class)->group(function () {
 });
 
 //user_account
-Route::controller(AccountController::class)->group(function () {
-    Route::get('views/client/pages/account', 'user_account')->name('user_account');
-    Route::get('/account', 'show_user_account')->name('show_user_account');
-});
+
+    Route::controller(AccountController::class)->group(function () {
+        Route::get('views/client/pages/account', 'user_account')->name('user_account');
+        Route::get('/account', 'show_user_account')->name('show_user_account');
+    });
+
 
 
 
@@ -133,6 +137,8 @@ Route::middleware(['blockip'])->group(function () {
             //Admin_visitors
             Route::controller(VisitorsController::class)->group(function () {
                 Route::get('/views/admin/pages/visitors/list', 'visitors_admin')->name('visitorslist');
+                Route::post('/update-read-count', 'updateReadCount')->name('updatereadcount');
+
             });
 
             //Admin_support

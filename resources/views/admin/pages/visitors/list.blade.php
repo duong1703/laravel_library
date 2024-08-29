@@ -34,7 +34,6 @@ Theo dõi truy cập
                     </div>
                     <div class="card-body ">
                         <canvas id="bookReadsChart" width="400" height="200"></canvas>
-
                     </div>
                 </div>
             </div>

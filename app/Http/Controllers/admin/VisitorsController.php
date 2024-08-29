@@ -11,7 +11,5 @@ class VisitorsController extends Controller
         return view('/admin/pages/visitors/list');
     }
 
-    public function monitor_admin(){
-        
-    }
+   
 }

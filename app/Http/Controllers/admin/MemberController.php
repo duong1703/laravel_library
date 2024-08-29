@@ -28,7 +28,7 @@ class MemberController extends Controller
         $request->validate([
             'name_member' => 'required|string|max:255',
             'name_login' => 'required|string|max:255',
-            'password' => 'required|string|max:8',
+            'password' => 'required|string|min:8',
             'email' => 'required|string|email|max:255|unique:member,email',
             'role' => 'required|string|max:16',
             'born' => 'required|string|max:255',
@@ -49,7 +49,7 @@ class MemberController extends Controller
         $member->address = $request->input('address');
         $member->save();
 
-        Mail::to($member->email)->send(new AuthenMemberMail($request->input('email'), $request->input('password')));
+        Mail::to($member->email)->send(new AuthenMemberMail($request->input('name_login'), $request->input('password')));
 
         $request->session()->flash('success', 'Thêm thành viên thành công!');
         return redirect()->route('memberadd');

@@ -20,11 +20,14 @@ class BookController extends Controller
         return view('client/pages/book', compact('books', 'categories'));
     }
 
-    public function getChildCategories($category_id)
+    public function searchBook(Request $request)
     {
-        $childCategories = subcategories::where('category_id', $category_id)->get();
-        return response()->json($childCategories);
+        // $dataBook = book::where('book_name', 'like', "%$request->search%")->get();
+        // return $dataBook;
+        $searchTerm = $request->input('search');
+        
+        $dataBook = book::where('book_name', 'like', "%$searchTerm%")->paginate(6);
+       
+        return view('client/pages/book', ['books' => $dataBook, 'search' => $searchTerm]);
     }
-
-
 }
