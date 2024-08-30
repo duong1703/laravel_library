@@ -17,6 +17,7 @@ class BookController extends Controller
     {
         $books = DB::table('book')->paginate(6);
         $categories = DB::table('categories')->get();
+
         return view('client/pages/book', compact('books', 'categories'));
     }
 
@@ -25,9 +26,12 @@ class BookController extends Controller
         // $dataBook = book::where('book_name', 'like', "%$request->search%")->get();
         // return $dataBook;
         $searchTerm = $request->input('search');
-        
+
         $dataBook = book::where('book_name', 'like', "%$searchTerm%")->paginate(6);
-       
-        return view('client/pages/book', ['books' => $dataBook, 'search' => $searchTerm]);
+
+        return view('client/pages/book', [
+            'books' => $dataBook,
+            'search' => $searchTerm,
+        ]);
     }
 }

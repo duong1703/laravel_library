@@ -27,33 +27,6 @@ Kho sách
                 <button class="btn btn-outline-success hidden" type="submit">Tìm kiếm</button>
             </form>
         </div>
-        <form action="" method="GET">
-            <div class="row g-3 justify-content-center align-items-center" style="height: 100px;">
-                <!-- Select Danh mục cha -->
-                <div class="col-md-4 d-flex flex-column align-items-center">
-                    <label for="parentCategory" class="form-label">Danh mục cha</label>
-                    <select id="parentCategory" name="parent_category_id" class="form-control">
-                        <option selected>Chọn danh mục cha</option>
-
-                    </select>
-                </div>
-
-                <!-- Select Danh mục con -->
-                <div class="col-md-4 d-flex flex-column align-items-center">
-                    <label for="childCategory" class="form-label">Danh mục con</label>
-                    <select id="childCategory" name="child_category_id" class="form-control">
-                        <option selected>Chọn danh mục con</option>
-                        <!-- Các tùy chọn sẽ được điền qua AJAX -->
-                    </select>
-                </div>
-
-                <!-- Button Tìm kiếm -->
-                <div class="col-md-4 d-flex flex-column align-items-center">
-                    <button type="submit" class="btn btn-outline-primary" style="margin-top:30px">Tìm kiếm</button>
-                </div>
-            </div>
-        </form>
-
     </div>
 
     <div class="container mt-5">

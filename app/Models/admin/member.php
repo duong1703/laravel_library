@@ -17,12 +17,6 @@ class member extends Authenticatable
 
     protected $fillable = ['name_member', 'name_login', 'password', 'Email', 'role', 'born', 'numberphone', 'ID_number_card', 'address'];
 
-
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
-
     public function readbooks()
     {
         return $this->hasMany(readbook::class);

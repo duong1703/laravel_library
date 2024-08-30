@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Auth;
 use Hash;
 use Session;
-
+use Illuminate\Support\Facades\Log;
 class LoginController extends Controller
 {
     public function user_login()
@@ -28,7 +28,6 @@ class LoginController extends Controller
 
       
         $member = member::where('name_login', $request->input('name_login'))->first();
-
         if ($member && Hash::check($request->input('password'), $member->password)) {
 
             Session::flush(); 
