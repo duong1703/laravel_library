@@ -29,7 +29,16 @@ Kho sách
         </div>
     </div>
 
-    <div class="container mt-5">
+
+
+    <div class="container">
+        <h3>Danh mục sách</h3>
+        @foreach ($categories as $category)
+            <label class="d-flex w-50 btn btn-success" style="margin-bottom:50px">
+            {{ $category->book_category }} ( {{ $category->book_count }} )</span>
+            </label>
+        @endforeach
+
         @if($books->isEmpty())
             <p>Không có kết quả nào.</p>
         @else
@@ -46,6 +55,8 @@ Kho sách
                                 <span class="probootstrap-meta"><i class="icon-calendar2"></i> {{ $book->created_at }}</span>
                                 <h3 class="text-success">{{ $book->book_name }}</h3>
                                 <p class="text-primary">{{ $book->book_author }}</p>
+                                <p class="text-primary">Danh mục sách: {{ $book->book_category }}</p>
+
                                 <p class="text-success">Trạng thái sách: {{ $book->book_status }}</p>
                                 @if(Session::has('member_name_login'))
                                     <p>

@@ -48,12 +48,12 @@ Route::controller(ContactController::class)->group(function () {
     Route::post('/contact/postcontact', 'postcontact')->name('postcontact');
 });
 
+
 //User_bookdetail
 Route::controller(BookDetailController::class)->group(function () {
     Route::get('book/{book_file_name}')->name('showbook');
     Route::get('views/client/pages/bookdetail', 'user_bookdetail')->name('user_bookdetail');
     Route::get('views/client/pages/bookdetail/{id}', 'user_bookdetail')->name('user_bookdetail_id');
-   
 });
 
 //User_Intro
@@ -64,10 +64,10 @@ Route::controller(IntroController::class)->group(function () {
 
 //user_account
 
-    Route::controller(AccountController::class)->group(function () {
-        Route::get('views/client/pages/account', 'user_account')->name('user_account');
-        Route::get('/account', 'show_user_account')->name('show_user_account');
-    });
+Route::controller(AccountController::class)->group(function () {
+    Route::get('views/client/pages/account', 'user_account')->name('user_account');
+    Route::get('/account', 'show_user_account')->name('show_user_account');
+});
 
 
 

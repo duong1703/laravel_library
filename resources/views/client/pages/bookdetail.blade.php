@@ -23,6 +23,11 @@ Kho sách
                 <div class="row probootstrap-gutter0">
                     <div class="col-md-4" id="probootstrap-sidebar">
                         <div class="probootstrap-sidebar-inner probootstrap-overlap probootstrap-animate">
+                            @if (session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                             <div class="image">
                                 <div class="image-bg">
                                     <img src="{{ asset($bookdetail->book_images) }}" class="img-fluid">
@@ -37,7 +42,8 @@ Kho sách
                         </div>
                     </div>
                     <div class="col-md-7 col-md-push-1  probootstrap-animate" id="probootstrap-content">
-                    <iframe src="{{ route('showbook', ['book_file_name' => basename($bookdetail->book_file)]) }}" width="100%" height="850px"></iframe>
+                        <iframe src="{{ route('showbook', ['book_file_name' => basename($bookdetail->book_file)]) }}"
+                            width="100%" height="850px"></iframe>
                         <p><a href="{{ route('user_book') }}" class="btn btn-primary">Quay lại</a> <span
                                 class="enrolled-count"></span></p>
                     </div>

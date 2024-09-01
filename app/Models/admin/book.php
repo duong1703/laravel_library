@@ -19,9 +19,4 @@ class book extends Model
     {
         return $this->hasMany(readbook::class);
     }
-
-    public function subcategories()
-    {
-        return $this->belongsTo(subcategories::class);
-    }
 }
