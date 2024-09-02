@@ -42,4 +42,42 @@ class BookController extends Controller
         ]);
     }
 
+    public function saveBookRead(Request $request)
+    {
+        try {
+            $userId = Session::get('member_id');
+
+            if (!$userId || !is_int($userId)) {
+                return response()->json(['success' => false, 'message' => 'Người dùng chưa đăng nhập hoặc ID không hợp lệ.'], 401);
+            }
+
+            $bookId = $request->input('book_id');
+
+            $readBook = DB::table('readbook')->where('book_id', $bookId)->where('member_id', $userId)->first();
+
+            if ($readBook) {
+                DB::table('readbook')->where('book_id', $bookId)->where('member_id', $userId)
+                    ->update([
+                        'read_count' => $readBook->read_count + 1,
+                        'last_read_at' => now(),
+                    ]);
+            } else {
+
+                DB::table('readbook')->insert([
+                    'book_id' => $bookId,
+                    'member_id' => $userId,
+                    'read_count' => 1,
+                    'last_read_at' => now(),
+                ]);
+            }
+
+            return response()->json(['success' => true]);
+
+        } catch (\Exception $e) {
+            \Log::error('Lỗi khi lưu lượt đọc sách: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Đã xảy ra lỗi khi lưu lượt đọc sách.'], 500);
+        }
+    }
+
+
 }

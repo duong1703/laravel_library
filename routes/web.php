@@ -40,6 +40,8 @@ Route::controller(\App\Http\Controllers\client\BookController::class)->group(fun
     Route::get('views/client/pages/book', 'user_book')->name('user_book');
     Route::post('/book/read-count/{id}', 'readBook')->name('user_book_id');
     Route::get('search', 'searchBook')->name('search');
+    Route::post('/save-book-read', 'saveBookRead')->name('save.book.read');
+
 });
 
 //User_contact

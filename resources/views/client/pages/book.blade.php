@@ -35,7 +35,7 @@ Kho sách
         <h3>Danh mục sách</h3>
         @foreach ($categories as $category)
             <label class="d-flex w-50 btn btn-success" style="margin-bottom:50px">
-            {{ $category->book_category }} ( {{ $category->book_count }} )</span>
+                {{ $category->book_category }} ( {{ $category->book_count }} )</span>
             </label>
         @endforeach
 
@@ -62,7 +62,10 @@ Kho sách
                                     <p>
                                         <a href="{{ route('user_bookdetail_id', ['id' => $book->id]) }}"
                                             class="btn btn-primary {{ $book->book_status === 'Unavailable' ? 'btn-secondary disabled' : 'btn-primary' }}"
-                                            id="readBookBtn">Đọc tài liệu chi tiết</a>
+                                            id="readBookBtn" onclick="saveBookRead({{ $book->id }})">
+                                            Đọc tài liệu chi tiết
+                                        </a>
+
                                 @else
                                     <a style="hidden" href="{{ route('user_login') }}" class="btn btn-primary">Đăng nhập để đọc
                                         tài liệu</a>
@@ -79,5 +82,28 @@ Kho sách
     </div>
 
 </section>
+<script>
+    function saveBookRead(bookId) {
+        event.preventDefault(); // Ngăn chặn việc điều hướng ngay lập tức
+        $.ajax({
+            url: '{{ route('save.book.read') }}', // Route để xử lý lưu lượt đọc
+            method: 'POST',
+            data: {
+                book_id: bookId,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function (response) {
+                if (response.success) {
+                    window.location.href = '{{ route('user_bookdetail_id', ['id' => ':id']) }}'.replace(':id', bookId);
+                } else {
+                    alert('Có lỗi xảy ra khi lưu lượt đọc sách.');
+                }
+            },
+            error: function () {
+                alert('Không thể kết nối đến server.');
+            }
+        });
+    }
+</script>
 
 @endsection
