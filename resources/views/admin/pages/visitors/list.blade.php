@@ -7,21 +7,21 @@ Theo dõi truy cập
 
 @section('content')
 <style>
-    .action-buttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 </style>
 <main class="dash-content">
     <div class="container-fluid">
         <h1 class="dash-title">Trang chủ / Xem lượt / Theo dõi truy cập</h1>
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         @endif
         <div class="row">
             <div class="col-xl-12">
@@ -33,11 +33,65 @@ Theo dõi truy cập
                         <div class="easion-card-title"> Theo dõi lượt truy cập </div>
                     </div>
                     <div class="card-body ">
-                        <canvas id="bookReadsChart" width="400" height="200"></canvas>
+                        <canvas id="readingChart" width="400" height="200"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/showReadingChart')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+
+
+            const bookIds = data.map(item => item.book_id);
+            const readCounts = data.map(item => item.read_count);
+
+
+            const ctx = document.getElementById('readingChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: bookIds,
+                    datasets: [{
+                        label: 'Số lượt đọc sách',
+                        data: readCounts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'ID Sách'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Số lượt đọc'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Lỗi khi lấy dữ liệu:', error);
+        });
+});
+</script>
+
+
+
 @endsection

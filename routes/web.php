@@ -38,8 +38,9 @@ Route::controller(\App\Http\Controllers\client\LoginController::class)->group(fu
 //User_book
 Route::controller(\App\Http\Controllers\client\BookController::class)->group(function () {
     Route::get('views/client/pages/book', 'user_book')->name('user_book');
-    Route::post('/book/read-count/{id}', 'readBook')->name('user_book_id');
     Route::get('search', 'searchBook')->name('search');
+    Route::get('/get-book-count', 'getReadCountForBook')->name('getReadCountForBook');
+    Route::post('/book/read-count/{id}', 'readBook')->name('user_book_id');
     Route::post('/save-book-read', 'saveBookRead')->name('save.book.read');
 
 });
@@ -70,10 +71,6 @@ Route::controller(AccountController::class)->group(function () {
     Route::get('views/client/pages/account', 'user_account')->name('user_account');
     Route::get('/account', 'show_user_account')->name('show_user_account');
 });
-
-
-
-
 
 /**ADMIN_PANEL */
 // Admin Login Routes
@@ -140,7 +137,7 @@ Route::middleware(['blockip'])->group(function () {
             Route::controller(VisitorsController::class)->group(function () {
                 Route::get('/views/admin/pages/visitors/list', 'visitors_admin')->name('visitorslist');
                 Route::post('/update-read-count', 'updateReadCount')->name('updatereadcount');
-
+                Route::get('/showReadingChart', 'showReadingChart')->name('showReadingChart');
             });
 
             //Admin_support

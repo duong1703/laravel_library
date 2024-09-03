@@ -56,7 +56,6 @@ Kho sách
                                 <h3 class="text-success">{{ $book->book_name }}</h3>
                                 <p class="text-primary">{{ $book->book_author }}</p>
                                 <p class="text-primary">Danh mục sách: {{ $book->book_category }}</p>
-
                                 <p class="text-success">Trạng thái sách: {{ $book->book_status }}</p>
                                 @if(Session::has('member_name_login'))
                                     <p>
@@ -84,9 +83,9 @@ Kho sách
 </section>
 <script>
     function saveBookRead(bookId) {
-        event.preventDefault(); // Ngăn chặn việc điều hướng ngay lập tức
+        event.preventDefault();
         $.ajax({
-            url: '{{ route('save.book.read') }}', // Route để xử lý lưu lượt đọc
+            url: '{{ route('save.book.read') }}',
             method: 'POST',
             data: {
                 book_id: bookId,
