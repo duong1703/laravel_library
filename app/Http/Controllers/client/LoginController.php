@@ -21,21 +21,12 @@ class LoginController extends Controller
     {
 
 
-        $request->validate([
-            'name_login' => 'required|string|max:255',
-            'password' => 'required|string|min:8',
-        ]);
+        $credentials = $request->only('name_login', 'password');
 
-
-        $member = member::where('name_login', $request->input('name_login'))->first();
-        if ($member && Hash::check($request->input('password'), $member->password)) {
-
-            Session::put('member_name_login', $member->name_login);
-            Session::put('member_id', $member->id);
+        if (Auth::guard('member')->attempt($credentials)) {
             return redirect()->intended('/')->with('success', 'Đăng nhập thành công');
             
         }
-
 
         return redirect()->back()->withErrors([
             'login_failed' => 'Tên đăng nhập hoặc mật khẩu không chính xác.',
@@ -46,9 +37,7 @@ class LoginController extends Controller
 
     public function userLogoutpost(Request $request): RedirectResponse
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        Auth::guard('member')->logout();
         return redirect()->route('user_home');
     }
 }

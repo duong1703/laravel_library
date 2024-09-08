@@ -16,8 +16,8 @@ class AccountController extends Controller
     {
         $member_id = Session::get('member_id');
         $reads = readbook::where('member_id', $member_id)
-            ->get();
+            ->paginate(5);
 
-        return view('client/pages/account', compact('reads'));
+        return view('client/pages/account', compact('reads', 'member_id'));
     }
 }

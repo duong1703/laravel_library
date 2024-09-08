@@ -90,5 +90,8 @@ class BookController extends Controller
         return view('client/pages/book', compact('readCounts'));
     }
 
-
+    public function getIDbook($id){
+        $book = book::findOrFail($id);
+        return view('client/pages/book', compact('book'));
+    }
 }

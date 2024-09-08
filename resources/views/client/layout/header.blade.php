@@ -27,21 +27,24 @@
         </li>
         <li><a href="{{ route('user_contact') }}">Liên hệ</a></li>
         <!-- <li><a href="{{ route('user_login') }}" class="fa fa-user">Đăng nhập</a></li> -->
-        @if(Session::has('member_name_login'))
-            <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle fa fa-user">
-                Xin chào, {{ Session::get('member_name_login') }}</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="text-center" href="{{ route('user_account') }}">Trang cá nhân</a></li>
-                    <li>
-                        <form action="{{ route('userLogoutpost') }}" method="post" class="text-center">
-                            @csrf
-                            <button type="submit" class="btn btn-primary">Đăng xuất</button>
-                        </form>
-                    </li>
-                </ul>
-            </li>
+        @if(Auth::guard('member')->check())
+                @php
+                    $user = Auth::guard('member')->user();
+                @endphp
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle fa fa-user">
+                        Xin chào, {{ $user->name_login }}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="text-center" href="{{ route('user_account') }}">Trang cá nhân</a></li>
+                        <li>
+                            <form action="{{ route('userLogoutpost') }}" method="post" class="text-center">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Đăng xuất</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
         @else
             <li><a href="{{ route('user_login') }}" class="fa fa-user">Đăng nhập</a></li>
         @endif

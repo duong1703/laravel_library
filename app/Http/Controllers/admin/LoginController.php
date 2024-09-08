@@ -22,10 +22,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
 
-        if (Auth::attempt($credentials)) {
-
-            $user = Auth::user();
-            Session::put('user_name', $user->name);
+        if (Auth::guard('admin')->attempt($credentials)) {
             return redirect()->intended('views/admin/pages/home');
         }
 
@@ -38,9 +35,7 @@ class LoginController extends Controller
 
     public function logout_process(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        Auth::guard('admin')->logout();
         return redirect()->route('loginadmin');
     }
 }

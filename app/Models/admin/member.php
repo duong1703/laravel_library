@@ -22,4 +22,10 @@ class member extends Authenticatable
         return $this->hasMany(readbook::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(comment::class);
+    }
+
+
 }

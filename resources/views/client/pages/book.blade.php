@@ -55,6 +55,7 @@ Kho sách
                                 <span class="probootstrap-meta"><i class="icon-calendar2"></i> {{ $book->created_at }}</span>
                                 <h3 class="text-success">{{ $book->book_name }}</h3>
                                 <p class="text-primary">{{ $book->book_author }}</p>
+                                <p class="text-primary">ID sách:  {{ $book->id }}</p>
                                 <p class="text-primary">Danh mục sách: {{ $book->book_category }}</p>
                                 <p class="text-success">Trạng thái sách: {{ $book->book_status }}</p>
                                 @if(Session::has('member_name_login'))

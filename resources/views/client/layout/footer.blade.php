@@ -9,14 +9,20 @@
         </div>
     </div>
 </section> -->
-<footer class="probootstrap-footer probootstrap-bg">
+
+<style>
+    .custom {
+        margin-top: 25px;
+    }
+</style>
+<footer class="probootstrap-footer probootstrap-bg custom">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <div class="probootstrap-footer-widget">
                     <h3>Thông tin về trường</h3>
                     <p>Tiền thân của Trường Đại học Điện lực là Trường Kỹ nghệ Thực hành được thành lập năm 1898.
-                    Sau đó Trường được tách thành Trường Kỹ thuật I và trường Kỹ thuật II.</p>
+                        Sau đó Trường được tách thành Trường Kỹ thuật I và trường Kỹ thuật II.</p>
                     <!-- <h3>Social</h3>
                     <ul class="probootstrap-footer-social">
                         <li><a href="#"><i class="icon-twitter"></i></a></li>
@@ -44,7 +50,8 @@
                 <div class="probootstrap-footer-widget">
                     <h3>Thông tin liên hệ</h3>
                     <ul class="probootstrap-contact-info">
-                        <li><i class="icon-location2"></i> <span>Trường Đại Học Điện Lực, 235 Hoàng Quốc Việt, Hà Nội</span></li>
+                        <li><i class="icon-location2"></i> <span>Trường Đại Học Điện Lực, 235 Hoàng Quốc Việt, Hà
+                                Nội</span></li>
                         <li><i class="icon-mail"></i><span>info@epu.edu.vn</span></li>
                         <li><i class="icon-phone2"></i><span>024 2245 2662</span></li>
                     </ul>
@@ -52,7 +59,7 @@
             </div>
 
         </div>
-       
+
 
     </div>
 
@@ -61,8 +68,7 @@
             <div class="row">
                 <div class="col-md-8 text-left">
                     <p>&copy; 2024. All Rights
-                        Reserved. Designed &amp; Developed with by <a
-                            href="">EPU IT</a></p>
+                        Reserved. Designed &amp; Developed with by <a href="">EPU IT</a></p>
                 </div>
                 <div class="col-md-4 probootstrap-back-to-top">
                     <p><a href="#" class="js-backtotop">Back to top <i class="icon-arrow-long-up"></i></a></p>

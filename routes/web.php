@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\SupportController;
 use App\Http\Controllers\admin\VisitorsController;
 use App\Http\Controllers\client\AccountController;
 use App\Http\Controllers\client\BookDetailController;
+use App\Http\Controllers\client\CommentController;
 use App\Http\Controllers\client\ContactController;
 use App\Http\Controllers\client\IntroController;
 use App\Mail\AuthenMemberMail;
@@ -22,12 +23,15 @@ use Illuminate\Support\Facades\Route;
 // });
 
 //User_home
+
 Route::controller(\App\Http\Controllers\client\HomeController::class)->group(function () {
     Route::get('/', 'user_home')->name('user_home');
 });
 
 
+
 //User_login
+
 Route::controller(\App\Http\Controllers\client\LoginController::class)->group(function () {
     Route::get('views/client/pages/login', 'user_login')->name('user_login');
     Route::post('/auth/userLoginpost', 'userLoginpost')->name('userLoginpost');
@@ -39,6 +43,7 @@ Route::controller(\App\Http\Controllers\client\LoginController::class)->group(fu
 Route::controller(\App\Http\Controllers\client\BookController::class)->group(function () {
     Route::get('views/client/pages/book', 'user_book')->name('user_book');
     Route::get('search', 'searchBook')->name('search');
+    Route::get('/getbook/{id}', 'getIDbook')->name('getIDbook');
     Route::get('/get-book-count', 'getReadCountForBook')->name('getReadCountForBook');
     Route::post('/book/read-count/{id}', 'readBook')->name('user_book_id');
     Route::post('/save-book-read', 'saveBookRead')->name('save.book.read');
@@ -59,6 +64,7 @@ Route::controller(BookDetailController::class)->group(function () {
     Route::get('views/client/pages/bookdetail/{id}', 'user_bookdetail')->name('user_bookdetail_id');
 });
 
+
 //User_Intro
 Route::controller(IntroController::class)->group(function () {
     Route::get('views/client/pages/intro/info', 'info_user')->name('info_user');
@@ -66,10 +72,16 @@ Route::controller(IntroController::class)->group(function () {
 });
 
 //user_account
-
 Route::controller(AccountController::class)->group(function () {
     Route::get('views/client/pages/account', 'user_account')->name('user_account');
     Route::get('/account', 'show_user_account')->name('show_user_account');
+});
+
+//User_comment
+Route::controller(CommentController::class)->group(function () {
+    Route::get('/user_comment', 'usercomment')->name('usercomment');
+    Route::get('/book/{id}', 'getBookDetail')->name('bookdetail');
+    Route::post('/comment/{id}', 'user_comment_post')->name('user_comment');
 });
 
 /**ADMIN_PANEL */
@@ -85,7 +97,7 @@ Route::middleware(['blockip'])->group(function () {
 
 //Admin_Panel
 Route::middleware(['blockip'])->group(function () {
-    Route::middleware(['admin'])->group(function () {
+    Route::middleware('auth:admin')->group(function () {
         Route::group(['middleware' => 'nocache'], function () {
             //Admin_home
             Route::controller(HomeController::class)->group(function () {

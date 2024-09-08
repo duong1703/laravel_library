@@ -40,10 +40,16 @@ return [
         //     'driver' => 'session',
         //     'provider' => 'users',
         // ],
-
-        'web' => [
+        'admin' => [
             'driver' => 'session',
-            'provider' => 'admin',
+            'provider' => 'admins',
+            'cookie' => env('ADMIN_SESSION_COOKIE', 'admin_session'),
+        ],
+
+        'member' => [
+            'driver' => 'session',
+            'provider' => 'members',
+            'cookie' => env('MEMBER_SESSION_COOKIE', 'member_session'),
         ],
     ],
 
@@ -70,16 +76,15 @@ return [
         //     'model' => env('AUTH_MODEL', App\Models\User::class),
         // ],
 
-        'admin' => [
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin\admin::class,  // Đảm bảo model Admin được sử dụng
+            'model' => App\Models\admin\admin::class,
         ],
 
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'members' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\admin\member::class,
+        ],
     ],
 
     /*

@@ -132,6 +132,10 @@ return [
         Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
     ),
 
+    // Thêm cấu hình cookie riêng cho admin
+    'admin_cookie' => env('ADMIN_SESSION_COOKIE', 'admin_session'),
+    'member_cookie' => env('MEMBER_SESSION_COOKIE', 'member_session'),
+
     /*
     |--------------------------------------------------------------------------
     | Session Cookie Path

@@ -7,7 +7,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckUserIsLoggedIn
+class AdminLogout
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,12 @@ class CheckUserIsLoggedIn
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('web')->check()) {
-            return $next($request);
+        if (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+            $request->session()->forget('admin_session_cookie');
+            session()->flush();
         }
 
-        return redirect()->route('user_login');
+        return $next($request);
     }
 }

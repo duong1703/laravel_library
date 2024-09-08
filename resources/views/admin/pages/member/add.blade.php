@@ -55,12 +55,17 @@ Thêm mới thành viên
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword">Mật khẩu đăng nhập</label>
-                                    <input name="password" type="password" class="form-control" id="inputPassword"
-                                        placeholder="Mật khẩu đăng nhập" value="{{ old('password') }}" required>
+                                    <div class="input-group">
+                                        <input name="password" type="text" class="form-control" id="inputPassword"
+                                            placeholder="Mật khẩu đăng nhập" value="{{ old('password') }}" required>
+                                        <button type="button" class="btn btn-secondary" id="generatePassword">Generate
+                                            Password</button>
+                                    </div>
                                     @error('password')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+
                                 <div class="form-group col-md-12">
                                     <label for="inputEmail">Email</label>
                                     <input name="email" type="email" class="form-control" id="inputEmail"
@@ -125,4 +130,20 @@ Thêm mới thành viên
         </div>
     </div>
 </main>
+<script>
+document.getElementById('generatePassword').addEventListener('click', function() {
+    function generatePassword(length = 10) {
+        const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let randomPassword = '';
+        for (let i = 0; i < length; i++) {
+            randomPassword += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return randomPassword;
+    }
+
+    const password = generatePassword(10);
+    document.getElementById('inputPassword').value = password;
+});
+</script>
+
 @endsection

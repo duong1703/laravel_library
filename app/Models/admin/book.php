@@ -13,10 +13,15 @@ class book extends Model
 
     protected $primaryKey = "id";
 
-    protected $fillable = ['book_images', 'book_name', 'book_author', 'book_file' ,  'book_publisher', 'book_year_of_manufacture', 'book_amount', 'book_category', 'book_status'];
+    protected $fillable = ['book_images', 'book_name', 'book_author', 'book_file', 'book_publisher', 'book_year_of_manufacture', 'book_amount', 'book_category', 'book_status'];
 
     public function readbooks()
     {
         return $this->hasMany(readbook::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(comment::class);
     }
 }

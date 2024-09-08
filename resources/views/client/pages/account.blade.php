@@ -5,16 +5,6 @@ Tài khoản của bạn
 @endsection
 
 @section('content')
-<!-- <div class="container">
-    <h1>Trang Tài Khoản</h1>
-
-   
-    <p>Xin chào, {{ Session::get('member_name_login') }}</p>
-
-    <h2>Lịch sử đọc sách</h2>
-
-</div> -->
-
 <section class="probootstrap-section probootstrap-section-colored">
     <div class="container">
         <div class="row">
@@ -55,11 +45,14 @@ Tài khoản của bạn
                 </tbody>
             </table>
         </div>
+        <div class="d-flex justify-content-center text-center">
+            {{ $reads->links('vendor.pagination.bootstrap-4') }}
+        </div>
 
     </div>
 @else
-    <p class="text-center mt-3">Bạn cần đăng nhập để xem thêm thông tin !. Vui lòng đăng nhập tại <a
-            href="{{ route('user_login') }}">đây</a>
+    <p class="alert alert-danger text-center" role="alert" style="margin-top:25px">Bạn cần đăng nhập để xem thêm thông tin
+        !. Vui lòng đăng nhập tại <a href="{{ route('user_login') }}">đây</a>
 
 @endif
 
