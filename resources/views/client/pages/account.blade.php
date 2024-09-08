@@ -14,9 +14,12 @@ Tài khoản của bạn
         </div>
     </div>
 </section>
-@if(Session::has('member_name_login'))
+@if(Auth::guard('member')->check())
+    @php
+        $user = Auth::guard('member')->user();
+    @endphp
     <div class="container">
-        <h4 class="mt-2">Xin chào, {{ Session::get('member_name_login') }}</h4>
+        <h4 class="mt-2">Xin chào, {{ $user->name_login }}</h4>
 
         <h2>Lịch sử đọc sách</h2>
         <div class="body">
@@ -51,8 +54,8 @@ Tài khoản của bạn
 
     </div>
 @else
-    <p class="alert alert-danger text-center" role="alert" style="margin-top:25px">Bạn cần đăng nhập để xem thêm thông tin
-        !. Vui lòng đăng nhập tại <a href="{{ route('user_login') }}">đây</a>
+    <p class="text-center mt-3 bg-danger">Bạn cần đăng nhập để xem thêm thông tin !. Vui lòng đăng nhập tại <a
+            href="{{ route('user_login') }}">đây</a>
 
 @endif
 

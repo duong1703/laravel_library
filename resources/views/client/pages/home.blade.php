@@ -43,34 +43,34 @@ Trang chủ
         <div class="container">
             <div class="row">
                 @foreach($data as $book)
-                <div class="col-md-6 mb-4">
-                    <div class="probootstrap-service-2 probootstrap-animate">
-                        <div class="image">
-                            <div class="image-bg">
-                                <img src="{{ asset($book->book_images)  }}" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="text">
-                            <span class="probootstrap-meta"><i class="icon-calendar2"></i>
-                                {{ $book->created_at }}</span>
-                            <h3>{{ $book->book_name }}</h3>
-                            <h3> Tác giả: {{ $book->book_author }}</h3>
-                            @if(Session::has('member_name_login'))
-                            <p><a href="{{ route('user_bookdetail_id', ['id' => $book->id]) }}"
-                                    class="btn btn-primary">Đọc tài liệu chi tiết</a> <span class="enrolled-count">
+                        <div class="col-md-6 mb-4">
+                            <div class="probootstrap-service-2 probootstrap-animate">
+                                <div class="image">
+                                    <div class="image-bg">
+                                        <img src="{{ asset($book->book_images)  }}" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <span class="probootstrap-meta"><i class="icon-calendar2"></i>
+                                        {{ $book->created_at }}</span>
+                                    <h3>{{ $book->book_name }}</h3>
+                                    <h3> Tác giả: {{ $book->book_author }}</h3>
+                                    @if(Auth::guard('member')->check())
+                                        <p><a href="{{ route('user_bookdetail_id', ['id' => $book->id]) }}"
+                                                class="btn btn-primary">Đọc tài liệu chi tiết</a> <span class="enrolled-count">
                                     @else
-                                    <a href="{{ route('user_login') }}" class="btn btn-primary">Đăng nhập để đọc tài
-                                        liệu</a>
+                                        <a href="{{ route('user_login') }}" class="btn btn-primary">Đăng nhập để đọc tài
+                                            liệu</a>
                                     @endif
 
-                                </span></p>
+                                        </span></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                @if ($loop->iteration % 2 == 0)
-            </div>
-            <div class="row">
-                @endif
+                        @if ($loop->iteration % 2 == 0)
+                            </div>
+                            <div class="row">
+                        @endif
                 @endforeach
             </div>
         </div>

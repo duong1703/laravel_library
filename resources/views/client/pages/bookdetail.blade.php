@@ -5,7 +5,7 @@ Kho sách
 @endsection
 
 @section('content')
-@if(Session::has('member_name_login'))
+@if(Auth::guard('member')->check())
     <section class="probootstrap-section probootstrap-section-colored">
         <div class="container">
             <div class="row">
@@ -81,7 +81,7 @@ Kho sách
                 @csrf
                 <div class="mb-3">
                     <input type="hidden" name="book_id" value="{{ $bookdetail->id }}">
-                    <input type="hidden" name="member_id" value="{{ Session::get('member_id') }}">
+                    <input type="hidden" name="member_id" value="{{ Auth::guard('member')->user()->id }}">
                     <label for="comment" class="form-label">Bình luận</label>
                     <textarea name="comment" id="comment">Welcome to TinyMCE!</textarea>
                 </div>

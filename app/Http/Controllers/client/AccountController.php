@@ -14,10 +14,14 @@ class AccountController extends Controller
 {
     public function user_account()
     {
-        $member_id = Session::get('member_id');
-        $reads = readbook::where('member_id', $member_id)
-            ->paginate(5);
+        if (Auth::guard('member')->check()) {
+            $member_id = Auth::guard('member')->user()->id;
+            $reads = readbook::where('member_id', $member_id)
+                ->paginate(5);
+            return view('client/pages/account', compact('reads', 'member_id'));
+        } else {
+            return redirect()->route('user_login');
+        }
 
-        return view('client/pages/account', compact('reads', 'member_id'));
     }
 }

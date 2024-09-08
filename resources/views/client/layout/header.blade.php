@@ -49,13 +49,6 @@
             <li><a href="{{ route('user_login') }}" class="fa fa-user">Đăng nhập</a></li>
         @endif
 
-        <!-- @if(Session::has('member_name_login'))
-            <p>Xin chào, {{ Session::get('member_name_login') }}</p>
-        @else
-            <a href="{{ route('user_login') }}">Login</a>
-        @endif -->
-
-
 
 
 

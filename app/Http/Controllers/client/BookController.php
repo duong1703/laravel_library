@@ -45,7 +45,7 @@ class BookController extends Controller
     public function saveBookRead(Request $request)
     {
         try {
-            $userId = Session::get('member_id');
+            $userId = Auth::guard('member')->user()->id;
 
             if (!$userId || !is_int($userId)) {
                 return response()->json(['success' => false, 'message' => 'Người dùng chưa đăng nhập hoặc ID không hợp lệ.'], 401);
