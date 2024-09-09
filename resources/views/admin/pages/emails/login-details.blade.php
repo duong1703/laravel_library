@@ -1,19 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông tin đăng nhập của bạn</title>
-</head>
-<body>
-    <h1>Chào mừng, {{ $name_login }}</h1>
-    <p>Tài khoản của bạn đã được tạo thành công. Dưới đây là thông tin đăng nhập của bạn:</p>
-    <p>Tên đăng nhập: {{ $name_login }}</p>
-    <p>Mật khẩu: {{ $password }}</p>
-    <p>Bạn có thể đăng nhập tại <a href="{{ route('user_login') }}">{{ route('user_login') }}</a>.</p>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 

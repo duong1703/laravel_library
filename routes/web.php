@@ -17,21 +17,13 @@ use App\Mail\AuthenMemberMail;
 use Illuminate\Support\Facades\Route;
 
 /** USER_WEBSITE */
-//User_Website
-// Route::get('/', function () {
-//     return view('client/pages/home');
-// });
 
 //User_home
-
 Route::controller(\App\Http\Controllers\client\HomeController::class)->group(function () {
     Route::get('/', 'user_home')->name('user_home');
 });
 
-
-
 //User_login
-
 Route::controller(\App\Http\Controllers\client\LoginController::class)->group(function () {
     Route::get('views/client/pages/login', 'user_login')->name('user_login');
     Route::post('/auth/userLoginpost', 'userLoginpost')->name('userLoginpost');
@@ -88,7 +80,7 @@ Route::controller(CommentController::class)->group(function () {
 // Admin Login Routes
 Route::middleware(['blockip'])->group(function () {
     Route::controller(LoginController::class)->group(function () {
-        Route::get('views/admin/pages/login', 'admin_login')->name('loginadmin');
+        Route::get('views/admin/pages/login', 'admin_login')->name('login');
         Route::post('/auth/login', 'login_process')->name('login_process');
         Route::post('/auth/logout', 'logout_process')->name('logout_process');
     });

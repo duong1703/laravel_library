@@ -43,6 +43,7 @@ return [
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
+            'expire_on_close' => true,
             'cookie' => env('ADMIN_SESSION_COOKIE', 'admin_session'),
         ],
 

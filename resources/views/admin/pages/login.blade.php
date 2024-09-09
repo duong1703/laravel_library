@@ -10,6 +10,7 @@
     <link rel="stylesheet" href=" {{ asset('css/easion.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
     <script src=" {{ asset('js/chart-js-config.js') }}"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <title>Trang đăng nhập</title>
 </head>
 
@@ -21,6 +22,11 @@
         <p class="fs-1 text-light">THƯ VIỆN ĐIỆN TỬ KHOA CÔNG NGHỆ THÔNG TIN</p>
         <div class="card account-dialog">
             <div class="card-header bg-primary text-white"> Vui lòng đăng nhập</div>
+            @if ($errors->has('captcha_failed'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('captcha_failed') }}
+                </div>
+            @endif
             <div class="card-body">
                 <form action="{{ route('login_process') }}" method="post">
                     @csrf
@@ -41,12 +47,34 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="cf-turnstile text-center" data-sitekey="{{ env('SITE_KEY') }}"
+                        data-callback="javascriptCallback" >
+                    </div>
                     <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
                 </form>
 
             </div>
         </div>
     </div>
+    <script>
+        window.onloadTurnstileCallback = function () {
+            turnstile.render('#example-container', {
+                sitekey: '{{ env('SITE_KEY') }}',
+                callback: function (token) {
+                    console.log(`Challenge Success ${token}`);
+                },
+            });
+        };
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if ({{ $errors->has('captcha_failed') ? 'true' : 'false' }}) {
+                turnstile.reset(); 
+            }
+        });
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
         </script>
@@ -56,6 +84,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
         </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
 
     <script src=" {{ asset('js/easion.js') }}"></script>
 </body>

@@ -12,6 +12,8 @@
 
     <link rel="stylesheet" href=" {{ asset('css/style1.css') }} ">
 
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 </head>
 
 <body>
@@ -30,6 +32,11 @@
                                 </div>
 
                             </div>
+                            @if ($errors->has('captcha_failed'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('captcha_failed') }}
+                                </div>
+                            @endif
                             <form action="{{ route('userLoginpost') }}" method="post">
                                 @csrf
                                 @if (session('error'))
@@ -37,21 +44,31 @@
                                         {{ session('error') }}
                                     </div>
                                 @endif
+
+
+                                @csrf
                                 <div class="form-group">
                                     <label for="name_login">Tên đăng nhập</label>
-                                    <input type="text" name="name_login" id="name_login" class="form-control" required>
+                                    <input type="text" name="name_login" id="name_login"
+                                        class="form-control @error('name_login') is-invalid @enderror"
+                                        value="{{ old('name_login') }}" required>
                                     @error('name_login')
-                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Mật khẩu</label>
-                                    <input type="password" name="password" id="password" class="form-control" required>
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" id="password"
+                                        class="form-control @error('password') is-invalid @enderror" required>
                                     @error('password')
-                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                                <div class="cf-turnstile" data-sitekey="{{ env('SITE_KEY') }}"
+                                    data-callback="javascriptCallback">
+                                </div>
+                                <button type="submit" class="btn btn-primary text-center">Đăng nhập</button>
+
                             </form>
 
 
@@ -62,7 +79,17 @@
             </div>
         </div>
     </section>
-
+    <script>
+        window.onloadTurnstileCallback = function () {
+            turnstile.render('#example-container', {
+                sitekey: '{{ env('
+            SITE_KEY ') }}',
+                callback: function (token) {
+                    console.log(`Challenge Success ${token}`);
+                },
+            });
+        };
+    </script>
     <script src=" {{ asset('js/jquery1.min.js') }} "></script>
     <script src=" {{ asset('js/popper1.js') }} "></script>
     <script src="{{ asset('js/bootstrap1.min.js') }} "></script>

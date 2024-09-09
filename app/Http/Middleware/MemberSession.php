@@ -21,6 +21,6 @@ class MemberSession
         }
 
         
-        return redirect('client/pages/login');
+        return redirect('/views/client/pages/login');
     }
 }
