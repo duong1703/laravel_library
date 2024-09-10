@@ -54,9 +54,9 @@ Thêm mới quản trị viên
                                 <label for="role" class="form-label">Quyền quản trị</label>
                                 <select name="role" id="inputState" class="form-control" required>
                                 <option value="Quyền quản trị"> Lựa chọn quyền truy cập</option>
-                                    <option value="superadmin" {{ old('role', $editAdmin->role) == 'superadmin' ? 'selected' : '' }}>
+                                    <option value="superadmin" {{ old('role') == 'superadmin' ? 'selected' : '' }}>
                                         Quản trị viên cấp cao</option>
-                                    <option value="admin" {{ old('role', $editAdmin->role) == 'admin' ? 'selected' : '' }}>
+                                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>
                                         Quản trị viên</option>
                                 </select>
                                 @error('role')

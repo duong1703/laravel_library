@@ -22,8 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::policy(admin::class,AdminAccessPolicy::class );
-
         Gate::define('manage-everything', function ($user) {
             return $user->isSuperAdmin(); 
         });
@@ -31,6 +29,5 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('manage-limited', function ($user) {
             return $user->isAdmin(); 
         });
-    
     }
 }

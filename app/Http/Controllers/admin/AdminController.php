@@ -58,24 +58,14 @@ class AdminController extends Controller
 
     public function editAdmin($id)
     {
-        if (!Gate::allows('manage-everything')) {
-            abort(403, 'Bạn không có quyền chỉnh sửa quản trị viên.');
-        }
-    
         $editAdmin = admin::findOrFail($id);
         return view('/admin/pages/admin/edit', compact('editAdmin'));
     }
 
     public function admineditpost(Request $request, $id)
     {
-        if (!Gate::allows('manage-everything')) {
-            abort(403, 'Bạn không có quyền chỉnh sửa quản trị viên.');
-        }
-    
 
         $user = Auth::user()->name;
-
-
         $rules = [
             'name' => 'required|string|max:255',
             'email' => 'string|email|max:255',
@@ -113,10 +103,6 @@ class AdminController extends Controller
 
     public function admindelete(Request $request, $id)
     {
-        if (!Gate::allows('manage-everything')) {
-            abort(403, 'Bạn không có quyền xóa quản trị viên.');
-        }
-    
         $member = admin::findOrFail($id);
         $member->delete();
         $request->session()->flash('success', 'Xóa quản trị thành công!');
