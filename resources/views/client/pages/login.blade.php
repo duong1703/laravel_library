@@ -5,14 +5,14 @@
     <title>Đăng nhập thành viên</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=119436&format=png&color=000000">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href=" {{ asset('css/style1.css') }} ">
-
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <link rel="stylesheet" href=" {{ asset('css/style1.css') }} ">
 
 </head>
 
@@ -44,9 +44,6 @@
                                         {{ session('error') }}
                                     </div>
                                 @endif
-
-
-                                @csrf
                                 <div class="form-group">
                                     <label for="name_login">Tên đăng nhập</label>
                                     <input type="text" name="name_login" id="name_login"
@@ -63,15 +60,10 @@
                                     @error('password')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
-                                </div>
-                                <div class="cf-turnstile" data-sitekey="{{ env('SITE_KEY') }}"
-                                    data-callback="javascriptCallback">
+                                    <div class="cf-turnstile mt-3 text-center" data-sitekey="{{ env('SITE_KEY') }}" data-callback="javascriptCallback"></div>
                                 </div>
                                 <button type="submit" class="btn btn-primary text-center">Đăng nhập</button>
-
                             </form>
-
-
                             <a href="{{ route('user_home') }}">Quay lại trang chủ</a>
                         </div>
                     </div>
@@ -79,17 +71,6 @@
             </div>
         </div>
     </section>
-    <script>
-        window.onloadTurnstileCallback = function () {
-            turnstile.render('#example-container', {
-                sitekey: '{{ env('
-            SITE_KEY ') }}',
-                callback: function (token) {
-                    console.log(`Challenge Success ${token}`);
-                },
-            });
-        };
-    </script>
     <script src=" {{ asset('js/jquery1.min.js') }} "></script>
     <script src=" {{ asset('js/popper1.js') }} "></script>
     <script src="{{ asset('js/bootstrap1.min.js') }} "></script>

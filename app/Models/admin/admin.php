@@ -17,4 +17,19 @@ class admin extends Authenticatable
     protected $primaryKey = "id";
 
     protected $Fillable = ['name', 'email', 'password', 'role'];
+
+    public function getIsSuperAdminAttribute()
+    {
+        return $this->is_super_admin; 
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->role === 'superadmin';
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 }

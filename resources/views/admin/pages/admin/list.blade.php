@@ -39,6 +39,7 @@ Danh sách quản trị viên
                                     <th scope="col">Tên</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Mật khẩu</th>
+                                    <th scope="col">Quyền</th>
                                     <th scope="col">Chức năng</th>
                                 </tr>
                             </thead>
@@ -53,6 +54,7 @@ Danh sách quản trị viên
                                     <td>{{ $admin->name }}</td>
                                     <td>{{ $admin->email }}</td>
                                     <td>{{ $admin->password }}</td>
+                                    <td>{{ $admin->role }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('adminedit', ['id' => $admin->id]) }}"
                                             class="btn btn-primary"><i class="fas fa-edit"></i></a>

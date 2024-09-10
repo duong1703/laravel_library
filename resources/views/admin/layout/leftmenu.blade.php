@@ -59,7 +59,7 @@
             <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
                 <i class="fa fa-eye"></i> Lượt truy cập</a>
             <div class="dash-nav-dropdown-menu">
-                <a href="{{ route('visitorslist') }}" class="dash-nav-dropdown-item">Xem lượt</a>
+                <a href="{{ route('visitorslist') }}" class="dash-nav-dropdown-item">Xem lượt đọc</a>
             </div>
         </div>
         <div class="dash-nav-dropdown">

@@ -18,6 +18,8 @@ class BookDetailController extends Controller
     {
         $path = public_path('book/' . $book_file_name);
 
+        
+
         if (!file_exists($path)) {
             abort(404);
         }

@@ -107,15 +107,16 @@ Route::middleware(['blockip'])->group(function () {
             });
 
             //Admin_admin
-            Route::controller(AdminController::class)->group(function () {
-                Route::get('views/admin/pages/admin/list', 'admin_admin')->name('adminlist');
-                Route::get('views/admin/pages/admin/add', 'addAdmin')->name('adminadd');
-                Route::get('views/admin/pages/admin/edit/{id}', 'editAdmin')->name('adminedit');
-                Route::put('/admin/edit/{id}', 'admineditpost')->name('admineditpost');
-                Route::post('/admin/add', 'adminpost')->name('adminpost');
-                Route::delete('/admin/delete/{id}', 'admindelete')->name('admindelete');
+            Route::middleware('can:manage-everything')->group(function () {
+                Route::controller(AdminController::class)->group(function () {
+                    Route::get('views/admin/pages/admin/list', 'admin_admin')->name('adminlist');
+                    Route::get('views/admin/pages/admin/add', 'addAdmin')->name('adminadd');
+                    Route::get('views/admin/pages/admin/edit/{id}', 'editAdmin')->name('adminedit');
+                    Route::put('/admin/edit/{id}', 'admineditpost')->name('admineditpost');
+                    Route::post('/admin/add', 'adminpost')->name('adminpost');
+                    Route::delete('/admin/delete/{id}', 'admindelete')->name('admindelete');
+                });
             });
-
             //Admin_category
             Route::controller(CategoriesController::class)->group(function () {
                 Route::get('views/admin/pages/categories/list', 'categories_admin')->name('categorieslist');
