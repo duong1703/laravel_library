@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <section class="ftco-section">
+    <section class="ftco-section bg-light">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 col-lg-10">

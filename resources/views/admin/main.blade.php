@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=119436&format=png&color=000000">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
@@ -26,9 +27,9 @@
 <body>
     <div class="dash">
         @include('admin/layout/header')
-        <div class="dash-app">
+        <div class="dash-app" >
             @include('admin/layout/leftmenu')
-            <main class="dash-content">
+            <main class="dash-content bg-light">
                 @yield('content')
             </main>
         </div>
