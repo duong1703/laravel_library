@@ -14,9 +14,6 @@ class AdminController extends Controller
 {
     public function admin_admin(Request $request)
     {
-        if (!Gate::allows('manage-everything')) {
-            abort(403, 'Bạn không có quyền truy cập trang này.');
-        }
 
         $admin = DB::table('admin')->get();
 
@@ -25,19 +22,11 @@ class AdminController extends Controller
 
     public function addAdmin()
     {
-        if (!Gate::allows('manage-everything')) {
-            abort(403, 'Bạn không có quyền thêm quản trị viên.');
-        }
-
         return view('/admin/pages/admin/add');
     }
 
     public function adminpost(Request $request)
     {
-        if (!Gate::allows('manage-everything')) {
-            abort(403, 'Bạn không có quyền thêm quản trị viên.');
-        }
-
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:admin,email',
@@ -64,7 +53,6 @@ class AdminController extends Controller
 
     public function admineditpost(Request $request, $id)
     {
-
         $user = Auth::user()->name;
         $rules = [
             'name' => 'required|string|max:255',
