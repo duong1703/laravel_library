@@ -54,6 +54,7 @@ Route::controller(BookDetailController::class)->group(function () {
     Route::get('book/{book_file_name}')->name('showbook');
     Route::get('views/client/pages/bookdetail', 'user_bookdetail')->name('user_bookdetail');
     Route::get('views/client/pages/bookdetail/{id}', 'user_bookdetail')->name('user_bookdetail_id');
+    Route::get('views/client/pages/bookdetail/{book_id}', 'user_bookdetail')->name('user_bookdetail_ids');
 });
 
 

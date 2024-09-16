@@ -15,7 +15,7 @@ class HomeController extends Controller
         $top_readbook = DB::table('readbook')
             ->join('book', 'readbook.book_id', '=', 'book.id')
             ->select('book.id', 'book.book_name', 'book.book_author', 'book.book_images', 'book.created_at', 'readbook.read_count')
-            ->orderByDesc('readbook.read_count')
+            ->orderByDesc('read_count')
             ->limit(6)
             ->get();
         // dd($top_readbook);
