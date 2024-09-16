@@ -78,6 +78,52 @@ Trang chủ
     </div>
 </section>
 
+<section class="probootstrap-section probootstrap-bg-white probootstrap-border-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center section-heading probootstrap-animate">
+                <h2>TOP sách được đọc nhiều nhất</h2>
+            </div>
+        </div>
+        <div class="container" style="font-family:auto">
+            <div class="row" >
+                @foreach($data1 as $top_readbook)
+                        <div class="col-md-6 mb-4">
+                            <div class="probootstrap-service-2 probootstrap-animate">
+                                <div class="image">
+                                    <div class="image-bg">
+                                        <img src="{{ asset($top_readbook->book_images)  }}" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <span class="probootstrap-meta"><i class="icon-calendar2"></i>
+                                        {{ $top_readbook->created_at }}</span>
+                                    <h3>{{ $top_readbook->book_name }}</h3>
+                                    <h3> Tác giả: {{ $top_readbook->book_author }}</h3>
+                                    <h3> Lượt đọc: {{ $top_readbook->read_count }}</h3>
+                                    @if(Auth::guard('member')->check())
+                                        <p><a href="{{ route('user_bookdetail_id', ['book_id' => $top_readbook->book_id]) }}"
+                                                class="btn btn-primary">Đọc tài liệu chi tiết</a> <span class="enrolled-count">
+                                    @else
+                                        <a href="{{ route('user_login') }}" class="btn btn-primary">Đăng nhập để đọc tài
+                                            liệu</a>
+                                    @endif
+
+                                        </span></p>
+                                </div>
+                            </div>
+                        </div>
+                        @if ($loop->iteration % 2 == 0)
+                            </div>
+                            <div class="row">
+                        @endif
+                @endforeach
+            </div>
+        </div>
+
+    </div>
+</section>
+
 <section class="probootstrap-section" style="font-family:auto">
     <div class="container">
         <div class="row">
