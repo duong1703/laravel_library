@@ -15,7 +15,7 @@
     <title>Trang đăng nhập</title>
 </head>
 
-<body class="bg-primary">
+<body class="bg-primary" style="font-family:auto">
     <div class="form-screen">
         <a href="" class="easion-logo">
             <img src="{{ asset('img/CNTTIT.png') }}" width="210" height="75">

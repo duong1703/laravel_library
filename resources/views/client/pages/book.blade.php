@@ -14,9 +14,14 @@ Kho sách
         </div>
     </div>
 </section>
+<nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Thư viện sách</li>
+    </ol>
+</nav>
 
-
-<section class="probootstrap-section">
+<section class="probootstrap-section" >
     <div class="container">
         <div class="container vh-100 d-flex justify-content-center align-items-center">
             <h3>TÌM KIẾM MỘT CÁI GÌ ĐÓ !</h3>

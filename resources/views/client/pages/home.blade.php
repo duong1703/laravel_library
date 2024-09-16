@@ -6,7 +6,7 @@ Trang chủ
 
 @section('content')
 
-<section class="probootstrap-section probootstrap-section-colored">
+<section class="probootstrap-section probootstrap-section-colored" >
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-left section-heading probootstrap-animate">
@@ -16,7 +16,7 @@ Trang chủ
     </div>
 </section>
 
-<section class="probootstrap-section">
+<section class="probootstrap-section" style="font-family:auto">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -40,8 +40,8 @@ Trang chủ
                 <h2>Một số sách phổ biến</h2>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
+        <div class="container" style="font-family:auto">
+            <div class="row" >
                 @foreach($data as $book)
                         <div class="col-md-6 mb-4">
                             <div class="probootstrap-service-2 probootstrap-animate">
@@ -78,7 +78,7 @@ Trang chủ
     </div>
 </section>
 
-<section class="probootstrap-section">
+<section class="probootstrap-section" style="font-family:auto">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center section-heading probootstrap-animate">

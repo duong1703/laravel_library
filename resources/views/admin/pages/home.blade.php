@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" style="font-family:auto">
     <div class="row dash-row">
         <div class="col-xl-3">
             <div class="stats stats-primary rounded-4">

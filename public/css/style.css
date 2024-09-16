@@ -1010,6 +1010,7 @@ a:hover, a:focus, a:active {
 
 .section-heading h1 {
   color: #ffffff;
+  font-family: auto;
 }
 
 @media screen and (max-width: 768px) {
@@ -1705,6 +1706,7 @@ a:hover, a:focus, a:active {
 }
 
 .service.left-icon h3 {
+  font-family: auto;
   font-size: 22px;
   margin-bottom: 0px;
 }

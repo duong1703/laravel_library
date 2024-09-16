@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css" />
 </head>
 
-<body>
+<body style="font-family:auto">
     <div class="dash">
         @include('admin/layout/header')
         <div class="dash-app" >

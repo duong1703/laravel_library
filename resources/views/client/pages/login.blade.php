@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <section class="ftco-section bg-light">
+    <section class="ftco-section bg-light" style="font-family:auto">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 col-lg-10">
@@ -27,7 +27,7 @@
                         <div class="login-wrap p-4 p-md-5">
                             <div class="d-flex">
                                 <div class="w-100">
-                                    <h3 class="mb-4">Đăng nhập thành viên</h3>
+                                    <h3 class="mb-4" style="font-family:auto">Đăng nhập thành viên</h3>
                                     <p class="text-danger">Chỉ có thành viên mới có thể đăng nhập</p>
                                 </div>
 

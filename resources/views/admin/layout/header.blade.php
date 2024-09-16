@@ -1,4 +1,4 @@
-<header class="dash-toolbar">
+<header class="dash-toolbar" style="font-family:auto">
     <a href="javascript::void()" class="menu-toggle">
         <i class="fas fa-bars"></i>
     </a>
@@ -16,6 +16,8 @@
                     @csrf
                     <button type="submit" class="dropdown-item">Đăng xuất</button>
                 </form>
+
+                
             </div>
         </div>
     </div>

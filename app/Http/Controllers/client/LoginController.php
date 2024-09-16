@@ -34,7 +34,7 @@ class LoginController extends Controller
             $credentials = $request->only('name_login', 'password');
 
             if (Auth::guard('member')->attempt($credentials)) {
-                return redirect()->intended('/')->with('success', 'Đăng nhập thành công');
+                return redirect()->route('user_home');
 
             }
 

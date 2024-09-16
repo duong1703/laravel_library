@@ -30,15 +30,7 @@
     gtag('config', 'G-B9177KNB74');
 </script>
 
-<body>
-
-    <div class="probootstrap-search" id="probootstrap-search">
-        <a href="#" class="probootstrap-close js-probootstrap-close"><i class="icon-cross"></i></a>
-        <form action="#">
-            <input type="search" name="s" id="search" placeholder="Search a keyword and hit enter...">
-        </form>
-    </div>
-
+<body style="font-family:auto">
     <div class="probootstrap-page-wrapper">
         <!-- Fixed navbar -->
 

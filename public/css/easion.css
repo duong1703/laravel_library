@@ -8947,7 +8947,9 @@ h1 {
   font-weight: normal; }
 
 .dash-title {
-  margin-bottom: 30px; }
+  margin-bottom: 30px; 
+  font-family: auto;
+}
 
 .content-anchor::before {
   display: block;
@@ -9474,7 +9476,8 @@ body {
 .stats-title {
   font-size: 26px;
   font-weight: 600;
-  letter-spacing: .04em; }
+  letter-spacing: .04em;
+  font-family: auto; }
 
 .stats-icon {
   display: -webkit-box;
@@ -9507,7 +9510,8 @@ body {
   font-size: 33px;
   line-height: 33px;
   font-weight: 600;
-  letter-spacing: .04em; }
+  letter-spacing: .04em;
+  font-family: auto; }
 
 .stats-change {
   margin-top: 5px;

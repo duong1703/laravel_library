@@ -16,7 +16,6 @@ Kho sách
         </div>
     </section>
 
-
     <section class="probootstrap-section probootstrap-section-sm">
         <div class="container">
             <div class="row">
@@ -29,17 +28,24 @@ Kho sách
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <div class="image">
-                                    <div class="image-bg">
-                                        <img src="{{ asset($bookdetail->book_images) }}" class="img-fluid">
+                                <nav aria-label="breadcrumb" class="main-breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Tài liệu chi tiết</li>
+                                    </ol>
+                                </nav>
+                                    <div class="image">
+                                        <div class="image-bg">
+                                            <img src="{{ asset($bookdetail->book_images) }}" class="img-fluid">
+                                        </div>
                                     </div>
-                                </div>
-                                <p>Tên sách: {{ $bookdetail->book_name }}</p>
-                                <p>Tên tác giả: {{ $bookdetail->book_author }}</p>
-                                <p>Nhà sản xuất: {{ $bookdetail->book_publisher }}</p>
-                                <p>Năm sản xuất: {{ $bookdetail->book_year_of_manufacture }}</p>
-                                <p>Số lượng sách: {{ $bookdetail->book_amount }}</p>
-                                <p>Danh mục sách: {{ $bookdetail->book_category}}</p>
+
+                                    <p>Tên sách: {{ $bookdetail->book_name }}</p>
+                                    <p>Tên tác giả: {{ $bookdetail->book_author }}</p>
+                                    <p>Nhà sản xuất: {{ $bookdetail->book_publisher }}</p>
+                                    <p>Năm sản xuất: {{ $bookdetail->book_year_of_manufacture }}</p>
+                                    <p>Số lượng sách: {{ $bookdetail->book_amount }}</p>
+                                    <p>Danh mục sách: {{ $bookdetail->book_category}}</p>
                             </div>
                         </div>
                         <div class="col-md-7 col-md-push-1  probootstrap-animate" id="probootstrap-content">
