@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\BookController;
 use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\admin\InfoController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\MemberController;
 use App\Http\Controllers\admin\SupportController;
@@ -152,6 +153,11 @@ Route::middleware(['blockip'])->group(function () {
                 Route::get('/views/admin/pages/support/edit/{id}', 'editMessage')->name('editMessage');
                 Route::put('/admin/support/{id}', 'replyMessage')->name('replyMessage');
                 Route::delete('/message/delete/{id}', 'messagedelete')->name('messagedelete');
+            });
+
+            //Admin_info
+            Route::controller(InfoController::class)->group(function () {
+                Route::get('/views/admin/pages/info/infoversion', 'Infoversion')->name('Infoversion');
             });
         });
 

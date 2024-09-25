@@ -9,7 +9,7 @@ class AuthAdmin
 {
     public function handle($request, Closure $next)
     {
-        if (!Auth::check() || Auth::user()->role !== 'admin') {
+        if (!Auth::check() || Auth::user()->role !== 'superadmin') {
             return redirect('/views/admin/pages/login')->with('error', 'Bạn cần đăng nhập với tư cách quản trị viên để truy cập.');
         }
 

@@ -21,10 +21,10 @@ Kho sách
     </ol>
 </nav>
 
-<section class="probootstrap-section" >
+<section class="probootstrap-section">
     <div class="container">
         <div class="container vh-100 d-flex justify-content-center align-items-center">
-            <h3>TÌM KIẾM MỘT CÁI GÌ ĐÓ !</h3>
+            <h3>TÌM KIẾM SÁCH BẠN CẦN !</h3>
             <form class="d-flex w-50" role="search" style="margin-bottom:50px" method="get"
                 action="{{ route('search') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -39,9 +39,9 @@ Kho sách
     <div class="container">
         <h3>Danh mục sách</h3>
         @foreach ($categories as $category)
-            <label class="d-flex w-50 btn btn-success" style="margin-bottom:50px">
+            <button class="d-flex w-50 btn btn-success" style="margin-bottom:50px">
                 {{ $category->book_category }} ( {{ $category->book_count }} )</span>
-            </label>
+            </button>
         @endforeach
 
         @if($books->isEmpty())

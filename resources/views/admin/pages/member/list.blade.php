@@ -33,7 +33,7 @@ Danh sách thành viên
                         <div class="easion-card-title"> Danh sách thành viên </div>
                     </div>
                     <div class="card-body ">
-                        <table id="datatable" class="cell-border">
+                        <table id="datatable" class="cell-border" style="width:100%">
                             <thead>
                                 <tr>
                                     <th scope="col">id</th>
@@ -49,7 +49,7 @@ Danh sách thành viên
                                     <th scope="col">Chức năng</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody  style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 200px;">
                                 @php
                                     $count = 1;
                                 @endphp

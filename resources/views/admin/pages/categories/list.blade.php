@@ -32,7 +32,7 @@ Danh sách danh mục
                         <div class="easion-card-title"> Danh sách danh mục </div>
                     </div>
                     <div class="card-body ">
-                        <table id="datatable" class="cell-border">
+                        <table id="datatable" class="cell-border" style="width:100%">
                             <thead>
                                 <tr>
                                     <th scope="col">id</th>

@@ -21,14 +21,14 @@
             <img src="{{ asset('img/CNTTIT.png') }}" width="210" height="75">
         </a>
         <p class="fs-1 text-light">THƯ VIỆN ĐIỆN TỬ KHOA CÔNG NGHỆ THÔNG TIN</p>
-        <div class="card account-dialog">
-            <div class="card-header bg-primary text-white"> Vui lòng đăng nhập</div>
+        <div class="card account-dialog rounded-lg" >
+            <div class="card-header bg-primary text-white rounded-lg"> Vui lòng đăng nhập</div>
             <div class="card-body">
                 <form action="{{ route('login_process') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
+                        <input type="email" name="email" id="email" class="form-control rounded-lg @error('email') is-invalid @enderror" value="{{ old('email') }}"
                             required>
                         @error('email')
                         <div class="text-danger">{{ $message }}</div>
@@ -36,13 +36,14 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required>
+                        <input type="password" name="password" id="password" class="form-control rounded-lg @error('password') is-invalid @enderror" required>
                         @error('password')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <div class="cf-turnstile mt-3 text-center" data-sitekey="{{ env('SITE_KEY') }}" data-callback="javascriptCallback"></div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                  
+                    <button type="submit" class="btn btn-primary btn-block rounded-lg">Đăng nhập</button>
                 </form>
 
             </div>

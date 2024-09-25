@@ -36,23 +36,23 @@ class LoginController extends Controller
             ]);
         }
 
-       
+
         $credentials = $request->only('email', 'password');
 
-      
+
         $admin = admin::where('email', $request->email)->first();
 
-       
+
         if (!$admin) {
             return redirect()->back()->withErrors(['email' => 'Email không chính xác.']);
         }
 
-      
+
         if (!Hash::check($request->password, $admin->password)) {
             return redirect()->back()->withErrors(['password' => 'Mật khẩu không chính xác.']);
         }
 
-      
+
         if (Auth::guard('admin')->attempt($credentials)) {
             return redirect()->route('homeadmin');
         }
@@ -62,7 +62,7 @@ class LoginController extends Controller
             'login_failed' => 'Có lỗi xảy ra, vui lòng thử lại.',
         ]);
     }
-
+    
     public function logout_process(Request $request)
     {
         Auth::guard('admin')->logout();

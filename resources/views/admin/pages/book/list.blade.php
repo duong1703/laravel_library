@@ -63,7 +63,7 @@ Danh sách sách
                         <div class="easion-card-title">Danh sách về sách</div>
                     </div>
                     <div class="card-body">
-                        <table id="datatable" class="cell-border table " style="width:100%">
+                        <table id="datatable" class="cell-border" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="text-center" scope="col">id</th>
@@ -80,7 +80,8 @@ Danh sách sách
                                     <th class="text-center" scope="col">Chức năng</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody
+                                style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 200px;">
                                 @php
                                     $count = 1;
                                 @endphp
@@ -103,7 +104,7 @@ Danh sách sách
                                             {{ $book->book_status }}
                                         </td>
 
-                                        <td class="text-center">{{ $book->created_at }}</td>
+                                        <td class="text-center">{{date($book->created_at) }}</td>
                                         <td class="text-center action-buttons mt-3">
                                             <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary">
                                                 <i class="fas fa-edit"></i>
@@ -128,22 +129,6 @@ Danh sách sách
                                 @endforeach
                             </tbody>
                         </table>
-                        <!-- <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-xl">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="previewModalLabel">Xem trước tài liệu</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <iframe id="documentViewer" src="" style="width: 100%; height: 600px;"
-                                            frameborder="0"></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -177,23 +162,6 @@ Danh sách sách
 @endsection
 
 <script>
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     $('#datatable').DataTable();
-
-    //     var previewModal = document.getElementById('previewModal');
-    //     previewModal.addEventListener('show.bs.modal', function (event) {
-    //         var button = event.relatedTarget;
-    //         var fileUrl = button.getAttribute('data-file-url');
-
-    //         var documentViewer = previewModal.querySelector('#documentViewer');
-    //         documentViewer.src = fileUrl;
-    //     });
-
-    //     previewModal.addEventListener('hidden.bs.modal', function (event) {
-    //         var documentViewer = previewModal.querySelector('#documentViewer');
-    //         documentViewer.src = '';
-    //     });
-    // });
 
     document.addEventListener('DOMContentLoaded', () => {
         const previewModal = document.getElementById('previewModal');

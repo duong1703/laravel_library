@@ -62,6 +62,7 @@
                                     @enderror
                                     <div class="cf-turnstile mt-3 text-center" data-sitekey="{{ env('SITE_KEY') }}" data-callback="javascriptCallback"></div>
                                 </div>
+                                
                                 <button type="submit" class="btn btn-primary text-center">Đăng nhập</button>
                             </form>
                             <a href="{{ route('user_home') }}">Quay lại trang chủ</a>

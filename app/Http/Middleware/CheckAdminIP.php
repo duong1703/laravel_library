@@ -17,6 +17,7 @@ class CheckAdminIP
     {
         $allowedIPs = [
             '192.168.0.166',   
+            '103.186.147.106',
             '127.0.0.1',   
         ];
         // Nếu yêu cầu tới IP cho phép thì được phép truy cập , và ngược lại

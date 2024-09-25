@@ -19,8 +19,10 @@ class blockip
         
         $allowedIp = [
             '192.168.1.127',
+            '103.186.147.106',
             '127.0.0.1',
         ];
+        
 
         if (!in_array($request->ip(), $allowedIp)) {
             return response('Your IP address is not allowed to access this resource.', 403);

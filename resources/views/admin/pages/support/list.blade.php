@@ -32,7 +32,7 @@ Hỗ trợ từ xa
                         <div class="easion-card-title"> Danh sách tin nhắn </div>
                     </div>
                     <div class="card-body ">
-                        <table id="datatable" class="cell-border">
+                        <table id="datatable" class="cell-border" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="text-center" scope="col">id</th>

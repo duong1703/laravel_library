@@ -1,16 +1,16 @@
 <style>
-.leftmenu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #f8f9fa;
-    overflow-y: auto;
-    padding-top: 20px;
-    z-index: 1000;
-    /* Ensures menu stays on top */
-}
+    .leftmenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        background-color: #f8f9fa;
+        overflow-y: auto;
+        padding-top: 20px;
+        z-index: 1000;
+        /* Ensures menu stays on top */
+    }
 </style>
 <div class="dash-nav dash-nav-dark leftmenu">
     <header>
@@ -31,14 +31,17 @@
                 <a href="{{ route('memberadd') }}" class="dash-nav-dropdown-item">Thêm mới</a>
             </div>
         </div>
-        <div class="dash-nav-dropdown">
-            <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
-                <i class="fas fa-users"></i>Quản trị viên</a>
-            <div class="dash-nav-dropdown-menu">
-                <a href="{{ route('adminlist') }}" class="dash-nav-dropdown-item">Danh sách</a>
-                <a href="{{ route('adminadd') }}" class="dash-nav-dropdown-item">Thêm mới</a>
+        @if (Auth::check() && Auth::user()->role === 'superadmin')
+            <div class="dash-nav-dropdown">
+                <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
+                    <i class="fas fa-users"></i>Quản trị viên</a>
+                <div class="dash-nav-dropdown-menu">
+                    <a href="{{ route('adminlist') }}" class="dash-nav-dropdown-item">Danh sách</a>
+                    <a href="{{ route('adminadd') }}" class="dash-nav-dropdown-item">Thêm mới</a>
+                </div>
             </div>
-        </div>
+        @endif
+
         <div class="dash-nav-dropdown">
             <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
                 <i class="fa fa-book"></i> Quản lý sách </a>
@@ -67,6 +70,13 @@
                 <i class="fa fa-mail-bulk"></i>Tin nhắn hỗ trợ</a>
             <div class="dash-nav-dropdown-menu">
                 <a href="{{ route('message_admin') }}" class="dash-nav-dropdown-item">Danh sách</a>
+            </div>
+        </div>
+        <div class="dash-nav-dropdown">
+            <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
+                <i class="fa fa-info"></i>Thông tin hệ thống</a>
+            <div class="dash-nav-dropdown-menu">
+                <a href="{{ route('Infoversion') }}" class="dash-nav-dropdown-item">Phiên bản</a>
             </div>
         </div>
     </nav>
