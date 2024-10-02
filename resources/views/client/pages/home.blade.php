@@ -16,7 +16,7 @@ Trang chủ
     </div>
 </section>
 
-<section class="probootstrap-section" style="font-family:auto">
+<section class="probootstrap-section" >
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -40,7 +40,7 @@ Trang chủ
                 <h2>Một số sách phổ biến</h2>
             </div>
         </div>
-        <div class="container" style="font-family:auto">
+        <div class="container" >
             <div class="row" >
                 @foreach($data as $book)
                         <div class="col-md-6 mb-4">
@@ -85,7 +85,7 @@ Trang chủ
                 <h2>TOP sách được đọc nhiều nhất</h2>
             </div>
         </div>
-        <div class="container" style="font-family:auto">
+        <div class="container" >
             <div class="row" >
                 @foreach($data1 as $top_readbook)
                         <div class="col-md-6 mb-4">
@@ -124,7 +124,7 @@ Trang chủ
     </div>
 </section>
 
-<section class="probootstrap-section" style="font-family:auto">
+<section class="probootstrap-section" >
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center section-heading probootstrap-animate">

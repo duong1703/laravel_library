@@ -20,18 +20,20 @@ Thêm mới thành viên
                     <div class="card-body ">
                         <div id="add-alerts">
                             @if (session('error'))
-                            <div class="alert alert-danger alert-dismissible fade show">
-                                {{ session('error') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <script>
+                                    Swal.fire({
+                                        text: "{{ session('error') }}",
+                                        icon: "error"
+                                    });
+                                </script>
                             @endif
                             @if (session('success'))
-                            <div class="alert alert-success alert-dismissible fade show">
-                                {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <script>
+                                    Swal.fire({
+                                        text: "{{ session('success') }}, Thông tin đăng ký sẽ được gửi qua email người dùng!",
+                                        icon: "success"
+                                    });
+                                </script>
                             @endif
                         </div>
                         <form action="{{ route('memberpost') }}" method="POST">
@@ -42,7 +44,7 @@ Thêm mới thành viên
                                     <input name="name_member" type="text" class="form-control" id="inputName"
                                         placeholder="Tên thành viên" value="{{ old('name_member') }}" required>
                                     @error('name_member')
-                                    <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-12">
@@ -50,7 +52,7 @@ Thêm mới thành viên
                                     <input name="name_login" type="text" class="form-control" id="inputNameLogin"
                                         placeholder="Tên đăng nhập" value="{{ old('name_login') }}" required>
                                     @error('name_login')
-                                    <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-12">
@@ -62,7 +64,7 @@ Thêm mới thành viên
                                             Password</button>
                                     </div>
                                     @error('password')
-                                    <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
 
@@ -71,7 +73,7 @@ Thêm mới thành viên
                                     <input name="email" type="email" class="form-control" id="inputEmail"
                                         placeholder="Email thành viên" value="{{ old('email') }}" required>
                                     @error('email')
-                                    <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-12">
@@ -81,7 +83,7 @@ Thêm mới thành viên
                                             Thành viên</option>
                                     </select>
                                     @error('role')
-                                    <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -91,7 +93,7 @@ Thêm mới thành viên
                                     <input name="born" type="date" class="form-control" id="date"
                                         value="{{ old('born') }}" required>
                                     @error('born')
-                                    <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-12">
@@ -100,7 +102,7 @@ Thêm mới thành viên
                                         placeholder="Số diện thoại thành viên" value="{{ old('numberphone') }}"
                                         required>
                                     @error('numberphone')
-                                    <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-12">
@@ -109,7 +111,7 @@ Thêm mới thành viên
                                         placeholder="Số căn cước thành viên" value="{{ old('ID_number_card') }}"
                                         required>
                                     @error('ID_number_card')
-                                    <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-12">
@@ -117,7 +119,7 @@ Thêm mới thành viên
                                     <input name="address" type="text" class="form-control" id="inputAddress"
                                         placeholder="Địa chỉ thành viên" value="{{ old('address') }}" required>
                                     @error('address')
-                                    <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -131,19 +133,19 @@ Thêm mới thành viên
     </div>
 </main>
 <script>
-document.getElementById('generatePassword').addEventListener('click', function() {
-    function generatePassword(length = 10) {
-        const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let randomPassword = '';
-        for (let i = 0; i < length; i++) {
-            randomPassword += characters.charAt(Math.floor(Math.random() * characters.length));
+    document.getElementById('generatePassword').addEventListener('click', function () {
+        function generatePassword(length = 9) {
+            const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let randomPassword = '';
+            for (let i = 0; i < length; i++) {
+                randomPassword += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return randomPassword;
         }
-        return randomPassword;
-    }
 
-    const password = generatePassword(10);
-    document.getElementById('inputPassword').value = password;
-});
+        const password = generatePassword(9);
+        document.getElementById('inputPassword').value = password;
+    });
 </script>
 
 @endsection

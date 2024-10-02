@@ -28,7 +28,7 @@ class MemberController extends Controller
         $request->validate([
             'name_member' => 'required|string|max:255',
             'name_login' => 'required|string|max:255',
-            'password' => 'required|string|min:16',
+            'password' => 'required|string|min:9',
             'email' => 'required|string|email|max:255|unique:member,email',
             'role' => 'required|string|max:16',
             'born' => 'required|string|max:255',

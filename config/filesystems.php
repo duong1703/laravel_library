@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'dropbox'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -56,6 +56,22 @@ return [
             'throw' => false,
         ],
 
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'key' => env('DROPBOX_KEY'),
+            'secret' => env('DROPBOX_SECRET'),
+            'authorization_token' => env('DROPBOX_AUTH_TOKEN'),
+            'root' => env('DROPBOX_ROOT', 'backups_laravel_library_DB'),
+        ],
+
+        'google' => [
+            'driver' => 'google',
+            'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+            'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+            'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+            'folder' => env('GOOGLE_DRIVE_FOLDER'),
+            'folder_id' => env('GOOGLE_DRIVE_FOLDER_ID'),
+        ],
     ],
 
     /*

@@ -71,7 +71,7 @@ Tài khoản của bạn
 </style>
 
 
-<div class="container" style="font-family:auto">
+<div class="container" >
 
 
     <div class="main-body">
@@ -101,7 +101,7 @@ Tài khoản của bạn
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8" style="font-family:auto">
+                        <div class="col-md-8" >
                             <div class="card mb-3">
                                 <div class="card-body" >
                                     <div class="row">
@@ -143,7 +143,7 @@ Tài khoản của bạn
                             </div>
                         </div>
                         <h2>Lịch sử đọc sách</h2>
-                        <div class="body" style="font-family:auto">
+                        <div class="body" >
                             <table id="datatable" class="cell-border table " style="width:100%, font-family:auto">
                                 <thead>
                                     <tr>

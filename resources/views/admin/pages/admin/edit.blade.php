@@ -75,7 +75,8 @@ Chỉnh sửa quản trị viên
                                 @error('role')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
-                                <button type="submit" class="btn btn-success mt-4">Chỉnh sửa</button>
+                                <button type="submit" class="btn btn-success mt-4" onclick="showConfirmation()">Cập
+                                    nhật</button>
                                 <a href="{{ route('adminlist') }}" class="btn btn-danger mt-4">Quay lại</a>
                         </form>
                     </div>

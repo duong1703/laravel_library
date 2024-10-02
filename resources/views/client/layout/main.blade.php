@@ -30,7 +30,7 @@
     gtag('config', 'G-B9177KNB74');
 </script>
 
-<body style="font-family:auto">
+<body >
     <div class="probootstrap-page-wrapper">
         <!-- Fixed navbar -->
 

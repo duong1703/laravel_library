@@ -38,11 +38,6 @@ Danh sách sách
     .action-buttons form {
         margin: 0;
     }
-
-    .table th,
-    .table td {
-        border: 1px solid #dee2e6;
-    }
 </style>
 <main class="dash-content">
     <div class="container-fluid">
@@ -99,9 +94,11 @@ Danh sách sách
                                         <td class="text-center">{{ $book->book_publisher }}</td>
                                         <td class="text-center">{{ $book->book_amount }}</td>
                                         <td class="text-center">{{ $book->book_category }}</td>
-                                        <td
-                                            class="text-center {{ $book->book_status === 'Unavailable' ? ' bg-danger text-white' : ' bg-success text-white' }}">
-                                            {{ $book->book_status }}
+                                        <td class="text-center align-middle">
+                                            <span
+                                                class="badge rounded-pill {{ $book->book_status === 'Unavailable' ? 'bg-danger text-white' : 'bg-success text-white' }}">
+                                                {{ $book->book_status }}
+                                            </span>
                                         </td>
 
                                         <td class="text-center">{{date($book->created_at) }}</td>

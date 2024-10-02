@@ -17,10 +17,12 @@ Thêm mới danh mục
     <div class="container-fluid">
         <h1 class="dash-title">Trang chủ / Danh mục / Thêm mới</h1>
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            <script>
+                Swal.fire({
+                    text: "{{ session('success') }}",
+                    icon: "success"
+                });
+            </script>
         @endif
         <div class="row">
             <div class="col-xl-12">

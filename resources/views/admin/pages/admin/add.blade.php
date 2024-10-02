@@ -17,10 +17,12 @@ Thêm mới quản trị viên
     <div class="container-fluid">
         <h1 class="dash-title">Trang chủ / Quản trị viên / Thêm mới</h1>
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            <script>
+                Swal.fire({
+                    text: "{{ session('success') }}",
+                    icon: "success"
+                });
+            </script>
         @endif
         <div class="row">
             <div class="col-xl-12">
@@ -53,7 +55,7 @@ Thêm mới quản trị viên
                             <div class="mb-3">
                                 <label for="role" class="form-label">Quyền quản trị</label>
                                 <select name="role" id="inputState" class="form-control" required>
-                                <option value="Quyền quản trị"> Lựa chọn quyền truy cập</option>
+                                    <option value="Quyền quản trị"> Lựa chọn quyền truy cập</option>
                                     <option value="superadmin" {{ old('role') == 'superadmin' ? 'selected' : '' }}>
                                         Quản trị viên cấp cao</option>
                                     <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>
@@ -72,7 +74,7 @@ Thêm mới quản trị viên
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-success">Thêm mới</button>
+                            <button type="submit" class="btn btn-success" onclick="showConfirmation()">Thêm mới</button>
                             <a href="{{ route('adminlist') }}" class="btn btn-danger">Quay lại</a>
                         </form>
                     </div>

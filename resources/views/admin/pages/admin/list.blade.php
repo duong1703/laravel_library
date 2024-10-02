@@ -12,12 +12,12 @@ Danh sách quản trị viên
         align-items: center;
         gap: 10px;
 
-            {
+        /* {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: 200px;
-        }
+        } */
     }
 </style>
 <main class="dash-content">
