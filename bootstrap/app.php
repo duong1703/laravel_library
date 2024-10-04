@@ -28,10 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
 
     ->withSchedule(function (Schedule $schedule) {
-        // Định nghĩa lịch trình lệnh của ứng dụng.
+        // Set cron backups Database
         $schedule->command('db:backups')->daily();
     })
-
-
-
     ->create();

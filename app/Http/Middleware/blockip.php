@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class blockip
@@ -23,6 +24,9 @@ class blockip
             '127.0.0.1',
         ];
         
+
+        Log::info($request->ip());
+
 
         if (!in_array($request->ip(), $allowedIp)) {
             return response('Your IP address is not allowed to access this resource.', 403);

@@ -15,34 +15,42 @@
     <title>Trang đăng nhập</title>
 </head>
 
-<body class="bg-primary" >
+<body class="bg-primary">
     <div class="form-screen">
         <a href="" class="easion-logo">
             <img src="{{ asset('img/CNTTIT.png') }}" width="210" height="75">
         </a>
         <p class="fs-1 text-light">THƯ VIỆN ĐIỆN TỬ KHOA CÔNG NGHỆ THÔNG TIN</p>
-        <div class="card account-dialog rounded-lg" >
+        <div class="card account-dialog rounded-lg">
             <div class="card-header bg-primary text-white rounded-lg"> Vui lòng đăng nhập</div>
+            @if ($errors->has('captcha_failed'))
+            <div class="alert alert-danger">
+                {{ $errors->first('captcha_failed') }}
+            </div>
+            @endif
             <div class="card-body">
                 <form action="{{ route('login_process') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control rounded-lg @error('email') is-invalid @enderror" value="{{ old('email') }}"
-                            required>
+                        <input type="email" name="email" id="email"
+                            class="form-control rounded-lg @error('email') is-invalid @enderror"
+                            value="{{ old('email') }}" required>
                         @error('email')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control rounded-lg @error('password') is-invalid @enderror" required>
+                        <input type="password" name="password" id="password"
+                            class="form-control rounded-lg @error('password') is-invalid @enderror" required>
                         @error('password')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
-                        <div class="cf-turnstile mt-3 text-center" data-sitekey="{{ env('SITE_KEY') }}" data-callback="javascriptCallback"></div>
+                        <div class="cf-turnstile mt-3 text-center" data-sitekey="{{ env('SITE_KEY') }}"
+                            data-callback="javascriptCallback"></div>
                     </div>
-                  
+
                     <button type="submit" class="btn btn-primary btn-block rounded-lg">Đăng nhập</button>
                 </form>
 
@@ -58,7 +66,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    
+
     <script src=" {{ asset('js/easion.js') }}"></script>
 </body>
 

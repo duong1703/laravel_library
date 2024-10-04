@@ -24,7 +24,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="font-family:auto">
     <div class="dash">
         @include('admin/layout/header')
         <div class="dash-app" >

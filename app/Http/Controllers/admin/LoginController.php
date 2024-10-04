@@ -30,37 +30,23 @@ class LoginController extends Controller
 
         $responseData = $response->json();
 
-        if (!$responseData['success']) {
+        if ($responseData['success']) {
+            $credentials = $request->only('email', 'password');
+
+            if (Auth::guard('admin')->attempt($credentials)) {
+                return redirect()->route('homeadmin');
+
+            }
+
+            return redirect()->route('login')->withErrors([
+                'email' => 'Email đăng nhập không chính xác.',
+                'password' => 'Password đăng nhập không chính xác.',
+            ]);
+        } else {
             return redirect()->back()->withErrors([
-                'captcha_failed' => 'Xác thực CAPTCHA không thành công. Vui lòng thử lại.',
+                'captcha_failed' => 'Xác thực captcha không thành công.',
             ]);
         }
-
-
-        $credentials = $request->only('email', 'password');
-
-
-        $admin = admin::where('email', $request->email)->first();
-
-
-        if (!$admin) {
-            return redirect()->back()->withErrors(['email' => 'Email không chính xác.']);
-        }
-
-
-        if (!Hash::check($request->password, $admin->password)) {
-            return redirect()->back()->withErrors(['password' => 'Mật khẩu không chính xác.']);
-        }
-
-
-        if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('homeadmin');
-        }
-
-        // Trường hợp khác, thông báo lỗi chung
-        return redirect()->back()->withErrors([
-            'login_failed' => 'Có lỗi xảy ra, vui lòng thử lại.',
-        ]);
     }
     
     public function logout_process(Request $request)

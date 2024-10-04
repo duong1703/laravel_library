@@ -34,23 +34,24 @@ Kho sách
                                         <li class="breadcrumb-item active" aria-current="page">Tài liệu chi tiết</li>
                                     </ol>
                                 </nav>
-                                    <div class="image">
-                                        <div class="image-bg">
-                                            <img src="{{ asset($bookdetail->book_images) }}" class="img-fluid">
-                                        </div>
+                                <div class="image">
+                                    <div class="image-bg">
+                                        <img src="{{ asset($bookdetail->book_images) }}" class="img-fluid">
                                     </div>
+                                </div>
 
-                                    <p>Tên sách: {{ $bookdetail->book_name }}</p>
-                                    <p>Tên tác giả: {{ $bookdetail->book_author }}</p>
-                                    <p>Nhà sản xuất: {{ $bookdetail->book_publisher }}</p>
-                                    <p>Năm sản xuất: {{ $bookdetail->book_year_of_manufacture }}</p>
-                                    <p>Số lượng sách: {{ $bookdetail->book_amount }}</p>
-                                    <p>Danh mục sách: {{ $bookdetail->book_category}}</p>
+                                <p>Tên sách: {{ $bookdetail->book_name }}</p>
+                                <p>Tên tác giả: {{ $bookdetail->book_author }}</p>
+                                <p>Nhà sản xuất: {{ $bookdetail->book_publisher }}</p>
+                                <p>Năm sản xuất: {{ $bookdetail->book_year_of_manufacture }}</p>
+                                <p>Số lượng sách: {{ $bookdetail->book_amount }}</p>
+                                <p>Danh mục sách: {{ $bookdetail->book_category}}</p>
                             </div>
                         </div>
                         <div class="col-md-7 col-md-push-1  probootstrap-animate" id="probootstrap-content">
                             <iframe src="{{ route('showbook', ['book_file_name' => basename($bookdetail->book_file)]) }}"
-                                width="100%" height="850px"></iframe>
+                                width="100%" height="850px" title="PDF Viewer for {{ basename($bookdetail->book_file) }}">
+                            </iframe>
                             <p><a href="{{ route('user_book') }}" class="btn btn-primary">Quay lại</a> <span
                                     class="enrolled-count"></span></p>
                         </div>
