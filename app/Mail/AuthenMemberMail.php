@@ -15,14 +15,14 @@ class AuthenMemberMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public $name_login;
+    public $Email;
     public $password;
     /**
      * Create a new message instance.
      */
-    public function __construct($name_login, $password)
+    public function __construct($Email, $password)
     {
-        $this->name_login = $name_login;  
+        $this->Email = $Email;  
         $this->password = $password;
     }
 
@@ -32,9 +32,9 @@ class AuthenMemberMail extends Mailable
     public function build()
     {
         return $this->subject('Thông tin đăng nhập của bạn')
-                    ->view('admin.pages.emails.login-details')
+                    ->markdown('admin.pages.emails.login-details')
                     ->with([
-                        'name_login' => $this->name_login,
+                        'Email' => $this->Email,
                         'password' => $this->password,
                     ]);
     }

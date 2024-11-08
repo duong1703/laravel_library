@@ -1,4 +1,4 @@
-<?php
+$table->timestamp('email_verified_at')->nullable();<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('ALTER TABLE comment CONVERT COLUMN comment USING utf8mb4');
+        Schema::table('member', function (Blueprint $table) {
+            $table->timestamp('email_verified_at')->after('address')->nullable();
+        });
     }
 
     /**
@@ -19,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement('ALTER TABLE comment CONVERT COLUMN comment USING utf8');
+        Schema::table('member', function (Blueprint $table) {
+            $table->dropColumn('email_verified_at');
+        });
     }
 };

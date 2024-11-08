@@ -19,16 +19,19 @@
     <link rel="stylesheet" href="{{ asset('css/styles-merged.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/satellite-min.css" integrity="sha256-woeV7a4SRDsjDc395qjBJ4+ZhDdFn8AqswN1rlTO64E=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/reset-min.css" integrity="sha256-KvFgFCzgqSErAPu6y9gz/AhZAvzK48VJASu3DpNLCEQ=" crossorigin="anonymous">
+    
 </head>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B9177KNB74"></script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-B9177KNB74"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-B9177KNB74');
-</script>
+</script> -->
 
 <body >
     <div class="probootstrap-page-wrapper">
@@ -60,5 +63,8 @@
 <script src="{{ asset('js/scripts.min.js') }}"></script>
 <script src="{{ asset('js/main.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.24.0/dist/algoliasearch-lite.umd.js" integrity="sha256-b2n6oSgG4C1stMT/yc/ChGszs9EY/Mhs6oltEjQbFCQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.74.2/dist/instantsearch.production.min.js" integrity="sha256-LfyQz2E24221PkRbKoakchcpdlZOA4R1Ugi6NnhyGF0=" crossorigin="anonymous"></script>
+
 
 </html>

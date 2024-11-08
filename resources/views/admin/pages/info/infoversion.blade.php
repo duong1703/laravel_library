@@ -47,7 +47,6 @@ Thông tin phiên bản
             <button class="btn btn-secondary" onclick="window.location.reload()">Refresh</button>
         </div>
     </div>
-</div>
 
 
-@endsection
+    @endsection

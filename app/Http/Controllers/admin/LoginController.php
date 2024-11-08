@@ -48,6 +48,10 @@ class LoginController extends Controller
             ]);
         }
     }
+
+    public function admin_forgot_pass(){
+        return view('/admin/auth/forgot-password');
+    }
     
     public function logout_process(Request $request)
     {

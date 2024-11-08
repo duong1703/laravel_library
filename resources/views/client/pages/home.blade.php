@@ -102,7 +102,7 @@ Trang chủ
                                     <h3> Tác giả: {{ $top_readbook->book_author }}</h3>
                                     <h3> Lượt đọc: {{ $top_readbook->read_count }}</h3>
                                     @if(Auth::guard('member')->check())
-                                        <p><a href="{{ route('user_bookdetail_id', ['id' => $book->id]) }}"
+                                        <p><a href="{{ route('user_bookdetail_id', ['id' => $top_readbook->id]) }}"
                                                 class="btn btn-primary">Đọc tài liệu chi tiết</a> <span class="enrolled-count">
                                     @else
                                         <a href="{{ route('user_login') }}" class="btn btn-primary">Đăng nhập để đọc tài

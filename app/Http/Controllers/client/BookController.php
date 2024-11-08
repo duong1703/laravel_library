@@ -29,7 +29,10 @@ class BookController extends Controller
     {
         $searchTerm = $request->input('search');
 
-        $dataBook = book::where('book_category', 'like', "%$searchTerm%")->paginate(6);
+        $dataBook = book::where('book_name', 'like', "%$searchTerm%")
+                            ->orWhere("book_author","like", "%$searchTerm%")
+                            ->orwhere('book_category', 'like', "%$searchTerm%")
+                            ->paginate(6);
         $categories = book::select('book_category', DB::raw('count(*) as book_count'))
             ->groupBy('book_category')
             ->get();

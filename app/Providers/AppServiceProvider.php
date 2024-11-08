@@ -2,16 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use App\Policies\AdminAccessPolicy;
 use App\Models\admin\admin;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Gate;
-use Storage;
-use Illuminate\Contracts\Foundation\Application;
-use Spatie\FlysystemDropbox\DropboxAdapter;
-use Illuminate\Filesystem\FilesystemAdapter;
-use League\Flysystem\Filesystem;
-use Spatie\Dropbox\Client as DropboxClient;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +31,17 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('manage-limited', function ($user) {
             return $user->isAdmin();
+        });
+
+        VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
+            return (new MailMessage)
+                ->subject('Verify Email Address')
+                ->line('Click the button below to verify your email address.')
+                ->action('Verify Email Address', $url);
+        });
+
+        ResetPassword::createUrlUsing(function (admin $admin, string $token) {
+            return route('password.reset', ['token' => $token]);
         });
     }
 }

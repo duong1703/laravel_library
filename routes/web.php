@@ -15,7 +15,14 @@ use App\Http\Controllers\client\CommentController;
 use App\Http\Controllers\client\ContactController;
 use App\Http\Controllers\client\IntroController;
 use App\Mail\AuthenMemberMail;
+use App\Models\admin\admin;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 
 /** USER_WEBSITE */
 
@@ -87,6 +94,60 @@ Route::middleware(['blockip'])->group(function () {
         Route::post('/auth/logout', 'logout_process')->name('logout_process');
     });
 });
+
+//Admin Forgot Password
+Route::get('/forgot-password', function () {
+    return view('admin.auth.forgot-password');
+})->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $email = $request->only('email');  // Lấy email từ request
+
+    // Kiểm tra xem email có giá trị không
+    if (empty($email['email'])) {
+        return back()->withErrors(['email' => 'Email is required']);
+    }
+
+    // Gửi yêu cầu reset mật khẩu
+    $status = Password::broker('admins')->sendResetLink(
+        ['email' => $email]
+    );
+
+    return $status === Password::RESET_LINK_SENT
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('admin.auth.reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $status = Password::broker('admins')->reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function (Admin $admin, string $password) {
+            $admin->forceFill([
+                'password' => Hash::make($password),
+            ])->setRememberToken(Str::random(60));
+
+            $admin->save();
+
+            event(new PasswordReset($admin));
+        }
+    );
+
+    return $status === Password::PASSWORD_RESET
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
+})->middleware('guest')->name('password.update');
 
 
 //Admin_Panel

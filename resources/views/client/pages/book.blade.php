@@ -28,7 +28,7 @@ Kho sách
             <form class="d-flex w-50" role="search" style="margin-bottom:50px" method="get"
                 action="{{ route('search') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                <input class="form-control me-2" type="text" name="search" placeholder="Tìm kiếm" aria-label="Search">
+                <input class="form-control me-2" type="text" name="search" placeholder="Tìm kiếm tài liệu, tác giả ..." aria-label="Search">
                 <button class="btn btn-outline-success hidden" type="submit">Tìm kiếm</button>
             </form>
         </div>

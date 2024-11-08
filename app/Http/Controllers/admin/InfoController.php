@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class InfoController extends Controller
 {
     public function Infoversion(){
-        return view('/admin/pages/info/Infoversion');
+        return view('/admin/pages/info/infoversion');
     }
 }

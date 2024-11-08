@@ -9,6 +9,9 @@ use Hash;
 use Mail;
 use App\Mail\AuthenMemberMail;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
+
 
 class MemberController extends Controller
 {
@@ -23,8 +26,9 @@ class MemberController extends Controller
         return view('/admin/pages/member/add');
     }
 
-    public function memberpost(Request $request)
+    public function memberpost(Request $request): RedirectResponse
     {
+        
         $request->validate([
             'name_member' => 'required|string|max:255',
             'name_login' => 'required|string|max:255',
@@ -49,7 +53,8 @@ class MemberController extends Controller
         $member->address = $request->input('address');
         $member->save();
 
-        Mail::to($member->email)->send(new AuthenMemberMail($request->input('name_login'), $request->input('password')));
+        event(new Registered($member));
+        Mail::to($member->email)->send(new AuthenMemberMail($request->input('email'), $request->input('password')));
 
         $request->session()->flash('success', 'Thêm thành viên thành công!');
         return redirect()->route('memberadd');

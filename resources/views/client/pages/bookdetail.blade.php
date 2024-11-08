@@ -49,9 +49,12 @@ Kho sách
                             </div>
                         </div>
                         <div class="col-md-7 col-md-push-1  probootstrap-animate" id="probootstrap-content">
-                            <iframe src="{{ route('showbook', ['book_file_name' => basename($bookdetail->book_file)]) }}"
-                                width="100%" height="850px" title="PDF Viewer for {{ basename($bookdetail->book_file) }}">
-                            </iframe>
+                            <iframe src="{{ route('showbook', ['book_file_name' => basename($bookdetail->book_file)]) }}#toolbar=0"
+                                    width="100%" height="850px" title="PDF Viewer for {{ basename($bookdetail->book_file) }}">
+                                </iframe>
+
+
+
                             <p><a href="{{ route('user_book') }}" class="btn btn-primary">Quay lại</a> <span
                                     class="enrolled-count"></span></p>
                         </div>
