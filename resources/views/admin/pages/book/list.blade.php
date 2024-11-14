@@ -102,7 +102,7 @@ Danh sách sách
                                         </td>
 
                                         <td class="text-center">{{date($book->created_at) }}</td>
-                                        <td class="text-center action-buttons mt-3">
+                                        <td >
                                             <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary">
                                                 <i class="fas fa-edit"></i>
                                             </a>

@@ -33,12 +33,11 @@ Danh sách danh mục
                     </div>
                     <div class="card-body ">
                         <table id="datatable" class="cell-border" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th scope="col">id</th>
-                                    <th scope="col">Tên danh mục cha</th>
-                                    <th scope="col">Tên danh mục con</th>
-                                    <th scope="col">Chức năng</th>
+                            <thead >
+                                <tr >
+                                    <th class="text-center"scope="col">id</th>
+                                    <th class="text-center"scope="col">Tên danh mục con</th>
+                                    <th class="text-center"scope="col">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,12 +48,9 @@ Danh sách danh mục
                                     @foreach($category->subcategories as $subcategory)
 
                                         <tr>
-                                            <td>{{ $count++ }}</td>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $subcategory->name }}</td>
+                                            <td class="text-center">{{ $count++ }}</td>
+                                            <td class="text-center">{{ $subcategory->name }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('categoriesedit', ['id' => $category->id]) }}"
-                                                    class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                                 <form action="{{ route('categoriesdelete', ['id' => $subcategory->id]) }}" method="POST"
                                                     style="display:inline;">
                                                     @csrf

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
+
 class admin extends Authenticatable implements CanResetPassword
 {
     // use HasFactory;
@@ -19,6 +20,7 @@ class admin extends Authenticatable implements CanResetPassword
     protected $primaryKey = "id";
 
     protected $Fillable = ['name', 'email', 'password', 'role' , 'remember_token'];
+    
 
     public function getIsSuperAdminAttribute()
     {

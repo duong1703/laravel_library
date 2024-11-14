@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\Auth2faController;
 use App\Http\Controllers\admin\BookController;
 use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\admin\HomeController;
@@ -96,6 +97,7 @@ Route::middleware(['blockip'])->group(function () {
 });
 
 //Admin Forgot Password
+
 Route::get('/forgot-password', function () {
     return view('admin.auth.forgot-password');
 })->middleware('guest')->name('password.request');
@@ -114,6 +116,8 @@ Route::post('/forgot-password', function (Request $request) {
     $status = Password::broker('admins')->sendResetLink(
         ['email' => $email]
     );
+
+
 
     return $status === Password::RESET_LINK_SENT
         ? back()->with(['status' => __($status)])

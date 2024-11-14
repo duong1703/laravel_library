@@ -4,14 +4,10 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
-use Laravel\Scout\Engines\Engine;
-use Laravel\Scout\EngineManager;
 
 class book extends Model
 {
     use HasFactory;
-    use Searchable;
 
     protected $table = "book";
 
@@ -38,10 +34,5 @@ class book extends Model
         ]);
     
         return $array;
-    }
-
-    public function searchableUsing(): Engine
-    {
-        return app(EngineManager::class)->engine('algolia');
     }
 }

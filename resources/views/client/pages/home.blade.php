@@ -10,7 +10,8 @@ Trang chủ
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-left section-heading probootstrap-animate">
-                <h2>Chào mừng bạn tới thư viện điện tử EPU IT</h2>
+                <marquee behavior="" direction=""> <h2>Chào mừng bạn tới thư viện điện tử EPU IT</h2></marquee>
+               
             </div>
         </div>
     </div>

@@ -27,8 +27,8 @@
                         <div class="login-wrap p-4 p-md-5">
                             <div class="d-flex">
                                 <div class="w-100">
-                                    <h3 class="mb-4" >Đăng nhập thành viên</h3>
-                                    <p class="text-danger">Chỉ có thành viên mới có thể đăng nhập</p>
+                                    <h3 class="mb-4 text-center" >Đăng nhập thành viên</h3>
+                                    <p class="text-danger text-center">Chỉ có thành viên mới có thể đăng nhập</p>
                                 </div>
 
                             </div>
@@ -60,12 +60,17 @@
                                     @error('password')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
-                                    <div class="cf-turnstile mt-3 text-center" data-sitekey="{{ env('SITE_KEY') }}" data-callback="javascriptCallback"></div>
                                 </div>
+                                <div class="cf-turnstile mt-3 text-center" data-sitekey="{{ env('SITE_KEY') }}" data-callback="javascriptCallback"></div>
                                 
-                                <button type="submit" class="btn btn-primary text-center">Đăng nhập</button>
+                                <div class="text-center mb-3">
+                                    <button type="submit" class="btn btn-primary text-center">Đăng nhập</button>
+                                </div>
                             </form>
-                            <a href="{{ route('user_home') }}">Quay lại trang chủ</a>
+                            <div class="text-center">
+
+                                <a  href="{{ route('user_home') }}">Quay lại trang chủ</a>
+                            </div>
                         </div>
                     </div>
                 </div>

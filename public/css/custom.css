@@ -174,3 +174,9 @@
     color: #adb5bd;
 }
 
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050; /* Đảm bảo đè lên các thành phần khác */
+}

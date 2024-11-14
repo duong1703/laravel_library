@@ -12,7 +12,8 @@ class CategoriesController extends Controller
 {
     public function categories_admin()
     {
-        $categories = categories::with('subcategories')->get();
+        $categories = categories::with('subcategories')->distinct()->get();
+        // dd($categories);
         return view('/admin/pages/categories/list', compact('categories'));
     }
 

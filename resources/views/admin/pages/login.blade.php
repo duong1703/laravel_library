@@ -24,33 +24,33 @@
         <div class="card account-dialog rounded-lg">
             <div class="card-header bg-primary text-white rounded-lg"> Vui lòng đăng nhập</div>
             @if ($errors->has('captcha_failed'))
-            <div class="alert alert-danger">
-                {{ $errors->first('captcha_failed') }}
-            </div>
+                <div class="alert alert-danger">
+                    {{ $errors->first('captcha_failed') }}
+                </div>
             @endif
             <div class="card-body">
                 <form action="{{ route('login_process') }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email <span class="text-danger"> ( * ) </span></label>
                         <input type="email" name="email" id="email"
                             class="form-control rounded-lg @error('email') is-invalid @enderror"
-                            value="{{ old('email') }}" required>
+                            value="{{ old('email') }}">
                         @error('email')
-                        <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">Password <span class="text-danger"> ( * ) </span></label>
                         <input type="password" name="password" id="password"
-                            class="form-control rounded-lg @error('password') is-invalid @enderror" required>
+                            class="form-control rounded-lg @error('password') is-invalid @enderror">
                         @error('password')
-                        <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="cf-turnstile mt-3 text-center" data-sitekey="{{ env('SITE_KEY') }}"
-                        data-callback="javascriptCallback"></div>
-
+                    <div class="form-group">
+                        <input type="checkbox" name="remember" id="remember"> Ghi nhớ đăng nhập
+                    </div>
                     <button type="submit" class="btn btn-primary btn-block rounded-lg">Đăng nhập</button>
                     <div class="mt-2 text-center">
                         <a href="{{ route('password.request') }}">Quên mật khẩu</a>
@@ -62,13 +62,13 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+        </script>
 
     <script src=" {{ asset('js/easion.js') }}"></script>
 </body>

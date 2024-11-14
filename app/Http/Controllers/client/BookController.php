@@ -17,7 +17,7 @@ class BookController extends Controller
 {
     public function user_book()
     {
-        $books = book::paginate(6);
+        $books = book::select('id', 'book_name', 'book_images', 'book_author', 'book_status' , 'book_category', 'created_at')->paginate(6);
         $categories = book::select('book_category', DB::raw('count(*) as book_count'))
             ->groupBy('book_category')
             ->get();

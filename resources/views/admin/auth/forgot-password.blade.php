@@ -23,15 +23,6 @@
         <div class="card account-dialog rounded-lg">
             <div class="card-header bg-primary text-white rounded-lg"> Khôi phục mật khẩu</div>
             <div class="card-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
@@ -43,7 +34,7 @@
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email"
                             class="form-control rounded-lg @error('email') is-invalid @enderror"
-                            value="{{ old('email') }}" required>
+                            value="{{ old('email') }}">
                         @error('email')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror

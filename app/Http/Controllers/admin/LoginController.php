@@ -19,40 +19,31 @@ class LoginController extends Controller
     }
 
     public function login_process(Request $request)
-    {
-        $turnstileToken = $request->input('cf-turnstile-response');
+    { 
+        {
+            $remember = $request->has('remeber');
 
-        $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
-            'secret' => env('SECRET_KEY'),
-            'response' => $turnstileToken,
-            'remoteip' => $request->ip(),
-        ]);
+            $credentials = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
 
-        $responseData = $response->json();
-
-        if ($responseData['success']) {
-            $credentials = $request->only('email', 'password');
-
-            if (Auth::guard('admin')->attempt($credentials)) {
+            if (Auth::guard('admin')->attempt($credentials, $remember)) {
                 return redirect()->route('homeadmin');
 
             }
 
-            return redirect()->route('login')->withErrors([
-                'email' => 'Email đăng nhập không chính xác.',
-                'password' => 'Password đăng nhập không chính xác.',
-            ]);
-        } else {
-            return redirect()->back()->withErrors([
-                'captcha_failed' => 'Xác thực captcha không thành công.',
-            ]);
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ])->onlyInput('email');
         }
     }
 
-    public function admin_forgot_pass(){
+    public function admin_forgot_pass()
+    {
         return view('/admin/auth/forgot-password');
     }
-    
+
     public function logout_process(Request $request)
     {
         Auth::guard('admin')->logout();
