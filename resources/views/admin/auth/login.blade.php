@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=119436&format=png&color=000000">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
         integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
@@ -23,13 +22,9 @@
         <p class="fs-1 text-light">THƯ VIỆN ĐIỆN TỬ KHOA CÔNG NGHỆ THÔNG TIN</p>
         <div class="card account-dialog rounded-lg">
             <div class="card-header bg-primary text-white rounded-lg"> Vui lòng đăng nhập</div>
-            @if ($errors->has('captcha_failed'))
-                <div class="alert alert-danger">
-                    {{ $errors->first('captcha_failed') }}
-                </div>
-            @endif
+           
             <div class="card-body">
-                <form action="{{ route('login_process') }}" method="post">
+                <form action="{{ route('login.store') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="email">Email <span class="text-danger"> ( * ) </span></label>

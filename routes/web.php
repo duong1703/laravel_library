@@ -86,75 +86,8 @@ Route::controller(CommentController::class)->group(function () {
     Route::post('/comment/{id}', 'user_comment_post')->name('user_comment');
 });
 
-/**ADMIN_PANEL */
-// Admin Login Routes
-Route::middleware(['blockip'])->group(function () {
-    Route::controller(LoginController::class)->group(function () {
-        Route::get('views/admin/pages/login', 'admin_login')->name('login');
-        Route::post('/auth/login', 'login_process')->name('login_process');
-        Route::post('/auth/logout', 'logout_process')->name('logout_process');
-    });
-});
-
-//Admin Forgot Password
-
-Route::get('/forgot-password', function () {
-    return view('admin.auth.forgot-password');
-})->middleware('guest')->name('password.request');
-
-Route::post('/forgot-password', function (Request $request) {
-    $request->validate(['email' => 'required|email']);
-
-    $email = $request->only('email');  // Lấy email từ request
-
-    // Kiểm tra xem email có giá trị không
-    if (empty($email['email'])) {
-        return back()->withErrors(['email' => 'Email is required']);
-    }
-
-    // Gửi yêu cầu reset mật khẩu
-    $status = Password::broker('admins')->sendResetLink(
-        ['email' => $email]
-    );
 
 
-
-    return $status === Password::RESET_LINK_SENT
-        ? back()->with(['status' => __($status)])
-        : back()->withErrors(['email' => __($status)]);
-})->middleware('guest')->name('password.email');
-
-Route::get('/reset-password/{token}', function (string $token) {
-    return view('admin.auth.reset-password', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
-
-Route::post('/reset-password', function (Request $request) {
-    $request->validate([
-        'token' => 'required',
-        'email' => 'required|email',
-        'password' => 'required|min:8|confirmed',
-    ]);
-
-    $status = Password::broker('admins')->reset(
-        $request->only('email', 'password', 'password_confirmation', 'token'),
-        function (Admin $admin, string $password) {
-            $admin->forceFill([
-                'password' => Hash::make($password),
-            ])->setRememberToken(Str::random(60));
-
-            $admin->save();
-
-            event(new PasswordReset($admin));
-        }
-    );
-
-    return $status === Password::PASSWORD_RESET
-        ? redirect()->route('login')->with('status', __($status))
-        : back()->withErrors(['email' => [__($status)]]);
-})->middleware('guest')->name('password.update');
-
-
-//Admin_Panel
 Route::middleware(['blockip'])->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::group(['middleware' => 'nocache'], function () {
@@ -223,6 +156,11 @@ Route::middleware(['blockip'])->group(function () {
             //Admin_info
             Route::controller(InfoController::class)->group(function () {
                 Route::get('/views/admin/pages/info/infoversion', 'Infoversion')->name('Infoversion');
+            });
+
+            //2FA 
+            Route::controller(Auth2faController::class)->group(function () {
+                Route::get('/views/admin/pages/auth2fa','index')->name('auth2fa');
             });
         });
 

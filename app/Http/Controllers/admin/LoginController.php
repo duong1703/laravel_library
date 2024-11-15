@@ -44,7 +44,7 @@ class LoginController extends Controller
         return view('/admin/auth/forgot-password');
     }
 
-    public function logout_process(Request $request)
+    public function userLogoutpost(Request $request)
     {
         Auth::guard('admin')->logout();
         return redirect()->route('login');

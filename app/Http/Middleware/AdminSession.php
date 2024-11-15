@@ -20,6 +20,6 @@ class AdminSession
             return $next($request);
         }
 
-        return redirect('/views/admin/pages/login');
+        return redirect('login');
     }
 }

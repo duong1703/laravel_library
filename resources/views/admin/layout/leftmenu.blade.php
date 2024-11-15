@@ -79,5 +79,12 @@
                 <a href="{{ route('Infoversion') }}" class="dash-nav-dropdown-item">Phiên bản</a>
             </div>
         </div>
+        <div class="dash-nav-dropdown">
+            <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
+                <i class="fa fa-lock"></i>Bảo mật xác thực</a>
+            <div class="dash-nav-dropdown-menu">
+                <a href="{{ route('auth2fa') }}" class="dash-nav-dropdown-item">Xác thực 2FA</a>
+            </div>
+        </div>
     </nav>
 </div>

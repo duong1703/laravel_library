@@ -7,24 +7,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 
 
 class admin extends Authenticatable implements CanResetPassword
 {
     // use HasFactory;
-    use Notifiable, \Illuminate\Auth\Passwords\CanResetPassword;
-    
+    use Notifiable, \Illuminate\Auth\Passwords\CanResetPassword, TwoFactorAuthenticatable;
+
 
     protected $table = "admin";
 
     protected $primaryKey = "id";
 
-    protected $Fillable = ['name', 'email', 'password', 'role' , 'remember_token'];
-    
+    protected $Fillable = ['name', 'email', 'password', 'role', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes', 'two_factor_confirmed_at'];
+
 
     public function getIsSuperAdminAttribute()
     {
-        return $this->is_super_admin; 
+        return $this->is_super_admin;
     }
 
     public function isSuperAdmin()
