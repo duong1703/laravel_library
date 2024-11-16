@@ -15,13 +15,14 @@ class HomeController extends Controller
         $categoriescount = DB::table('categories')->count();
         $subcategoriescount = DB::table('subcategories')->count();
         $bookcount = DB::table('book')->count();
+        $unansweredCount = DB::table('message')->where('status', 'chưa trả lời')->count();
         return view('/admin/pages/home', [
             'membercount' => $membercount,
             'admincount' => $admincount,
             'categoriescount' => $categoriescount,
             'subcategoriescount' => $subcategoriescount,
             'bookcount' => $bookcount,
-            
+            '$unansweredCount' => $unansweredCount,
         ]);
     }
 }

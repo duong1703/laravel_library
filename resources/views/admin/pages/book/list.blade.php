@@ -62,6 +62,7 @@ Danh sách sách
                             <thead>
                                 <tr>
                                     <th class="text-center" scope="col">id</th>
+                                    <th class="text-center" scope="col">Người quản lý</th>
                                     <th class="text-center" scope="col">Bìa sách</th>
                                     <th class="text-center" scope="col">Tên sách</th>
                                     <th class="text-center" scope="col">Tác giả</th>
@@ -83,6 +84,7 @@ Danh sách sách
                                 @foreach ($data as $book)
                                     <tr>
                                         <td class="text-center">{{ $count++ }}</td>
+                                        <td class="text-center">{{ $book->admin ? $book->admin->name : 'Không có người quản lý'  }}</td>
                                         <td>
                                             <img src="{{ asset($book->book_images) }}" alt="" class="img-fluid"
                                                 height="120">

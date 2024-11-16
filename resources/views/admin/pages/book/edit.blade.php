@@ -59,6 +59,7 @@ Chỉnh sửa thông tin sách
                             method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="member_id" id="member_id" value="{{ Auth::id() }}">
                             <div class="mb-3">
                                 <label for="book_name" class="form-label">Tên sách</label>
                                 <input type="text" class="form-control" id="book_name" name="book_name"

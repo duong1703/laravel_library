@@ -12,7 +12,8 @@ class SupportController extends Controller
     public function message_admin()
     {
         $message = DB::table('message')->get();
-        return view('/admin/pages/support/list', ['data' => $message]);
+        $unansweredCount = DB::table('message')->where('status', 'chưa trả lời')->count();
+        return view('/admin/pages/support/list', ['data' => $message, 'unansweredCount' => $unansweredCount]);
     }
 
     public function editMessage($id)

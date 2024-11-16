@@ -32,6 +32,10 @@ class member extends Authenticatable
         return $this->belongsTo(admin::class, 'admin_id');
     }
 
+    public function message(){
+        return $this->belongsTo(message::class, 'member_id');
+    }
+
 
 
 }

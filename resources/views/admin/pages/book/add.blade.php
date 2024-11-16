@@ -6,12 +6,12 @@ Thêm mới sách
 
 @section('content')
 <style>
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
 </style>
 <main class="dash-content">
     <div class="container-fluid">
@@ -24,6 +24,16 @@ Thêm mới sách
                 });
             </script>
         @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-xl-12">
                 <div class="card easion-card">
@@ -34,15 +44,16 @@ Thêm mới sách
                         <div class="easion-card-title"> Thêm mới sách </div>
                     </div>
                     <div class="card-body ">
-                        <form id="uploadForm" action="{{ route('bookpost') }}" method="post"
-                            enctype="multipart/form-data">
+                        <form id="uploadForm" action="{{ route('bookpost') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="member_id" id="member_id" value="{{ Auth::id() }}">
+
                             <div class="mb-3">
                                 <label for="book_name" class="form-label">Tên sách</label>
                                 <input type="text" class="form-control" id="book_name" name="book_name"
                                     placeholder="Tên của sách" value="{{ old('book_name') }}" required>
                                 @error('book_name')
-                                <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -50,7 +61,7 @@ Thêm mới sách
                                 <label for="formFile" class="form-label">Tải lên ảnh bìa sách</label>
                                 <input class="form-control" type="file" id="book_images" name="book_images" required>
                                 @error('book_images')
-                                <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -59,7 +70,7 @@ Thêm mới sách
                                 <input type="text" class="form-control" id="book_author" name="book_author"
                                     placeholder="Tên tác giả" value="{{ old('book_author') }}" required>
                                 @error('book_author')
-                                <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -68,7 +79,7 @@ Thêm mới sách
                                         class="text-danger">( .pdf, word )</span></label>
                                 <input type="file" class="form-control" id="book_file" name="book_file" required>
                                 @error('book_file')
-                                <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -77,7 +88,7 @@ Thêm mới sách
                                 <input name="book_publisher" type="text" class="form-control" id="book_publisher"
                                     value="{{ old('book_publisher') }}" placeholder="Nhập tên nhà xuất bản" required>
                                 @error('book_publisher')
-                                <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -86,7 +97,7 @@ Thêm mới sách
                                 <input name="book_year_of_manufacture" type="date" class="form-control" id="date"
                                     value="{{ old('book_year_of_manufacture') }}" required>
                                 @error('book_year_of_manufacture')
-                                <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -95,21 +106,20 @@ Thêm mới sách
                                 <input type="text" class="form-control" id="book_amount" name="book_amount"
                                     placeholder="Số lượng sách" value="{{ old('book_amount') }}" required>
                                 @error('book_amount')
-                                <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label for="book_category">Danh mục sách</label>
-                                <select name="book_category" id="book_category" class="form-control"
-                                    value="{{ old('book_category') }}" required>
-                                    <option selected>Lựa chọn danh mục sách</option>
-                                    @foreach ($book_category as $data)
-                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                <label for="sub_categories_id">Danh mục con</label>
+                                <select name="sub_categories_id" id="sub_categories_id" class="form-control" required>
+                                    <option selected>Lựa chọn danh mục con</option>
+                                    @foreach ($subcategories as $subcategory)
+                                        <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('book_category')
-                                <div class="text-danger">{{ $message }}</div>
+                                @error('sub_categories_id')
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -122,7 +132,7 @@ Thêm mới sách
                                     <option value="lost" class="text-danger">Mất</option>
                                 </select>
                                 @error('book_status')
-                                <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 

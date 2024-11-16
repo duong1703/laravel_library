@@ -13,5 +13,9 @@ class message extends Model
 
     protected $primaryKey = "id";
 
-    protected $fillable = ['fullname', 'email', 'ID_student', 'message', 'status', 'reply'];
+    protected $fillable = [ 'member_id', 'fullname', 'email', 'ID_student', 'message', 'status', 'reply'];
+
+    public function member(){
+        return $this->hasMany(Member::class, 'member_id');
+    }
 }

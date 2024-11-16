@@ -8,6 +8,9 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Gate;
+use DB;
+use RateLimiter;
+use View;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -43,5 +46,11 @@ class AppServiceProvider extends ServiceProvider
         ResetPassword::createUrlUsing(function (admin $admin, string $token) {
             return route('password.reset', ['token' => $token]);
         });
+
+         // Đếm số lượng tin nhắn chưa trả lời
+        $unansweredCount = DB::table('message')->where('status', 'chưa trả lời')->count();
+    
+         // Chia sẻ biến toàn cục cho tất cả các view
+        View::share('unansweredCount', $unansweredCount);
     }
 }

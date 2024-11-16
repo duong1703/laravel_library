@@ -43,5 +43,11 @@ class admin extends Authenticatable implements CanResetPassword
         return $this->hasMany(member::class, 'admin_id');
     }
 
+    public function book()
+    {
+        return $this->hasMany(book::class, 'admin_id');
+    }
+
+
     
 }

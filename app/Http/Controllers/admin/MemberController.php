@@ -38,8 +38,8 @@ class MemberController extends Controller
             'email' => 'required|string|email|max:255|unique:member,email',
             'role' => 'required|string|max:16',
             'born' => 'required|string|max:255',
-            'numberphone' => 'required|string|max:10',
-            'ID_number_card' => 'required|string|max:12',
+            'numberphone' => 'required|string|max:10|unique:member,numberphone',
+            'ID_number_card' => 'required|string|max:12|unique:member,ID_number_card',
             'address' => 'required|string|max:255',
         ]);
 
@@ -71,6 +71,8 @@ class MemberController extends Controller
 
     public function membereditpost(Request $request, $id)
     {
+        $admin_id = Auth::id();
+
         $validatedData = $request->validate([
             'name_member' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
@@ -81,6 +83,8 @@ class MemberController extends Controller
         ]);
 
         $member = member::findOrFail($id);
+
+        $member->admin_id = $admin_id;
         $member->name_member = $validatedData['name_member'];
         $member->email = $validatedData['email'];
         $member->role = $validatedData['role'];

@@ -13,7 +13,7 @@ class book extends Model
 
     protected $primaryKey = "id";
 
-    protected $fillable = ['book_images', 'book_name', 'book_author', 'book_file', 'book_publisher', 'book_year_of_manufacture', 'book_amount', 'book_category', 'book_status'];
+    protected $fillable = [  'admin_id' , 'book_images', 'book_name', 'book_author', 'book_file', 'book_publisher', 'book_year_of_manufacture', 'book_amount', 'book_category', 'sub_categories_id' , 'book_status'];
 
     public function readbooks()
     {
@@ -34,5 +34,13 @@ class book extends Model
         ]);
     
         return $array;
+    }
+
+    public function admin(){
+        return $this->belongsTo(admin::class, 'admin_id');
+    }
+
+    public function subcategories(){
+        return $this->belongsTo(subcategories::class,'sub_categories_id');
     }
 }
