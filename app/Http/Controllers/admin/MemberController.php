@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\admin\member;
+use Auth;
 use DB;
 use Hash;
 use Mail;
@@ -17,7 +18,7 @@ class MemberController extends Controller
 {
     public function member_admin()
     {
-        $member = DB::table('member')->get();
+        $member = member::with('admin')->get();
         return view('/admin/pages/member/list', ['data' => $member]);
     }
 
@@ -28,6 +29,7 @@ class MemberController extends Controller
 
     public function memberpost(Request $request): RedirectResponse
     {
+        $admin_id = Auth::id();
         
         $request->validate([
             'name_member' => 'required|string|max:255',
@@ -42,6 +44,7 @@ class MemberController extends Controller
         ]);
 
         $member = new member();
+        $member->admin_id = $admin_id;
         $member->name_member = $request->input('name_member');
         $member->name_login = $request->input('name_login');
         $member->password = Hash::make($request->input('password'));

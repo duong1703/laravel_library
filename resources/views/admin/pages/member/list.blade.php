@@ -37,9 +37,9 @@ Danh sách thành viên
                             <thead>
                                 <tr>
                                     <th scope="col">id</th>
+                                    <th scope="col">Người quản lý</th>
                                     <th scope="col">Tên TV</th>
                                     <th scope="col">Tên ĐN</th>
-                                    <th scope="col">Mật khẩu</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Quyền</th>
                                     <th scope="col">Ngày sinh</th>
@@ -57,9 +57,9 @@ Danh sách thành viên
 
                                     <tr>
                                         <td>{{ $count++ }}</td>
+                                        <td>{{ $member->admin ? $member->admin->name : 'Không có quản trị viên' }}</td>
                                         <td>{{ $member->name_member }}</td>
                                         <td>{{ $member->name_login }}</td>
-                                        <td>{{ $member->password }}</td>
                                         <td>{{ $member->Email }}</td>
                                         <td>{{ $member->role }}</td>
                                         <td>{{ $member->born }}</td>

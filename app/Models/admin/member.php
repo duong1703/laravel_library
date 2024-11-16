@@ -15,7 +15,7 @@ class member extends Authenticatable
     protected $primaryKey = "id";
 
 
-    protected $fillable = ['name_member', 'name_login', 'password', 'Email', 'role', 'born', 'numberphone', 'ID_number_card', 'address'];
+    protected $fillable = [ 'admin_id' ,'name_member', 'name_login', 'password', 'Email', 'role', 'born', 'numberphone', 'ID_number_card', 'address'];
 
     public function readbooks()
     {
@@ -26,6 +26,12 @@ class member extends Authenticatable
     {
         return $this->hasMany(comment::class);
     }
+
+    public function admin()
+    {
+        return $this->belongsTo(admin::class, 'admin_id');
+    }
+
 
 
 }

@@ -42,12 +42,12 @@ Danh sách quản trị viên
                         <table id="datatable" class="cell-border" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th scope="col">id</th>
-                                    <th scope="col">Tên</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Mật khẩu</th>
-                                    <th scope="col">Quyền</th>
-                                    <th scope="col">Chức năng</th>
+                                    <th class="text-center" scope="col">id</th>
+                                    <th class="text-center" scope="col">Tên</th>
+                                    <th class="text-center" scope="col">Email</th>
+                                    <th class="text-center" scope="col">Xác minh 2FA</th>
+                                    <th class="text-center" scope="col">Quyền</th>
+                                    <th class="text-center" scope="col">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody
@@ -58,11 +58,11 @@ Danh sách quản trị viên
                                 @foreach ($data as $admin)
 
                                     <tr>
-                                        <td>{{ $count++ }}</td>
-                                        <td>{{ $admin->name }}</td>
-                                        <td>{{ $admin->email }}</td>
-                                        <td>{{ $admin->password }}</td>
-                                        <td>{{ $admin->role }}</td>
+                                        <td class="text-center">{{ $count++ }}</td>
+                                        <td class="text-center">{{ $admin->name }}</td>
+                                        <td class="text-center">{{ $admin->email }}</td>
+                                        <td class="text-center">{{ $admin->two_factor_confirmed_at ? $admin->two_factor_confirmed_at : 'Chưa xác minh 2FA'  }}</td>
+                                        <td class="text-center">{{ $admin->role }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('adminedit', ['id' => $admin->id]) }}"
                                                 class="btn btn-primary"><i class="fas fa-edit"></i></a>

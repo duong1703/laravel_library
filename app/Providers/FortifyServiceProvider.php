@@ -74,6 +74,6 @@ class FortifyServiceProvider extends ServiceProvider
         //Route 2FA challenge view
         Fortify::twoFactorChallengeView(function (Request $request) {
             return view('admin/auth/two-factor-challenge');
-        });
+        }); 
     }
 }

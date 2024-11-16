@@ -38,6 +38,7 @@ Thêm mới thành viên
                         </div>
                         <form action="{{ route('memberpost') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="member_id" id="member_id" value="{{ Auth::id() }}">
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputName">Tên thành viên</label>
