@@ -8,10 +8,25 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
         integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700" rel="stylesheet">
-    <link rel="stylesheet" href=" {{ asset('css/easion.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
-    <script src=" {{ asset('js/chart-js-config.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/easion.css') }}">
     <title>Xác minh 2FA</title>
+    <style>
+        .code-input {
+            width: 40px;
+            height: 50px;
+            font-size: 24px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .code-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
 </head>
 
 <body class="bg-primary">
@@ -28,38 +43,46 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <form action="{{ route('two-factor.login.store')}}" method="post">
+                <form action="{{ route('two-factor.login.store')}}" method="post" id="codeForm">
                     @csrf
-                    <div class="form-group">
-                        <label for="code">Mã xác thực</label>
-                        <input type="text" name="code" id="code"
-                            class="form-control rounded-lg @error('code') is-invalid @enderror"
-                            value="{{ old('code') }}">
-                        @error('code')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                    <div class="code-container">
+                        @for ($i = 0; $i < 6; $i++)
+                            <input type="text" maxlength="1" class="form-control code-input" id="code{{ $i }}" required>
+                        @endfor
                     </div>
+                    <input type="hidden" name="code" id="hiddenCodeInput">
+                    @error('code')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
 
-                    <button type="submit" class="btn btn-primary btn-block rounded-lg">Xác nhận</button>
+                    <button type="submit" class="btn btn-primary btn-block rounded-lg mt-3">Xác nhận</button>
                     <div class="mt-2 text-center">
-                    <a href="{{ route('auth2fa') }}">Trở về</a>
+                        <a href="{{ route('auth2fa') }}">Trở về</a>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-        </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-        </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-        </script>
 
-    <script src=" {{ asset('js/easion.js') }}"></script>
+    <script>
+        const codeInputs = document.querySelectorAll('.code-input');
+        const hiddenCodeInput = document.getElementById('hiddenCodeInput');
+
+        codeInputs.forEach((input, index, array) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && index < array.length - 1) {
+                    array[index + 1].focus();
+                }
+                if (input.inputType === 'deleteContentBackward' && index > 0) {
+                    array[index - 1].focus();
+                }
+                // Hợp nhất giá trị từ các ô nhập vào một chuỗi duy nhất
+                let codeValue = '';
+                array.forEach(inp => codeValue += inp.value);
+                hiddenCodeInput.value = codeValue;
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -25,12 +25,12 @@ Theo dõi truy cập
                         </div>
                     @endif
 
-                    <p class="mt-3">Trạng thái bảo mật của bạn giúp tăng cường sự an toàn của tài khoản. Kích hoạt 2FA để bảo vệ thông tin cá nhân khỏi các truy cập trái phép.</p>
+                    <p class="mt-3">Trạng thái bảo mật của bạn giúp tăng cường sự an toàn của tài khoản. Kích hoạt 2FA
+                        để bảo vệ thông tin cá nhân khỏi các truy cập trái phép.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Cột hiển thị giao diện tương tác -->
         <div class="col-md-6">
             <div class="card shadow-lg border-0">
                 <div class="card-header bg-gradient-primary text-white text-center py-4">
@@ -47,12 +47,15 @@ Theo dõi truy cập
 
                         <div class="mb-4">
                             <h5 class="fw-bold text-primary">Mã phục hồi của bạn:</h5>
-                            <ul class="list-group list-group-numbered">
+                            <button class="btn btn-outline-primary mb-2" onclick="toggleRecoveryCodes()">Hiển thị/Ẩn
+                                mã</button>
+                            <ul id="recoveryCodes" class="list-group list-group-numbered" style="display:none">
                                 @foreach (auth()->user()->recoveryCodes() as $code)
                                     <li class="list-group-item">{{ $code }}</li>
                                 @endforeach
                             </ul>
                         </div>
+
 
                         <form action="{{ route('two-factor.disable') }}" method="post" class="text-center">
                             @csrf
@@ -72,7 +75,9 @@ Theo dõi truy cập
                             @csrf
                             <div class="mb-3">
                                 <label for="code" class="form-label">Nhập mã xác thực</label>
-                                <input type="text" name="code" id="code" class="form-control form-control-lg @error('code') is-invalid @enderror" placeholder="Nhập mã 6 chữ số">
+                                <input type="text" name="code" id="code"
+                                    class="form-control form-control-lg @error('code') is-invalid @enderror"
+                                    placeholder="Nhập mã 6 chữ số">
                             </div>
                             <button type="submit" class="btn btn-info btn-lg w-100 mt-3">Xác nhận</button>
                         </form>
@@ -91,4 +96,15 @@ Theo dõi truy cập
         </div>
     </div>
 </div>
+<script>
+    function toggleRecoveryCodes() {
+        const recoveryCodes = document.getElementById('recoveryCodes');
+        if (recoveryCodes.style.display === 'none') {
+            recoveryCodes.style.display = 'block';
+        } else {
+            recoveryCodes.style.display = 'none';
+        }
+    }
+</script>
+
 @endsection

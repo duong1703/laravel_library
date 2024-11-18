@@ -49,5 +49,5 @@ class admin extends Authenticatable implements CanResetPassword
     }
 
 
-    
+
 }

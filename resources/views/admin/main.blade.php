@@ -50,6 +50,7 @@
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
 <script src="https://cdn.datatables.net/2.1.2/js/dataTables.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js" defer></script>
 <script src=" {{ asset('js/easion.js') }}" defer></script>
 
 <script>

@@ -178,5 +178,11 @@
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 1050; /* Đảm bảo đè lên các thành phần khác */
+    z-index: 1050;
+}
+
+#pdf-canvas {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
 }

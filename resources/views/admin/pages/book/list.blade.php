@@ -84,7 +84,8 @@ Danh sách sách
                                 @foreach ($data as $book)
                                     <tr>
                                         <td class="text-center">{{ $count++ }}</td>
-                                        <td class="text-center">{{ $book->admin ? $book->admin->name : 'Không có người quản lý'  }}</td>
+                                        <td class="text-center">
+                                            {{ $book->admin ? $book->admin->name : 'Không có người quản lý'  }}</td>
                                         <td>
                                             <img src="{{ asset($book->book_images) }}" alt="" class="img-fluid"
                                                 height="120">
@@ -92,7 +93,8 @@ Danh sách sách
                                         <td class="text-center">{{ $book->book_name }}</td>
                                         <td class="text-center">{{ $book->book_author }}</td>
                                         <td class="text-center">{{ $book->book_file }}</td>
-                                        <td class="text-center">{{ $book->book_year_of_manufacture }}</td>
+                                        <td class="text-center">{{ \Carbon\Carbon::parse($book->book_year_of_manufacture)->format('d/m/Y') }}</td>
+                                        
                                         <td class="text-center">{{ $book->book_publisher }}</td>
                                         <td class="text-center">{{ $book->book_amount }}</td>
                                         <td class="text-center">{{ $book->book_category }}</td>
@@ -103,8 +105,8 @@ Danh sách sách
                                             </span>
                                         </td>
 
-                                        <td class="text-center">{{date($book->created_at) }}</td>
-                                        <td >
+                                        <td class="text-center">{{\Carbon\Carbon::parse($book->created_at)->format('d/m/Y H:i') }}</td>
+                                        <td>
                                             <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary">
                                                 <i class="fas fa-edit"></i>
                                             </a>
@@ -118,8 +120,7 @@ Danh sách sách
                                                 style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                                <button type="button" class="btn btn-danger" onclick="confirmDelete(this)">
                                                     <i class="far fa-trash-alt"></i>
                                                 </button>
                                             </form>
@@ -188,5 +189,24 @@ Danh sách sách
             }
         });
     });
+
+
+    function confirmDelete(button) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa?',
+            text: 'Hành động này không thể hoàn tác!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Tìm form chứa hành động xóa và submit
+                document.getElementById('deleteForm').submit();
+            }
+        });
+    }
 
 </script>

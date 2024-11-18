@@ -70,10 +70,10 @@ Danh sách quản trị viên
                                                 style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
+                                                <button type="button" class="btn btn-danger"
+                                                        onclick="confirmDelete(this)">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -87,4 +87,23 @@ Danh sách quản trị viên
         </div>
     </div>
 </main>
+<script>
+    function confirmDelete(button) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa?',
+            text: 'Hành động này không thể hoàn tác!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Tìm form chứa hành động xóa và submit
+                document.getElementById('deleteForm').submit();
+            }
+        });
+    }
+</script>
 @endsection

@@ -49,7 +49,8 @@ Danh sách thành viên
                                     <th scope="col">Chức năng</th>
                                 </tr>
                             </thead>
-                            <tbody  style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 200px;">
+                            <tbody
+                                style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 200px;">
                                 @php
                                     $count = 1;
                                 @endphp
@@ -72,11 +73,11 @@ Danh sách thành viên
                                                 <a href="{{ route('memberedit', ['id' => $member->id]) }}"
                                                     class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                                 <form action="{{ route('memberdelete', ['id' => $member->id]) }}"
-                                                    method="POST" style="display:inline;">
+                                                    method="POST" style="display:inline;" id="deleteForm">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger"
-                                                        onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                                    <button type="button" class="btn btn-danger"
+                                                        onclick="confirmDelete(this)">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
                                                 </form>
@@ -93,4 +94,23 @@ Danh sách thành viên
         </div>
     </div>
 </main>
+<script>
+    function confirmDelete(button) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa?',
+            text: 'Hành động này không thể hoàn tác!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Tìm form chứa hành động xóa và submit
+                document.getElementById('deleteForm').submit();
+            }
+        });
+    }
+</script>
 @endsection

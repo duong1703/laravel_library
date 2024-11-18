@@ -162,7 +162,8 @@ Tài khoản của bạn
                                             <td class="text-center">{{ $count++ }}</td>
                                             <td class="text-center">{{ $read->book_id }}</td>
                                             <td class="text-center">{{ $read->read_count }}</td>
-                                            <td class="text-center">{{ $read->last_read_at }}</td>
+                                            <td class="text-center">{{ \Carbon\Carbon::parse($read->last_read_at)->format('d/m/Y H:i') }}</td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
