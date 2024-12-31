@@ -30,7 +30,7 @@ class MemberController extends Controller
     public function memberpost(Request $request): RedirectResponse
     {
         $admin_id = Auth::id();
-        
+
         $request->validate([
             'name_member' => 'required|string|max:255',
             'name_login' => 'required|string|max:255',
@@ -99,10 +99,20 @@ class MemberController extends Controller
 
     public function memberdelete(Request $request, $id)
     {
-        $member = Member::findOrFail($id);
+        \Log::info('Xóa thành viên', ['id' => $id]);  // Log ID nhận được từ URL
+
+        $member = Member::find($id);
+
+        if (!$member) {
+            \Log::error('Không tìm thấy thành viên với ID:', ['id' => $id]);
+            return redirect()->route('memberlist')->with('error', 'Thành viên không tồn tại!');
+        }
+
         $member->delete();
+        \Log::info('Thành viên đã được xóa', ['id' => $id]);
+
         $request->session()->flash('success', 'Xóa thành viên thành công!');
         return redirect()->route('memberlist');
-
     }
+
 }

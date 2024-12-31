@@ -16,12 +16,17 @@ class AccountController extends Controller
     {
         if (Auth::guard('member')->check()) {
             $member_id = Auth::guard('member')->user()->id;
-            $reads = readbook::where('member_id', $member_id)
+    
+            $reads = DB::table('readbook')
+                ->join('book', 'readbook.book_id', '=', 'book.id') 
+                ->select('book.id as book_id', 'book.book_name', 'readbook.read_count', 'readbook.last_read_at') 
+                ->where('readbook.member_id', $member_id) 
                 ->paginate(5);
+    
             return view('client/pages/account', compact('reads', 'member_id'));
         } else {
             return redirect()->route('user_login');
         }
-
     }
+    
 }

@@ -149,6 +149,7 @@ Tài khoản của bạn
                                     <tr>
                                         <th class="text-center" scope="col">STT</th>
                                         <th class="text-center" scope="col">ID sách</th>
+                                        <th class="text-center" scope="col">Tên sách</th>
                                         <th class="text-center" scope="col">Số lần đọc</th>
                                         <th class="text-center" scope="col">Ngày cập nhật cuối</th>
                                     </tr>
@@ -161,6 +162,7 @@ Tài khoản của bạn
                                         <tr>
                                             <td class="text-center">{{ $count++ }}</td>
                                             <td class="text-center">{{ $read->book_id }}</td>
+                                            <td class="text-center">{{ $read->book_name }}</td> 
                                             <td class="text-center">{{ $read->read_count }}</td>
                                             <td class="text-center">{{ \Carbon\Carbon::parse($read->last_read_at)->format('d/m/Y H:i') }}</td>
 

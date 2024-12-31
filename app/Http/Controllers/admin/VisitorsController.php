@@ -16,10 +16,14 @@ class VisitorsController extends Controller
         return view('/admin/pages/visitors/list');
     }
 
-    public function showReadingChart(){
-        $data = DB::table('readbook')->select('book_id','read_count')->get();
-        // return $data->toArray();
+    public function showReadingChart() {
+        $data = DB::table('readbook')
+              ->join('book', 'readbook.book_id', '=', 'book.id') 
+              ->select('book.book_name as book_name', 'readbook.read_count') 
+              ->get();
+    
         return response()->json($data);
     }
+    
 
 }

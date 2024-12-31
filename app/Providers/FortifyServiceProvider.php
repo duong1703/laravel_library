@@ -76,7 +76,7 @@ class FortifyServiceProvider extends ServiceProvider
         //Route handle login admin
         Fortify::authenticateUsing(function (Request $request) {
             $user = admin::where('email', $request->email)->first();
-     
+
             if ($user &&
                 Hash::check($request->password, $user->password)) {
                 return $user;
@@ -91,6 +91,6 @@ class FortifyServiceProvider extends ServiceProvider
         //Route 2FA challenge view
         Fortify::twoFactorChallengeView(function (Request $request) {
             return view('admin/auth/two-factor-challenge');
-        }); 
+        });
     }
 }

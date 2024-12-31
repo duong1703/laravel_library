@@ -20,13 +20,15 @@
         </script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body style="font-family:auto">
     <div class="dash">
         @include('admin/layout/header')
-        <div class="dash-app" >
+        <div class="dash-app">
             @include('admin/layout/leftmenu')
             <main class="dash-content bg-light">
                 @yield('content')
@@ -58,4 +60,19 @@
         $('#datatable').DataTable();
     });
 </script>
+
+<script>
+    document.getElementById("search_bar").addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase();
+        const menuItems = document.querySelectorAll(".dash-nav-item, .dash-nav-dropdown");
+
+        menuItems.forEach((item) => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(searchTerm) ? "" : "none";
+        });
+    });
+
+
+</script>
+
 </html>

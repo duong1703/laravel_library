@@ -50,6 +50,7 @@
                             <input type="text" maxlength="1" class="form-control code-input" id="code{{ $i }}" required>
                         @endfor
                     </div>
+
                     <input type="hidden" name="code" id="hiddenCodeInput">
                     @error('code')
                         <div class="text-danger mt-2">{{ $message }}</div>

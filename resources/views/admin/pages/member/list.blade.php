@@ -55,7 +55,6 @@ Danh sách thành viên
                                     $count = 1;
                                 @endphp
                                 @foreach ($data as $member)
-
                                     <tr>
                                         <td>{{ $count++ }}</td>
                                         <td>{{ $member->admin ? $member->admin->name : 'Không có quản trị viên' }}</td>
@@ -73,10 +72,10 @@ Danh sách thành viên
                                                 <a href="{{ route('memberedit', ['id' => $member->id]) }}"
                                                     class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                                 <form action="{{ route('memberdelete', ['id' => $member->id]) }}"
-                                                    method="POST" style="display:inline;" id="deleteForm">
+                                                    method="POST" style="display:inline;" id="deleteForm-{{ $member->id }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" class="btn btn-danger"
+                                                    <button type="button" class="btn btn-danger" title="deletemember"
                                                         onclick="confirmDelete(this)">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
@@ -85,6 +84,7 @@ Danh sách thành viên
                                         </td>
                                     </tr>
                                 @endforeach
+
 
                             </tbody>
                         </table>
@@ -107,10 +107,12 @@ Danh sách thành viên
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Tìm form chứa hành động xóa và submit
-                document.getElementById('deleteForm').submit();
+                // Tìm form chứa hành động xóa từ button được nhấn
+                var form = button.closest('form');
+                form.submit(); // Gửi form
             }
         });
     }
+
 </script>
 @endsection

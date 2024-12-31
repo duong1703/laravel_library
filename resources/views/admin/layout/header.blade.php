@@ -1,22 +1,42 @@
 <header class="dash-toolbar d-flex justify-content-between align-items-center">
+   
     <div>
         <a href="javascript:void(0)" class="menu-toggle"><i class="fas fa-bars"></i></a>
         <a href="javascript:void(0)" class="searchbox-toggle"><i class="fas fa-search"></i></a>
     </div>
+    <form id="search_form">
+        <div class="search_bar p-3">
+            <div class="input-group">
+                <input type="text" id="search_bar" class="form-control" placeholder="Tìm kiếm mục...">
+                <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                </span>
+            </div>
+        </div>
+    </form>
+
+
+
     <div class="tools d-flex align-items-center">
+    <div class="centered-icons" style="text-align: center;margin-top: 9px;color: #0d6efd;margin-left:10px">
+        <a id="realtime-time"><i class="fa fa-clock-o"></i></a>
+        <a id="realtime-date"><i class="fa fa-calendar-o"></i></a>
+    </div>
         <!-- Icon chuông thông báo -->
         <div class="tools-item d-flex align-items-center me-3 position-relative">
             <a href="#" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell"></i>
             </a>
             <!-- Badge số lượng thông báo -->
-            <span class="badge badge-danger position-absolute top-0 start-100 translate-middle" id="notificationCount">{{ $unansweredCount ?? 0 }}
+            <span class="badge badge-danger position-absolute top-0 start-100 translate-middle"
+                id="notificationCount">{{ $unansweredCount ?? 0 }}
             </span>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
                 <h6 class="dropdown-header">Thông báo</h6>
                 <div id="notificationList" style="max-height: 200px; overflow-y: auto;">
                     @if ($unansweredCount > 0)
-                        <a class="dropdown-item" href="{{ route('message_admin') }}">Có {{ $unansweredCount }} tin nhắn chưa được trả lời.</a>
+                        <a class="dropdown-item" href="{{ route('message_admin') }}">Có {{ $unansweredCount }} tin nhắn chưa
+                            được trả lời.</a>
                     @else
                         <a class="dropdown-item">Không có tin nhắn mới.</a>
                     @endif
@@ -65,4 +85,33 @@
             notificationCount.textContent = currentCount + 1;
             notificationCount.style.display = 'inline';  // Hiển thị số lượng thông báo
         });
+</script>
+
+<script>
+    /* date */
+    function updateDate() {
+        var now = new Date();
+        var options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        var formattedDate = now.toLocaleDateString('en-US', options);
+
+        document.getElementById('realtime-date').innerHTML = formattedDate;
+    }
+
+    // Gọi hàm updateDate() mỗi giây để cập nhật ngày
+    setInterval(updateDate, 1000);
+
+    /* date */
+    function updateTime() {
+        var now = new Date();
+        var time = now.toLocaleTimeString();
+
+        document.getElementById('realtime-time').innerHTML = time;
+    }
+
+    // Gọi hàm updateTime() mỗi giây để cập nhật thời gian
+    setInterval(updateTime, 1000);
 </script>

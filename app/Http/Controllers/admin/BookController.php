@@ -60,15 +60,12 @@ class BookController extends Controller
             $book->book_file = 'book/' . $book_file_name;
         }
 
-        // Lưu thông tin cơ bản của sách
         $book->admin_id = $admin_id;
 
-        // Lấy thông tin danh mục con
         $subcategory = subcategories::find($request->input('sub_categories_id'));
         if ($subcategory) {
-            // Lưu id và tên danh mục con vào cột `sub_categories_id`
-            $book->sub_categories_id = $subcategory->id;  // Lưu id
-            $book->book_category = $subcategory->name;  // Lưu tên danh mục con vào cột `book_category`
+            $book->sub_categories_id = $subcategory->id;  
+            $book->book_category = $subcategory->name;  
         } else {
             $book->sub_categories_id = null;
             $book->book_category = null;
