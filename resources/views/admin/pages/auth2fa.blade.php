@@ -78,7 +78,7 @@ Theo dõi truy cập
                                 <label for="code" class="form-label">Nhập mã xác thực</label>
                                 <input type="text" name="code" id="code"
                                     class="form-control form-control-lg @error('code') is-invalid @enderror"
-                                    placeholder="Nhập mã 6 chữ số">
+                                    placeholder="Nhập mã 6 chữ số" required>
                             </div>
                             <button type="submit" class="btn btn-info btn-lg w-100 mt-3">Xác nhận</button>
                         </form>

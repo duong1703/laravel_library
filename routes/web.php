@@ -43,6 +43,7 @@ Route::controller(\App\Http\Controllers\client\LoginController::class)->group(fu
 //User_book
 Route::controller(\App\Http\Controllers\client\BookController::class)->group(function () {
     Route::get('views/client/pages/book', 'user_book')->name('user_book');
+    Route::get('/books/category/{category}',  'filterByCategory')->name('books.filterByCategory');
     Route::get('search', 'searchBook')->name('search');
     Route::get('/getbook/{id}', 'getIDbook')->name('getIDbook');
     Route::get('/get-book-count', 'getReadCountForBook')->name('getReadCountForBook');
@@ -172,6 +173,7 @@ Route::middleware(['blockip'])->group(function () {
                     Route::delete('/admin/delete/{id}', 'admindelete')->name('admindelete');
                 });
             });
+
             //Admin_category
             Route::controller(CategoriesController::class)->group(function () {
                 Route::get('views/admin/pages/categories/list', 'categories_admin')->name('categorieslist');

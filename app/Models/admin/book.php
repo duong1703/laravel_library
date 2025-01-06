@@ -22,7 +22,7 @@ class book extends Model
 
     public function comments()
     {
-        return $this->hasMany(comment::class);
+        return $this->hasMany(comment::class, 'book_id');
     }
 
     public function toSearchableArray()
@@ -43,4 +43,6 @@ class book extends Model
     public function subcategories(){
         return $this->belongsTo(subcategories::class,'sub_categories_id');
     }
+
+    
 }

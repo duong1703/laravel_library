@@ -12,6 +12,9 @@ use Session;
 class CommentController extends Controller
 {
 
+    
+
+
     public function user_comment_post(Request $request, $id)
     {
         $request->validate([

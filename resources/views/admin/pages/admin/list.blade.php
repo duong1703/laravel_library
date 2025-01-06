@@ -61,20 +61,25 @@ Danh sách quản trị viên
                                         <td class="text-center">{{ $count++ }}</td>
                                         <td class="text-center">{{ $admin->name }}</td>
                                         <td class="text-center">{{ $admin->email }}</td>
-                                        <td class="text-center">{{ $admin->two_factor_confirmed_at ? $admin->two_factor_confirmed_at : 'Chưa xác minh 2FA'  }}</td>
+                                        <td class="text-center">
+                                            {{ $admin->two_factor_confirmed_at ? $admin->two_factor_confirmed_at : 'Chưa xác minh 2FA'  }}
+                                        </td>
                                         <td class="text-center">{{ $admin->role }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('adminedit', ['id' => $admin->id]) }}"
                                                 class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('admindelete', ['id' => $admin->id]) }}" method="POST"
+                                            <form id="deleteForm-{{ $admin->id }}"
+                                                action="{{ route('admindelete', ['id' => $admin->id]) }}" method="POST"
                                                 style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="btn btn-danger"
-                                                        onclick="confirmDelete(this)">
-                                                        <i class="far fa-trash-alt"></i>
-                                                    </button>
+                                                    onclick="confirmDelete('{{ $admin->id }}')">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
                                             </form>
+                                        </td>
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -88,7 +93,7 @@ Danh sách quản trị viên
     </div>
 </main>
 <script>
-    function confirmDelete(button) {
+    function confirmDelete(adminId) {
         Swal.fire({
             title: 'Bạn có chắc chắn muốn xóa?',
             text: 'Hành động này không thể hoàn tác!',
@@ -100,10 +105,11 @@ Danh sách quản trị viên
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Tìm form chứa hành động xóa và submit
-                document.getElementById('deleteForm').submit();
+                // Tìm form theo ID và submit
+                document.getElementById(`deleteForm-${adminId}`).submit();
             }
         });
     }
+
 </script>
 @endsection

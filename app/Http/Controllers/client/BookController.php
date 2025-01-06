@@ -17,10 +17,11 @@ class BookController extends Controller
 {
     public function user_book()
     {
-        $books = book::select('id', 'book_name', 'book_images', 'book_author', 'book_status' , 'book_category', 'created_at')->paginate(6);
+        $books = book::select('id', 'book_name', 'book_images', 'book_author', 'book_status', 'book_category', 'created_at')->paginate(6);
         $categories = book::select('book_category', DB::raw('count(*) as book_count'))
             ->groupBy('book_category')
             ->get();
+        // dd($categories);
 
         return view('client/pages/book', compact('books', 'categories'));
     }
@@ -30,9 +31,9 @@ class BookController extends Controller
         $searchTerm = $request->input('search');
 
         $dataBook = book::where('book_name', 'like', "%$searchTerm%")
-                            ->orWhere("book_author","like", "%$searchTerm%")
-                            ->orwhere('book_category', 'like', "%$searchTerm%")
-                            ->paginate(6);
+            ->orWhere("book_author", "like", "%$searchTerm%")
+            ->orwhere('book_category', 'like', "%$searchTerm%")
+            ->paginate(6);
         $categories = book::select('book_category', DB::raw('count(*) as book_count'))
             ->groupBy('book_category')
             ->get();
@@ -92,8 +93,31 @@ class BookController extends Controller
         return view('client/pages/book', compact('readCounts'));
     }
 
-    public function getIDbook($id){
+    public function getIDbook($id)
+    {
         $book = book::findOrFail($id);
         return view('client/pages/book', compact('book'));
     }
+
+
+    public function filterByCategory($category)
+    {
+        // Giải mã tham số nếu cần thiết
+        $category = urldecode($category);
+
+        // Lọc sách theo danh mục
+        $books = Book::where('book_category', $category)->paginate(10);
+
+        // Lấy danh sách danh mục hợp lệ còn sách (có sách liên quan)
+        $categories = Book::select('book_category')
+            ->selectRaw('COUNT(*) as book_count')
+            ->groupBy('book_category')
+            ->havingRaw('COUNT(*) > 0') // Chỉ lấy danh mục có sách
+            ->get();
+
+        return view('client/pages/book', compact('books', 'categories', 'category'));
+    }
+
+
+
 }

@@ -22,7 +22,7 @@
     </header>
     <nav class="dash-nav-list">
         <a href="{{ route('homeadmin') }}" class="dash-nav-item" id="Thongke">
-            <i class="fas fa-home"></i> Thống kê </a>
+            <i class="fas fa-home"></i> Trang chủ </a>
         <div class="dash-nav-dropdown">
             <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
                 <i class="fas fa-users"></i>Thành viên </a>

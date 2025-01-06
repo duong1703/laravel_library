@@ -14,10 +14,73 @@
 
     <link rel="stylesheet" href=" {{ asset('css/style1.css') }} ">
 
+    <!-- Add this CSS for background image behind the form -->
+    <style>
+        .ftco-section {
+            background-image: url('/img/bg1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding-top: 80px;
+            padding-bottom: 80px;
+            min-height: 100vh;
+            /* Ensure the section fills the full screen */
+            position: relative;
+        }
+
+        .ftco-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: inherit;
+            background-size: inherit;
+            background-position: inherit;
+            background-repeat: inherit;
+            filter: blur(15px);
+            /* Adjust the blur amount */
+            z-index: -1;
+            /* Place the blurred image behind the content */
+        }
+
+        .login-wrap {
+            max-width: 450px;
+            /* Set a max width for the form */
+            margin: 0 auto;
+            /* Center the form */
+            padding: 30px;
+            /* Padding inside the form */
+            border-radius: 10px;
+            /* Rounded corners for the form */
+            background: rgba(255, 255, 255, 0.8);
+            /* Slight transparency for background */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            /* Add subtle shadow to lift form */
+            z-index: 1;
+        }
+
+        /* Optional: Make the login button stand out more */
+        .login-wrap button {
+            background-color: #007bff;
+            /* Customize button color */
+            border-color: #007bff;
+            /* Match border to button color */
+        }
+
+        .login-wrap button:hover {
+            background-color: #0056b3;
+            /* Darken on hover */
+            border-color: #0056b3;
+        }
+    </style>
+
+
 </head>
 
 <body>
-    <section class="ftco-section bg-light" >
+    <section class="ftco-section bg-light">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 col-lg-10">
@@ -27,7 +90,7 @@
                         <div class="login-wrap p-4 p-md-5">
                             <div class="d-flex">
                                 <div class="w-100">
-                                    <h3 class="mb-4 text-center" >Đăng nhập thành viên</h3>
+                                    <h3 class="mb-4 text-center">Đăng nhập thành viên</h3>
                                     <p class="text-danger text-center">Chỉ có thành viên mới có thể đăng nhập</p>
                                 </div>
 
@@ -61,15 +124,16 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="cf-turnstile mt-3 text-center" data-sitekey="{{ env('SITE_KEY') }}" data-callback="javascriptCallback"></div>
-                                
+                                <div class="cf-turnstile mt-3 text-center" data-sitekey="{{ env('SITE_KEY') }}"
+                                    data-callback="javascriptCallback"></div>
+
                                 <div class="text-center mb-3">
                                     <button type="submit" class="btn btn-primary text-center">Đăng nhập</button>
                                 </div>
                             </form>
                             <div class="text-center">
 
-                                <a  href="{{ route('user_home') }}">Quay lại trang chủ</a>
+                                <a href="{{ route('user_home') }}">Quay lại trang chủ</a>
                             </div>
                         </div>
                     </div>
@@ -77,6 +141,7 @@
             </div>
         </div>
     </section>
+
     <script src=" {{ asset('js/jquery1.min.js') }} "></script>
     <script src=" {{ asset('js/popper1.js') }} "></script>
     <script src="{{ asset('js/bootstrap1.min.js') }} "></script>

@@ -5,8 +5,11 @@
 @endsection
 
 @section('content')
+
 <div class="container-fluid">
+<p class="fw-bold fs-3">THỐNG KÊ</p>
     <div class="row dash-row">
+        
         <div class="col-xl-3">
             <div class="stats stats-primary rounded-4">
                 <h3 class="stats-title">Tổng thành viên </h3>
@@ -74,4 +77,5 @@
         </div>
     </div>
 </div>
+
 @endsection

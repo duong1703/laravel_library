@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
         </script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -51,14 +51,17 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
-<script src="https://cdn.datatables.net/2.1.2/js/dataTables.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js" defer></script>
-<script src=" {{ asset('js/easion.js') }}" defer></script>
 
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js" defer></script>
+<script src=" {{ asset('js/easion.js') }}" defer></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#datatable').DataTable();
-    });
+    var table = new DataTable('#datatable', {
+    language: {
+        url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/vi.json',
+    },
+});
 </script>
 
 <script>

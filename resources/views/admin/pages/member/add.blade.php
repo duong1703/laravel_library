@@ -59,10 +59,13 @@ Thêm mới thành viên
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword">Mật khẩu đăng nhập</label>
                                     <div class="input-group">
-                                        <input name="password" type="text" class="form-control" id="inputPassword"
+                                        <input name="password" type="password" class="form-control" id="inputPassword"
                                             placeholder="Mật khẩu đăng nhập" value="{{ old('password') }}" required>
-                                        <button type="button" class="btn btn-secondary" id="generatePassword">Generate
-                                            Password</button>
+                                        <button type="button" class="btn btn-secondary" id="generatePassword">Tạo mới
+                                            mật khẩu</button>
+                                        <button type="button" class="btn btn-secondary" id="togglePassword">
+                                            <i class="fas fa-eye" id="eyeIcon"></i>
+                                        </button>
                                     </div>
                                     @error('password')
                                         <div class="text-danger">{{ $message }}</div>
@@ -134,6 +137,7 @@ Thêm mới thành viên
     </div>
 </main>
 <script>
+    // Hàm tạo mật khẩu ngẫu nhiên
     document.getElementById('generatePassword').addEventListener('click', function () {
         function generatePassword(length = 9) {
             const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -147,6 +151,25 @@ Thêm mới thành viên
         const password = generatePassword(9);
         document.getElementById('inputPassword').value = password;
     });
+
+    // Hàm ẩn/hiện mật khẩu
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordField = document.getElementById('inputPassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        // Kiểm tra nếu mật khẩu đang ẩn
+        if (passwordField.type === "password") {
+            passwordField.type = "text"; // Hiển thị mật khẩu
+            eyeIcon.classList.remove('fa-eye'); // Thay đổi icon
+            eyeIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = "password"; // Ẩn mật khẩu
+            eyeIcon.classList.remove('fa-eye-slash'); // Thay đổi icon
+            eyeIcon.classList.add('fa-eye');
+        }
+    });
 </script>
 
+<!-- Bạn cần thêm font-awesome để có thể hiển thị icon mắt -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 @endsection

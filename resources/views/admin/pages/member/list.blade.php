@@ -62,7 +62,7 @@ Danh sách thành viên
                                         <td>{{ $member->name_login }}</td>
                                         <td>{{ $member->Email }}</td>
                                         <td>{{ $member->role }}</td>
-                                        <td>{{ $member->born }}</td>
+                                        <td> {{ \Carbon\Carbon::parse($member->born)->format('d/m/Y') }}</td>
                                         <td>{{ $member->numberphone }}</td>
                                         <td>{{ $member->ID_number_card }}</td>
                                         <td>{{ $member->address }}</td>

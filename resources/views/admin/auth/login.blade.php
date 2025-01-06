@@ -27,6 +27,7 @@
                 <form action="{{ route('login.store') }}" method="post">
                     @csrf
                     <div class="form-group">
+                        <i class="fa fa-user"></i>
                         <label for="email">Email <span class="text-danger"> ( * ) </span></label>
                         <input type="email" name="email" id="email"
                             class="form-control rounded-lg @error('email') is-invalid @enderror"
@@ -36,6 +37,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <i class="fa fa-lock"></i>
                         <label for="password">Password <span class="text-danger"> ( * ) </span></label>
                         <input type="password" name="password" id="password"
                             class="form-control rounded-lg @error('password') is-invalid @enderror">

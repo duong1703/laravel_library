@@ -22,6 +22,6 @@ class comment extends Model
 
     public function member()
     {
-        return $this->belongsTo(member::class);
+        return $this->belongsTo(member::class, 'member_id');
     }
 }

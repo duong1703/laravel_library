@@ -85,7 +85,8 @@ Danh sách sách
                                     <tr>
                                         <td class="text-center">{{ $count++ }}</td>
                                         <td class="text-center">
-                                            {{ $book->admin ? $book->admin->name : 'Không có người quản lý'  }}</td>
+                                            {{ $book->admin ? $book->admin->name : 'Không có người quản lý'  }}
+                                        </td>
                                         <td>
                                             <img src="{{ asset($book->book_images) }}" alt="" class="img-fluid"
                                                 height="120">
@@ -93,8 +94,9 @@ Danh sách sách
                                         <td class="text-center">{{ $book->book_name }}</td>
                                         <td class="text-center">{{ $book->book_author }}</td>
                                         <td class="text-center">{{ $book->book_file }}</td>
-                                        <td class="text-center">{{ \Carbon\Carbon::parse($book->book_year_of_manufacture)->format('d/m/Y') }}</td>
-                                        
+                                        <td class="text-center">
+                                            {{ \Carbon\Carbon::parse($book->book_year_of_manufacture)->format('d/m/Y') }}
+                                        </td>
                                         <td class="text-center">{{ $book->book_publisher }}</td>
                                         <td class="text-center">{{ $book->book_amount }}</td>
                                         <td class="text-center">{{ $book->book_category }}</td>
@@ -105,7 +107,9 @@ Danh sách sách
                                             </span>
                                         </td>
 
-                                        <td class="text-center">{{\Carbon\Carbon::parse($book->created_at)->format('d/m/Y H:i') }}</td>
+                                        <td class="text-center">
+                                            {{\Carbon\Carbon::parse($book->created_at)->format('d/m/Y H:i') }}
+                                        </td>
                                         <td>
                                             <a href="{{ route('bookedit', ['id' => $book->id]) }}" class="btn btn-primary">
                                                 <i class="fas fa-edit"></i>
@@ -117,14 +121,16 @@ Danh sách sách
                                                 <i class="fa fa-eye"></i>
                                             </button>
                                             <form action="{{ route('bookdelete', ['id' => $book->id]) }}" method="POST"
-                                                style="display:inline;">
+                                                id="deleteForm-{{ $book->id }}" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="btn btn-danger" onclick="confirmDelete(this)">
+                                                <button type="button" class="btn btn-danger"
+                                                    onclick="confirmDelete({{ $book->id }})">
                                                     <i class="far fa-trash-alt"></i>
                                                 </button>
                                             </form>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -191,7 +197,7 @@ Danh sách sách
     });
 
 
-    function confirmDelete(button) {
+    function confirmDelete(bookId) {
         Swal.fire({
             title: 'Bạn có chắc chắn muốn xóa?',
             text: 'Hành động này không thể hoàn tác!',
@@ -204,9 +210,10 @@ Danh sách sách
         }).then((result) => {
             if (result.isConfirmed) {
                 // Tìm form chứa hành động xóa và submit
-                document.getElementById('deleteForm').submit();
+                document.getElementById('deleteForm-' + bookId).submit();
             }
         });
     }
+
 
 </script>

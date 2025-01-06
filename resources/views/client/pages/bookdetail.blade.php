@@ -67,29 +67,7 @@ Kho sách
         <!-- Phần bình luận -->
         <div class="container mt-5">
             <h2>Để lại bình luận cho tài liệu này</h2>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            @if (session('success'))
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        Swal.fire({
-                            title: 'Thành công!',
-                            text: '{{ session('success') }}',
-                            icon: 'success',
-                            confirmButtonText: 'OK',
-                            timer: 5000,
-                            timerProgressBar: true
-                        });
-                    });
-                </script>
-            @endif
+           
             <form action="{{ route('user_comment', ['id' => $bookdetail->id]) }}" method="POST">
                 @csrf
                 <input type="hidden" name="book_id" value="{{ $bookdetail->id }}">

@@ -33,11 +33,11 @@ Danh sách danh mục
                     </div>
                     <div class="card-body ">
                         <table id="datatable" class="cell-border" style="width:100%">
-                            <thead >
-                                <tr >
-                                    <th class="text-center"scope="col">id</th>
-                                    <th class="text-center"scope="col">Tên danh mục con</th>
-                                    <th class="text-center"scope="col">Chức năng</th>
+                            <thead>
+                                <tr>
+                                    <th class="text-center" scope="col">id</th>
+                                    <th class="text-center" scope="col">Tên danh mục con</th>
+                                    <th class="text-center" scope="col">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,15 +51,20 @@ Danh sách danh mục
                                             <td class="text-center">{{ $count++ }}</td>
                                             <td class="text-center">{{ $subcategory->name }}</td>
                                             <td class="text-center">
-                                                <form action="{{ route('categoriesdelete', ['id' => $subcategory->id]) }}" method="POST"
-                                                    style="display:inline;">
+                                            <a href="{{ route('categoriesedit', ['id' => $category->id]) }}"
+                                            class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                                <form id="deleteForm-{{ $subcategory->id }}"
+                                                    action="{{ route('categoriesdelete', ['id' => $subcategory->id]) }}"
+                                                    method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" class="btn btn-danger" onclick="confirmDelete(this)">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        onclick="confirmDelete('{{ $subcategory->id }}')">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </button>
                                                 </form>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                 @endforeach
@@ -72,7 +77,7 @@ Danh sách danh mục
     </div>
 </main>
 <script>
-    function confirmDelete(button) {
+    function confirmDelete(subcategoryId) {
         Swal.fire({
             title: 'Bạn có chắc chắn muốn xóa?',
             text: 'Hành động này không thể hoàn tác!',
@@ -84,10 +89,11 @@ Danh sách danh mục
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Tìm form chứa hành động xóa và submit
-                document.getElementById('deleteForm').submit();
+                // Tìm form theo ID và submit
+                document.getElementById(`deleteForm-${subcategoryId}`).submit();
             }
         });
     }
+
 </script>
 @endsection

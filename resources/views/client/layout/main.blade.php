@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Open+Sans" rel="stylesheet">
+    
     <link rel="stylesheet" href="{{ asset('css/styles-merged.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">

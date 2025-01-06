@@ -28,7 +28,8 @@ Kho sách
             <form class="d-flex w-50" role="search" style="margin-bottom:50px" method="get"
                 action="{{ route('search') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                <input class="form-control me-2" type="text" name="search" placeholder="Tìm kiếm tài liệu, tác giả ..." aria-label="Search">
+                <input class="form-control me-2" type="text" name="search" placeholder="Tìm kiếm tài liệu, tác giả ..."
+                    aria-label="Search">
                 <button class="btn btn-outline-success hidden" type="submit">Tìm kiếm</button>
             </form>
         </div>
@@ -38,11 +39,17 @@ Kho sách
 
     <div class="container">
         <h3>Danh mục sách</h3>
-        @foreach ($categories as $category)
-            <button class="d-flex w-50 btn btn-success" style="margin-bottom:50px">
-                {{ $category->book_category }} ( {{ $category->book_count }} )</span>
-            </button>
+        @foreach ($categories as $cat)
+            <a href="{{ route('books.filterByCategory', ['category' => urlencode($cat->book_category)]) }}"
+                class="d-flex w-50 btn {{ isset($category) && $category === $cat->book_category ? 'btn-primary' : 'btn-success' }}"
+                style="margin-bottom:50px">
+                {{ $cat->book_category }} ({{ $cat->book_count }})
+            </a>
         @endforeach
+
+        @if(isset($category))
+            <h4>Danh mục đang chọn: <span class="text-primary">{{ $category }}</span></h4>
+        @endif
 
         @if($books->isEmpty())
             <p>Không có kết quả nào.</p>
@@ -57,7 +64,10 @@ Kho sách
                                 </div>
                             </div>
                             <div class="text">
-                                <span class="probootstrap-meta"><i class="icon-calendar2"></i> {{ \Carbon\Carbon::parse($book->created_at)->format('d/m/Y H:i') }}</span>
+                                <span class="probootstrap-meta">
+                                    <i class="icon-calendar2"></i>
+                                    {{ \Carbon\Carbon::parse($book->created_at)->format('d/m/Y H:i') }}
+                                </span>
                                 <h3 class="text-success">{{ $book->book_name }}</h3>
                                 <p class="text-primary">{{ $book->book_author }}</p>
                                 <p class="text-primary">ID sách: {{ $book->id }}</p>
@@ -66,14 +76,14 @@ Kho sách
                                 @if(Auth::guard('member')->check())
                                     <p>
                                         <a href="{{ route('user_bookdetail_id', ['id' => $book->id]) }}"
-                                            class="btn btn-primary {{ $book->book_status === 'Unavailable' ? 'btn-secondary disabled' : 'btn-primary' }}"
-                                            id="readBookBtn" onclick="saveBookRead({{ $book->id }})">
+                                            class="btn btn-primary {{ $book->book_status === 'Unavailable' ? 'btn-secondary disabled' : 'btn-primary' }}">
                                             Đọc tài liệu chi tiết
                                         </a>
-
+                                    </p>
                                 @else
-                                    <a style="hidden" href="{{ route('user_login') }}" class="btn btn-primary">Đăng nhập để đọc
-                                        tài liệu</a>
+                                    <p>
+                                        <a href="{{ route('user_login') }}" class="btn btn-primary">Đăng nhập để đọc tài liệu</a>
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -81,10 +91,12 @@ Kho sách
                 @endforeach
             </div>
         @endif
+
         <div class="d-flex justify-content-center text-center">
-            {{ $books->links('vendor.pagination.bootstrap-4') }}
+            {{ $books->appends(['category' => $category ?? ''])->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
+
 
 </section>
 <script>
