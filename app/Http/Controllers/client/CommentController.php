@@ -12,13 +12,10 @@ use Session;
 class CommentController extends Controller
 {
 
-    
-
-
     public function user_comment_post(Request $request, $id)
     {
         $request->validate([
-            'comment' => 'required|string',
+            'comment' => 'required|string|max:50',
             'book_id' => 'required|integer|exists:book,id',
             'member_id' => 'required|integer|exists:member,id',
             'answer_comment' => 'nullable|string',

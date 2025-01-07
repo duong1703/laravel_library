@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\book;
 use App\Models\admin\categories;
 use App\Models\admin\readbook;
+use App\Models\admin\comment;
 use App\Models\admin\subcategories;
 use DB;
 use Auth;
@@ -48,24 +49,35 @@ class BookController extends Controller
     public function saveBookRead(Request $request)
     {
         try {
+            // Kiểm tra xem người dùng đã đăng nhập chưa
             $userId = Auth::guard('member')->user()->id;
 
             if (!$userId || !is_int($userId)) {
                 return response()->json(['success' => false, 'message' => 'Người dùng chưa đăng nhập hoặc ID không hợp lệ.'], 401);
             }
 
+            // Lấy book_id từ request
             $bookId = $request->input('book_id');
 
+            // Lấy tên sách từ bảng books
+            $book = DB::table('book')->where('id', $bookId)->first();
+
+            if (!$book) {
+                return response()->json(['success' => false, 'message' => 'Không tìm thấy sách với ID này.'], 404);
+            }
+
+            // Kiểm tra xem người dùng đã đọc sách này chưa
             $readBook = DB::table('readbook')->where('book_id', $bookId)->where('member_id', $userId)->first();
 
             if ($readBook) {
+                // Nếu đã đọc, cập nhật số lần đọc và thời gian đọc lần cuối
                 DB::table('readbook')->where('book_id', $bookId)->where('member_id', $userId)
                     ->update([
                         'read_count' => $readBook->read_count + 1,
                         'last_read_at' => now(),
                     ]);
             } else {
-
+                // Nếu chưa đọc, insert bản ghi mới
                 DB::table('readbook')->insert([
                     'book_id' => $bookId,
                     'member_id' => $userId,
@@ -74,13 +86,16 @@ class BookController extends Controller
                 ]);
             }
 
-            return response()->json(['success' => true]);
+            // Trả về response thành công
+            return response()->json(['success' => true, 'book_name' => $book->book_name]);
 
         } catch (\Exception $e) {
             \Log::error('Lỗi khi lưu lượt đọc sách: ' . $e->getMessage());
             return response()->json(['success' => false, 'message' => 'Đã xảy ra lỗi khi lưu lượt đọc sách.'], 500);
         }
     }
+
+
 
     public function getReadCountForBook($bookId)
     {
